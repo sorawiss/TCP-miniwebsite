@@ -1,7 +1,6 @@
 {
   "dependencies": {
     "install": "^0.13.0",
-    "lint-staged": "^16.4.0",
     "next": "16.2.4",
     "react": "19.2.4",
     "react-dom": "19.2.4"
@@ -13,6 +12,7 @@
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "husky": "^9.1.7",
+    "lint-staged": "^16.4.0",
     "tailwindcss": "^4",
     "typescript": "^5",
     "ultracite": "7.6.0"
@@ -22,10 +22,13 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint",
-    "check": "ultracite check",
-    "fix": "ultracite fix",
+    "lint": "bun x ultracite check",
+    "check": "bun x ultracite check",
+    "fix": "bun x ultracite fix",
     "prepare": "husky"
+  },
+  "lint-staged": {
+    "*": "bun x ultracite fix"
   },
   "version": "0.1.0",
   "private": true,
