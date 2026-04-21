@@ -1,65 +1,71 @@
-import Image from "next/image";
+"use client";
+
+import { SurveyIntroStep } from "@/components/survey-intro-step";
+import { SurveyQuestionPage } from "@/components/survey-question-page";
+import { SurveySummaryStep } from "@/components/survey-summary-step";
+import { Button } from "@/components/ui/button";
+import { questionPages } from "@/lib/survey";
+import { useSurvey } from "@/lib/use-survey";
 
 export default function Home() {
+	const {
+		state,
+		currentQuestionPage,
+		isIntroStep,
+		isQuestionStep,
+		isSummaryStep,
+		currentQuestion,
+		canContinue,
+		updateProfile,
+		updateQuestionAnswer,
+		nextStep,
+		prevStep,
+	} = useSurvey();
+
 	return (
-		<div className="flex flex-1 flex-col items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-			<main className="flex w-full max-w-3xl flex-1 flex-col items-center justify-between bg-white px-16 py-32 sm:items-start dark:bg-black">
-				<Image
-					alt="Next.js logo"
-					className="dark:invert"
-					height={20}
-					priority
-					src="/next.svg"
-					width={100}
+		<main className="min-h-screen bg-zinc-50 text-zinc-950">
+			{isIntroStep ? (
+				<SurveyIntroStep
+					canContinue={canContinue}
+					onNext={nextStep}
+					onProfileChange={updateProfile}
+					profile={state.profile}
 				/>
-				<div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-					<h1 className="max-w-xs font-semibold text-3xl text-black leading-10 tracking-tight dark:text-zinc-50">
-						To get started, edit the page.tsx file.
-					</h1>
-					<p className="max-w-md text-lg text-zinc-600 leading-8 dark:text-zinc-400">
-						Looking for a starting point or more instructions? Head over to{" "}
-						<a
-							className="font-medium text-zinc-950 dark:text-zinc-50"
-							href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-						>
-							Templates
-						</a>{" "}
-						or the{" "}
-						<a
-							className="font-medium text-zinc-950 dark:text-zinc-50"
-							href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-						>
-							Learning
-						</a>{" "}
-						center.
-					</p>
+			) : (
+				<div className="mx-auto flex w-full max-w-3xl flex-col gap-6 px-4 py-8 sm:px-6">
+					<section className="rounded-xl border border-zinc-200 bg-white p-5 shadow-sm sm:p-6">
+						{isQuestionStep && currentQuestion ? (
+							<SurveyQuestionPage
+								answers={state.questionAnswers}
+								onAnswerChange={updateQuestionAnswer}
+								pageIndex={currentQuestionPage}
+								question={currentQuestion}
+								totalPages={questionPages.length}
+							/>
+						) : null}
+
+						{isSummaryStep ? <SurveySummaryStep state={state} /> : null}
+
+						<div className="mt-8 flex items-center justify-between gap-3 border-zinc-200 border-t pt-5">
+							<Button
+								disabled={state.step === 0}
+								onClick={prevStep}
+								variant="outline"
+							>
+								Back
+							</Button>
+
+							{isSummaryStep ? null : (
+								<Button disabled={!canContinue} onClick={nextStep}>
+									{state.step === questionPages.length
+										? "See results"
+										: "Continue"}
+								</Button>
+							)}
+						</div>
+					</section>
 				</div>
-				<div className="flex flex-col gap-4 font-medium text-base sm:flex-row">
-					<a
-						className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] md:w-[158px] dark:hover:bg-[#ccc]"
-						href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-						rel="noopener noreferrer"
-						target="_blank"
-					>
-						<Image
-							alt="Vercel logomark"
-							className="dark:invert"
-							height={16}
-							src="/vercel.svg"
-							width={16}
-						/>
-						Deploy Now
-					</a>
-					<a
-						className="flex h-12 w-full items-center justify-center rounded-full border border-black/[.08] border-solid px-5 transition-colors hover:border-transparent hover:bg-black/[.04] md:w-[158px] dark:border-white/[.145] dark:hover:bg-[#1a1a1a]"
-						href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-						rel="noopener noreferrer"
-						target="_blank"
-					>
-						Documentation
-					</a>
-				</div>
-			</main>
-		</div>
+			)}
+		</main>
 	);
 }
