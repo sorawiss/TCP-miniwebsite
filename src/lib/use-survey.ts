@@ -1,11 +1,9 @@
 "use client";
 
+import { parseAsInteger, useQueryState } from "nuqs";
 import { useReducer } from "react";
-import {
-	initialSurveyState,
-	questionPages,
-	type SurveyState,
-} from "@/lib/survey";
+import { initialSurveyState, type SurveyState } from "@/lib/survey";
+import { questionPages } from "./config";
 
 type SurveyAction =
 	| {
@@ -17,12 +15,6 @@ type SurveyAction =
 			type: "updateQuestionAnswer";
 			questionId: string;
 			value: string;
-	  }
-	| {
-			type: "nextStep";
-	  }
-	| {
-			type: "prevStep";
 	  };
 
 function surveyReducer(state: SurveyState, action: SurveyAction): SurveyState {
@@ -54,16 +46,6 @@ function surveyReducer(state: SurveyState, action: SurveyAction): SurveyState {
 					[action.questionId]: action.value,
 				},
 			};
-		case "nextStep":
-			return {
-				...state,
-				step: Math.min(state.step + 1, questionPages.length + 1),
-			};
-		case "prevStep":
-			return {
-				...state,
-				step: Math.max(state.step - 1, 0),
-			};
 		default:
 			return state;
 	}
@@ -77,13 +59,18 @@ function isIntroStepValid(state: SurveyState) {
 }
 
 export function useSurvey() {
-	const [state, dispatch] = useReducer(surveyReducer, initialSurveyState);
+	const [step, setStep] = useQueryState("step", parseAsInteger.withDefault(0));
 
-	const currentQuestionPage = state.step - 1;
-	const isIntroStep = state.step === 0;
+	const [state, dispatch] = useReducer(surveyReducer, {
+		...initialSurveyState,
+		step,
+	});
+
+	const currentQuestionPage = step - 1;
+	const isIntroStep = step === 0;
 	const isQuestionStep =
 		currentQuestionPage >= 0 && currentQuestionPage < questionPages.length;
-	const isSummaryStep = state.step === questionPages.length + 1;
+	const isSummaryStep = step === questionPages.length + 1;
 
 	const currentQuestion = isQuestionStep
 		? questionPages[currentQuestionPage]
@@ -112,7 +99,8 @@ export function useSurvey() {
 		) => dispatch({ type: "updateProfile", field, value }),
 		updateQuestionAnswer: (questionId: string, value: string) =>
 			dispatch({ type: "updateQuestionAnswer", questionId, value }),
-		nextStep: () => dispatch({ type: "nextStep" }),
-		prevStep: () => dispatch({ type: "prevStep" }),
+		nextStep: () =>
+			setStep((prev) => Math.min((prev ?? 0) + 1, questionPages.length + 1)),
+		prevStep: () => setStep((prev) => Math.max((prev ?? 0) - 1, 0)),
 	};
 }

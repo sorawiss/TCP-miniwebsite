@@ -4,7 +4,7 @@ import { SurveyIntroStep } from "@/components/survey-intro-step";
 import { SurveyQuestionPage } from "@/components/survey-question-page";
 import { SurveySummaryStep } from "@/components/survey-summary-step";
 import { Button } from "@/components/ui/button";
-import { questionPages } from "@/lib/survey";
+import { questionPages } from "@/lib/config";
 import { useSurvey } from "@/lib/use-survey";
 
 export default function Home() {
