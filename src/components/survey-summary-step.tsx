@@ -1,4 +1,5 @@
-import { questionPages, type SurveyState } from "@/lib/survey";
+import { questionPages } from "@/lib/config";
+import type { SurveyState } from "@/lib/survey";
 
 interface SurveySummaryStepProps {
 	state: SurveyState;
