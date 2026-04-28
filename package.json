@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "bad-words-thai": "^3.0.18",
     "install": "^0.13.0",
     "next": "16.2.4",
     "nuqs": "^2.8.9",
