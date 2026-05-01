@@ -1,10 +1,12 @@
 {
   "dependencies": {
+    "bad-words-thai": "^3.0.18",
     "install": "^0.13.0",
     "next": "16.2.4",
     "nuqs": "^2.8.9",
     "react": "19.2.4",
-    "react-dom": "19.2.4"
+    "react-dom": "19.2.4",
+    "zustand": "^5.0.12"
   },
   "devDependencies": {
     "@biomejs/biome": "2.4.12",
