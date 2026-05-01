@@ -1,6 +1,6 @@
 import { Label } from "@/components/ui/label";
 import { Progress } from "@/components/ui/progress";
-import type { Question } from "@/lib/survey";
+import type { Question } from "@/lib/config";
 
 interface SurveyQuestionPageProps {
 	answers: Record<string, string>;
