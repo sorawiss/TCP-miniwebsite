@@ -46,7 +46,7 @@ export default function Home() {
 					width={70}
 				/>
 				{currentStep.type === "intro" ? (
-					<SurveyIntroPage onNext={nextStep} step={currentStep} />
+					<SurveyIntroPage onNext={nextStep} />
 				) : null}
 
 				{currentStep.type === "name" ? (
