@@ -1,71 +1,126 @@
 "use client";
 
-import { SurveyIntroStep } from "@/components/survey-intro-step";
-import { SurveyQuestionPage } from "@/components/survey-question-page";
+import Image from "next/image";
+import { SurveyBirthDateStep } from "@/components/survey/survey-birth-date-step";
+import { SurveyIntroPage } from "@/components/survey/survey-intro-page";
+import { SurveyNameStep } from "@/components/survey/survey-name-step";
+import {
+	SurveyChoiceQuestionPage,
+	SurveyTextQuestionPage,
+} from "@/components/survey-question-page";
+import { SurveyStoryStep } from "@/components/survey-story-step";
 import { SurveySummaryStep } from "@/components/survey-summary-step";
 import { Button } from "@/components/ui/button";
-import { questionPages } from "@/lib/config";
+import { totalQuestionCount } from "@/lib/config";
 import { useSurvey } from "@/lib/use-survey";
 
 export default function Home() {
 	const {
 		state,
-		currentQuestionPage,
-		isIntroStep,
-		isQuestionStep,
-		isSummaryStep,
-		currentQuestion,
+		currentStep,
 		canContinue,
+		isResultStep,
+		winningPower,
+		daysLived,
 		updateProfile,
-		updateQuestionAnswer,
+		updateChoiceAnswer,
+		updateTextAnswer,
 		nextStep,
 		prevStep,
 	} = useSurvey();
 
+	const showNavigation =
+		currentStep.type !== "intro" &&
+		currentStep.type !== "name" &&
+		currentStep.type !== "birthDate" &&
+		!isResultStep;
+
 	return (
-		<main className="min-h-screen bg-zinc-50 text-zinc-950">
-			{isIntroStep ? (
-				<SurveyIntroStep
-					canContinue={canContinue}
-					onNext={nextStep}
-					onProfileChange={updateProfile}
-					profile={state.profile}
+		<main className="min-h-screen bg-[url('/svg/background.svg')] bg-repeat text-[#2f1b09]">
+			<div className="relative mx-auto flex min-h-screen max-w-[403px] flex-col border border-red-500 pt-20">
+				<Image
+					alt="Logo"
+					className="absolute top-4 right-4 z-50"
+					height={70}
+					src="/logo.svg"
+					width={70}
 				/>
-			) : (
-				<div className="mx-auto flex w-full max-w-3xl flex-col gap-6 px-4 py-8 sm:px-6">
-					<section className="rounded-xl border border-zinc-200 bg-white p-5 shadow-sm sm:p-6">
-						{isQuestionStep && currentQuestion ? (
-							<SurveyQuestionPage
-								answers={state.questionAnswers}
-								onAnswerChange={updateQuestionAnswer}
-								pageIndex={currentQuestionPage}
-								question={currentQuestion}
-								totalPages={questionPages.length}
-							/>
-						) : null}
+				{currentStep.type === "intro" ? (
+					<SurveyIntroPage onNext={nextStep} step={currentStep} />
+				) : null}
 
-						{isSummaryStep ? <SurveySummaryStep state={state} /> : null}
+				{currentStep.type === "name" ? (
+					<SurveyNameStep
+						onNext={nextStep}
+						onProfileChange={updateProfile}
+						profile={state.profile}
+						step={currentStep}
+					/>
+				) : null}
 
-						<div className="mt-8 flex items-center justify-between gap-3 border-zinc-200 border-t pt-5">
-							<Button
-								disabled={state.step === 0}
-								onClick={prevStep}
-								variant="outline"
-							>
-								Back
-							</Button>
+				{currentStep.type === "birthDate" ? (
+					<SurveyBirthDateStep
+						onNext={nextStep}
+						onProfileChange={updateProfile}
+						profile={state.profile}
+						step={currentStep}
+					/>
+				) : null}
 
-							{isSummaryStep ? null : (
-								<Button disabled={!canContinue} onClick={nextStep}>
-									{state.step === questionPages.length
-										? "See results"
-										: "Continue"}
-								</Button>
-							)}
-						</div>
-					</section>
-				</div>
-			)}
+				{currentStep.type === "choice" ? (
+					<SurveyChoiceQuestionPage
+						answers={state.choiceAnswers}
+						onAnswerChange={updateChoiceAnswer}
+						question={currentStep}
+						questionNumber={Number(currentStep.id)}
+						totalQuestions={totalQuestionCount}
+					/>
+				) : null}
+
+				{currentStep.type === "text" ? (
+					<SurveyTextQuestionPage
+						answers={state.textAnswers}
+						onAnswerChange={updateTextAnswer}
+						question={currentStep}
+						questionNumber={Number(currentStep.id)}
+						totalQuestions={totalQuestionCount}
+					/>
+				) : null}
+
+				{currentStep.type === "story" ? (
+					<SurveyStoryStep story={currentStep} />
+				) : null}
+
+				{isResultStep ? (
+					<SurveySummaryStep
+						daysLived={daysLived}
+						power={winningPower}
+						state={state}
+					/>
+				) : null}
+
+				{showNavigation ? (
+					<div className="mt-10 flex items-center justify-between gap-4 border-white/60 border-t pt-6">
+						<Button
+							className="rounded-full border-[#d7b894] px-6 text-[#6c5135]"
+							onClick={prevStep}
+							variant="outline"
+						>
+							ย้อนกลับ
+						</Button>
+
+						<Button
+							className="h-12 rounded-full bg-[#2f1b09] px-8 text-white hover:bg-[#4a2a11]"
+							disabled={!canContinue}
+							onClick={nextStep}
+						>
+							{currentStep.type === "story" && currentStep.id === "ending"
+								? "เปิดพลังของฉัน!"
+								: "ไปต่อ"}
+						</Button>
+					</div>
+				) : null}
+			</div>
 		</main>
 	);
 }
