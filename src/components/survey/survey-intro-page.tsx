@@ -6,7 +6,7 @@ interface IntroPageProps {
 
 export function SurveyIntroPage({ onNext }: IntroPageProps) {
 	return (
-		<div>
+		<div className="min-h-screen">
 			<button onClick={onNext} type="submit">
 				mockup
 			</button>
