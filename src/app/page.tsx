@@ -36,8 +36,8 @@ export default function Home() {
 		!isResultStep;
 
 	return (
-		<main className="min-h-screen bg-[url('/svg/background.svg')] bg-repeat text-[#2f1b09]">
-			<div className="relative mx-auto flex min-h-screen max-w-[403px] flex-col border border-red-500 pt-20">
+		<main className="bg-[url('/svg/background.svg')] bg-repeat text-[#2f1b09]">
+			<div className="relative mx-auto flex h-screen max-w-[403px] flex-col border border-red-500 pt-20">
 				<Image
 					alt="Logo"
 					className="absolute top-4 right-4 z-50"
