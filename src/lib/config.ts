@@ -17,6 +17,7 @@ export interface ResultPower {
 
 export interface StoryStep {
 	body: string;
+	bottomImage?: string;
 	id: string;
 	kicker?: string;
 	title?: string;
@@ -156,6 +157,12 @@ export const surveySteps: SurveyStep[] = [
 		type: "birthDate",
 		label: "วันเกิดของคุณ (ใช้คำนวณระยะทางชีวิต)",
 		optOutLabel: "ไม่สะดวกกรอกข้อมูล",
+	},
+	{
+		id: "0",
+		type: "story",
+		body: "เสียงสตาร์ทดังขึ้น…\nคุณออกตัวมุ่งสู่สนามทันที\nแต่ทันใดนั้นเอง!\nทะเลทรายเริ่มทดสอบหัวใจ\nคุณตั้งแต่ก้าวแรก..",
+		bottomImage: "/bottom/story-0.png",
 	},
 	{
 		id: "1",

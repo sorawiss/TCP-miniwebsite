@@ -101,7 +101,7 @@ export default function Home() {
 				) : null}
 
 				{showNavigation ? (
-					<div className="mt-10 flex items-center justify-between gap-4 border-white/60 border-t pt-6">
+					<div className="relative z-10 mt-auto flex items-center justify-between gap-4 border-white/60 border-t px-4 pt-6 pb-8">
 						<Button
 							className="rounded-full border-[#d7b894] px-6 text-[#6c5135]"
 							onClick={prevStep}
