@@ -52,6 +52,7 @@ export interface ChoiceOption {
 }
 
 export interface ChoiceQuestionStep {
+	bottomImage?: string;
 	id: string;
 	options: ChoiceOption[];
 	prompt: string;
@@ -166,6 +167,7 @@ export const surveySteps: SurveyStep[] = [
 			{ value: "C", label: "เปลี่ยนท่าวิ่งดู!", powerId: "power-3" },
 			{ value: "D", label: "วิ่งต่อไม่แคร์ทราย", powerId: "power-4" },
 		],
+		bottomImage: "/bottom/1st.png",
 	},
 	{
 		id: "2",
@@ -177,6 +179,7 @@ export const surveySteps: SurveyStep[] = [
 			{ value: "C", label: "มองหาแหล่งน้ำด่วน!", powerId: "power-7" },
 			{ value: "D", label: "จิบเท่าที่จำเป็นก่อน", powerId: "power-1" },
 		],
+		bottomImage: "/bottom/2nd.png",
 	},
 	{
 		id: "story-1",
@@ -198,6 +201,7 @@ export const surveySteps: SurveyStep[] = [
 			{ value: "C", label: "ใช้แรงขา กระโดดข้ามไปเลย!", powerId: "power-4" },
 			{ value: "D", label: "หาทางเดินอ้อมไปก็ได้", powerId: "power-5" },
 		],
+		bottomImage: "/bottom/3rd.png",
 	},
 	{
 		id: "story-2",
@@ -215,6 +219,7 @@ export const surveySteps: SurveyStep[] = [
 			{ value: "C", label: "มีสติหน่อย!", powerId: "power-1" },
 			{ value: "D", label: "อีกนิดเดียว ไปต่อ!", powerId: "power-2" },
 		],
+		bottomImage: "/bottom/4th.png",
 	},
 	{
 		id: "5",
@@ -234,6 +239,7 @@ export const surveySteps: SurveyStep[] = [
 				powerId: "power-6",
 			},
 		],
+		bottomImage: "/bottom/5th.png",
 	},
 	{
 		id: "6",

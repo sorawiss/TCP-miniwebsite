@@ -70,6 +70,7 @@ export default function Home() {
 				{currentStep.type === "choice" ? (
 					<SurveyChoiceQuestionPage
 						answers={state.choiceAnswers}
+						bottomImage={currentStep.bottomImage}
 						onAnswerChange={updateChoiceAnswer}
 						question={currentStep}
 						questionNumber={Number(currentStep.id)}
