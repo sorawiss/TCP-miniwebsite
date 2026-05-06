@@ -225,6 +225,7 @@ export const surveySteps: SurveyStep[] = [
 		id: "story-2",
 		type: "story",
 		body: "คุณข้ามมันมาได้สำเร็จ! แต่... ไม่ใช่ทุกคนที่มีรอยยิ้ม",
+		bottomImage: "/bottom/story-2.png",
 	},
 	{
 		id: "4",
