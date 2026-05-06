@@ -61,6 +61,7 @@ export function SurveyChoiceQuestionPage({
 					</div>
 				</div>
 
+				{/* TODO: This is not the final design now it just a mockup */}
 				<div className="space-y-6 pt-4">
 					<h2 className="mx-auto max-w-2xl whitespace-pre-line text-center font-bold text-2xl text-[#1c2b59] leading-relaxed sm:text-3xl">
 						{question.prompt}

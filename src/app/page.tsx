@@ -89,7 +89,7 @@ function HomeContent() {
 				) : null}
 
 				{currentStep.type === "story" ? (
-					<SurveyStoryStep onNext={nextStep} story={currentStep} />
+					<SurveyStoryStep story={currentStep} />
 				) : null}
 
 				{isResultStep ? (
