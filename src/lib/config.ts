@@ -19,7 +19,6 @@ export interface StoryStep {
 	body: string;
 	bottomImage?: string;
 	id: string;
-	kicker?: string;
 	title?: string;
 	type: "story";
 }
@@ -191,8 +190,14 @@ export const surveySteps: SurveyStep[] = [
 	{
 		id: "story-1",
 		type: "story",
-		kicker: "Story Bridge",
-		body: "ความกระหายทำให้โลกตรงหน้าเริ่มเบลอ แต่ทันใดนั้น! ครืนนนนนนน... พื้นทรายถล่มลงต่อหน้าต่อตา",
+		body: "ความกระหายทำให้โลก\nตรงหน้าเริ่มเบลอ\n\nแต่ทันใดนั้น!\nครืนนนนนนน...\nพื้นทรายถล่มลงต่อหน้าต่อตา",
+		bottomImage: "/bottom/story-1.png",
+	},
+	{
+		id: "story-bridge-1",
+		type: "story",
+		body: "พื้นถล่ม",
+		bottomImage: "/bottom/story-1.png",
 	},
 	{
 		id: "3",
@@ -213,7 +218,6 @@ export const surveySteps: SurveyStep[] = [
 	{
 		id: "story-2",
 		type: "story",
-		kicker: "Story Bridge",
 		body: "คุณข้ามมันมาได้สำเร็จ! แต่... ไม่ใช่ทุกคนที่มีรอยยิ้ม",
 	},
 	{
