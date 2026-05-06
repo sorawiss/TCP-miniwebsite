@@ -89,7 +89,7 @@ export default function Home() {
 				) : null}
 
 				{currentStep.type === "story" ? (
-					<SurveyStoryStep story={currentStep} />
+					<SurveyStoryStep onNext={nextStep} story={currentStep} />
 				) : null}
 
 				{isResultStep ? (

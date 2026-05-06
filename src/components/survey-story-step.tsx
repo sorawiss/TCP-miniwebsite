@@ -2,15 +2,20 @@ import Image from "next/image";
 import type { StoryStep } from "@/lib/config";
 
 interface SurveyStoryStepProps {
+	onNext?: () => void;
 	story: StoryStep;
 }
 
-export function SurveyStoryStep({ story }: SurveyStoryStepProps) {
+export function SurveyStoryStep({ story, onNext }: SurveyStoryStepProps) {
 	switch (story.id) {
 		case "0":
 			return <Story0 story={story} />;
 		case "story-1":
 			return <Story1 story={story} />;
+		case "story-1-1":
+			return <StoryBridge onNext={onNext} story={story} />;
+		case "story-1-2":
+			return <StoryBridge onNext={onNext} story={story} />;
 		default:
 			return <StoryDefault story={story} />;
 	}
@@ -82,5 +87,23 @@ function StoryDefault({ story }: { story: StoryStep }) {
 				/>
 			) : null}
 		</>
+	);
+}
+
+function StoryBridge({ story }: { onNext?: () => void; story: StoryStep }) {
+	return (
+		<section className="relative z-10 flex h-screen flex-col items-center justify-center px-6">
+			{story.bottomImage && (
+				<div className="relative w-full max-w-[320px]">
+					<Image
+						alt="Bridge scene"
+						className="h-auto w-full rounded-[2rem] object-cover shadow-lg"
+						height={500}
+						src={story.bottomImage}
+						width={400}
+					/>
+				</div>
+			)}
+		</section>
 	);
 }

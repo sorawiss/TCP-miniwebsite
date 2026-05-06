@@ -194,10 +194,16 @@ export const surveySteps: SurveyStep[] = [
 		bottomImage: "/bottom/story-1.png",
 	},
 	{
-		id: "story-bridge-1",
+		id: "story-1-1",
 		type: "story",
 		body: "พื้นถล่ม",
-		bottomImage: "/bottom/story-1.png",
+		bottomImage: "/bottom/story-bridge-1.png",
+	},
+	{
+		id: "story-1-2",
+		type: "story",
+		body: "พื้นถล่ม",
+		bottomImage: "/bottom/story-bridge-2.png",
 	},
 	{
 		id: "3",
