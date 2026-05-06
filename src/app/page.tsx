@@ -1,6 +1,5 @@
-"use client";
-
 import Image from "next/image";
+import { Suspense } from "react";
 import { SurveyBirthDateStep } from "@/components/survey/survey-birth-date-step";
 import { SurveyIntroPage } from "@/components/survey/survey-intro-page";
 import { SurveyNameStep } from "@/components/survey/survey-name-step";
@@ -14,7 +13,7 @@ import { Button } from "@/components/ui/button";
 import { totalQuestionCount } from "@/lib/config";
 import { useSurvey } from "@/lib/use-survey";
 
-export default function Home() {
+function HomeContent() {
 	const {
 		state,
 		currentStep,
@@ -123,5 +122,13 @@ export default function Home() {
 				) : null}
 			</div>
 		</main>
+	);
+}
+
+export default function Home() {
+	return (
+		<Suspense fallback={null}>
+			<HomeContent />
+		</Suspense>
 	);
 }
