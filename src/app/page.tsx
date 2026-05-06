@@ -1,3 +1,4 @@
+"use client";
 import Image from "next/image";
 import { Suspense } from "react";
 import { SurveyBirthDateStep } from "@/components/survey/survey-birth-date-step";
