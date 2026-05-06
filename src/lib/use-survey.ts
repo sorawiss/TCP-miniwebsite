@@ -134,7 +134,10 @@ export function getDaysLived(birthDate: string) {
 }
 
 export function useSurvey() {
-	const [step, setStep] = useQueryState("step", parseAsInteger.withDefault(0));
+	const [step, setStep] = useQueryState(
+		"step",
+		parseAsInteger.withDefault(0).withOptions({ history: "push" })
+	);
 	const store = useSurveyStore();
 
 	const state: SurveyState = {
