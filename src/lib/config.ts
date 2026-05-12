@@ -195,20 +195,20 @@ export const surveySteps: SurveyStep[] = [
 	{
 		id: "story-1",
 		type: "story",
-		body: "ความกระหายทำให้โลก\nตรงหน้าเริ่มเบลอ\n\nแต่ทันใดนั้น!\nครืนนนนนนน...\nพื้นทรายถล่มลงต่อหน้าต่อตา",
-		bottomImage: "/bottom/story-1.png",
+		body: "/text/story1-text.svg",
+		bottomImage: "/bottom/story1.svg",
 	},
 	{
 		id: "story-1-1",
 		type: "story",
 		body: "พื้นถล่ม",
-		bottomImage: "/bottom/story-bridge-1.png",
+		bottomImage: "/bottom/story-bridge-1.svg",
 	},
 	{
 		id: "story-1-2",
 		type: "story",
 		body: "พื้นถล่ม",
-		bottomImage: "/bottom/story-bridge-2.png",
+		bottomImage: "/bottom/story-bridge-2.svg",
 	},
 	{
 		id: "3",
