@@ -5,9 +5,13 @@ export function Story0({ story }: { story: StoryStep }) {
 	return (
 		<>
 			<section className="relative z-10 flex h-full flex-col items-center justify-center space-y-4 px-6 pt-10 text-center">
-				<h2 className="whitespace-pre-line font-bold text-2xl text-[#f26522] leading-relaxed sm:text-3xl">
-					{story.body}
-				</h2>
+				<Image
+					alt="Story background"
+					className="pointer-events-none absolute top-[40%] left-1/2 z-0 -translate-x-1/2 -translate-y-1/2 object-contain p-10"
+					height={800}
+					src={story.body}
+					width={800}
+				/>
 			</section>
 			{story.bottomImage ? (
 				<Image

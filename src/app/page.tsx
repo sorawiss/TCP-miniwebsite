@@ -40,7 +40,7 @@ function HomeContent() {
 			<div className="relative mx-auto flex h-screen max-w-[403px] flex-col border border-red-500 pt-20">
 				<Image
 					alt="Logo"
-					className="absolute inset-x-1/2 top-4 -translate-x-1/2"
+					className="absolute inset-x-1/2 top-4 z-10 -translate-x-1/2"
 					height={70}
 					src="/logo.svg"
 					width={70}
