@@ -24,10 +24,10 @@ export interface StoryStep {
 }
 
 export interface IntroStep {
-	body: string;
-	cta: string;
+	bottomImage?: string;
+	Image?: string;
 	id: string;
-	title: string;
+	topImage?: string;
 	type: "intro";
 }
 
@@ -141,9 +141,14 @@ export const surveySteps: SurveyStep[] = [
 	{
 		id: "intro",
 		type: "intro",
-		title: "Desert Marathon",
-		body: "ขอต้อนรับสู่มาราธอนกลางทะเลทรายที่แผดเผา ในระยะทาง 70 กม. มาดูกันว่าในสถานการณ์ที่สติใกล้หลุด...แต่เพื่อคว้าเงินรางวัลที่เส้นชัย พลังอะไรในตัวคุณคืออาวุธลับที่แท้จริง",
-		cta: "3... 2... 1.. Start!",
+		bottomImage: "/intro/intro0.svg",
+		topImage: "/intro/intro0-text.svg",
+	},
+	{
+		id: "intro-1",
+		type: "intro",
+		bottomImage: "/intro/intro1.svg",
+		topImage: "/intro/intro1-text.svg",
 	},
 	{
 		id: "name",
@@ -154,7 +159,7 @@ export const surveySteps: SurveyStep[] = [
 	{
 		id: "birthDate",
 		type: "birthDate",
-		label: "วันเกิดของคุณ (ใช้คำนวณระยะทางชีวิต)",
+		label: "วันเกิดของคุณ",
 		optOutLabel: "ไม่สะดวกกรอกข้อมูล",
 	},
 	{
