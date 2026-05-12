@@ -153,14 +153,14 @@ export const surveySteps: SurveyStep[] = [
 	{
 		id: "name",
 		type: "name",
-		label: "ชื่อของนักวิ่งคนนี้คือ :",
-		placeholder: "พิมพ์ชื่อของคุณ",
+		label: "สวัสดีพี่นักวิ่งชื่อคุณ :",
+		placeholder: "ชื่อของคุณ",
 	},
 	{
 		id: "birthDate",
 		type: "birthDate",
 		label: "วันเกิดของคุณ",
-		optOutLabel: "ไม่สะดวกกรอกข้อมูล",
+		optOutLabel: "ข้ามคำถาม",
 	},
 	{
 		id: "0",
