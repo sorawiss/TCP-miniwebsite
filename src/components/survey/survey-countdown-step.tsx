@@ -43,15 +43,23 @@ export function SurveyCountdownStep({
 	}, [index, delay, step.images.length, onNext]);
 
 	return (
-		<div className="absolute inset-0 z-0 flex items-center justify-center">
+		<div className="relative inset-0 z-0 flex h-screen items-center justify-center">
 			<Image
 				alt={`countdown-${index}`}
-				className="object-contain px-4"
+				className="mb-[25vh] object-contain px-4"
 				height={200}
 				priority
 				src={step.images[index]}
 				style={{ opacity: visible ? 1 : 0 }}
 				width={200}
+			/>
+
+			<Image
+				alt="Desert background"
+				className="pointer-events-none absolute bottom-0 left-0 z-0 w-full object-cover"
+				height={800}
+				src="/svg/desert.svg"
+				width={800}
 			/>
 		</div>
 	);
