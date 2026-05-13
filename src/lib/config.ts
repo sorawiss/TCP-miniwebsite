@@ -25,6 +25,7 @@ export interface StoryStep {
 
 export interface IntroStep {
 	bottomImage?: string;
+	className?: string;
 	Image?: string;
 	id: string;
 	topImage?: string;
@@ -151,12 +152,14 @@ export const surveySteps: SurveyStep[] = [
 		type: "intro",
 		bottomImage: "/intro/intro0.svg",
 		topImage: "/intro/intro0-text.svg",
+		className: "mt-[20vh]",
 	},
 	{
 		id: "intro-1",
 		type: "intro",
 		bottomImage: "/intro/intro1.svg",
 		topImage: "/intro/intro1-text.svg",
+		className: "mt-[25vh]",
 	},
 	{
 		id: "countdown",
@@ -280,6 +283,12 @@ export const surveySteps: SurveyStep[] = [
 		type: "text",
 		prompt: "ข้ามเส้นชัยแล้ว... ขอ 3 คำที่คุณอยากตะโกนบอกตัวเองคืออะไร?",
 		placeholder: "พิมพ์ 3 คำของคุณ",
+	},
+	{
+		id: "7",
+		type: "story",
+		body: "/text/last.svg",
+		bottomImage: "/bottom/last.png",
 	},
 	{
 		id: "result",

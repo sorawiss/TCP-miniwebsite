@@ -10,9 +10,8 @@ export function SurveyIntroPage({ step }: IntroPageProps) {
 		<div className="absolute inset-0 z-0">
 			{step.topImage && (
 				<Image
-					// TODO
 					alt=""
-					className="mt-[25vh] object-cover px-4"
+					className={`object-cover px-4 ${step.className ?? ""}`}
 					height={380}
 					priority
 					src={step.topImage}
