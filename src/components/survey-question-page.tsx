@@ -23,14 +23,14 @@ export function SurveyChoiceQuestionPage({
 }: ChoiceQuestionPageProps) {
 	const progressValue = (questionNumber / totalQuestions) * 100;
 
-	const getOptionColor = (index: number) => {
-		const colors = [
-			"bg-[#182359]", // A: Dark blue
-			"bg-[#ffbc11]", // B: Yellow
-			"bg-[#f87800]", // C: Orange
-			"bg-[#e60023]", // D: Red
+	const getOptionStyles = (index: number) => {
+		const styles = [
+			{ bg: "bg-[#182359]", border: "border-[#0f173b]" }, // A: Dark blue
+			{ bg: "bg-[#ffbc11]", border: "border-[#e5a80f]" }, // B: Yellow
+			{ bg: "bg-[#f87800]", border: "border-[#d96800]" }, // C: Orange
+			{ bg: "bg-[#e60023]", border: "border-[#cc001f]" }, // D: Red
 		];
-		return colors[index % colors.length];
+		return styles[index % styles.length];
 	};
 
 	return (
@@ -63,18 +63,18 @@ export function SurveyChoiceQuestionPage({
 
 				{/* TODO: This is not the final design now it just a mockup */}
 				<div className="space-y-6 pt-4">
-					<h2 className="mx-auto max-w-2xl whitespace-pre-line text-center font-bold text-2xl text-[#1c2b59] leading-relaxed sm:text-3xl">
+					<h2 className="mx-auto max-w-2xl whitespace-pre-line text-center text-2xl text-[#1c2b59] leading-relaxed sm:text-3xl">
 						{question.prompt}
 					</h2>
-					<div className="mx-auto mt-8 grid max-w-2xl gap-4">
+					<div className="mx-auto mt-8 grid max-w-2xl gap-[1rem]">
 						{question.options.map((option, index) => {
 							const inputId = `${question.id}-${option.value}`;
 							const isSelected = answers[question.id] === option.value;
-							const badgeColor = getOptionColor(index);
+							const badgeStyles = getOptionStyles(index);
 
 							return (
 								<label
-									className={`relative flex min-h-[70px] w-full cursor-pointer items-stretch overflow-hidden rounded-xl border-[2px] bg-[#fffaf0] transition-all ${isSelected ? "translate-y-[3px] border-[#d97c2a] shadow-[0_0px_0_0_#d97c2a]" : "border-[#e08a3c] shadow-[0_4px_0_0_#d97c2a] hover:translate-y-[2px] hover:shadow-[0_2px_0_0_#d97c2a]"}`}
+									className="group relative flex w-full cursor-pointer items-center py-1 pl-6"
 									htmlFor={inputId}
 									key={option.value}
 								>
@@ -90,23 +90,25 @@ export function SurveyChoiceQuestionPage({
 										value={option.value}
 									/>
 									<div
-										className="relative z-10 w-[70px] flex-none"
-										style={{
-											filter: "drop-shadow(3px 0px 2px rgba(0,0,0,0.15))",
-										}}
+										className={`relative flex min-h-[64px] w-full items-center rounded-full border-[2px] bg-[#fffaf0] py-3 pr-3 pl-[4.5rem] transition-all duration-200 ${
+											isSelected
+												? "translate-y-[4px] border-[#d97c2a] shadow-[0_0px_0_0_#d97c2a]"
+												: "border-[#e08a3c] shadow-[0_4px_0_0_#d97c2a] group-hover:translate-y-[2px] group-hover:shadow-[0_2px_0_0_#d97c2a]"
+										}`}
 									>
-										<div
-											className={`h-full w-full ${badgeColor} flex items-center justify-center font-bold text-3xl text-white`}
-											style={{
-												clipPath:
-													"polygon(0 0, 85% 0, 100% 12.5%, 85% 25%, 100% 37.5%, 85% 50%, 100% 62.5%, 85% 75%, 100% 87.5%, 85% 100%, 0 100%)",
-											}}
-										>
-											{option.value}
+										<div className="text-[#151F6D] text-[1.8rem] leading-8">
+											{option.label}
 										</div>
-									</div>
-									<div className="flex flex-1 items-center px-4 py-3 font-bold text-[#1c2b59] text-xl">
-										{option.label}
+
+										<div
+											className={`absolute top-1/2 -left-6 flex h-[76px] w-[76px] -translate-y-1/2 items-center justify-center rounded-full border-[4px] shadow-sm ${badgeStyles.bg} ${badgeStyles.border}`}
+										>
+											<div className="absolute inset-0.5 rounded-full border-[2px] border-white/30" />
+											<div className="absolute inset-0 rounded-full bg-gradient-to-b from-white/20 to-transparent" />
+											<span className="relative z-10 font-bold text-3xl text-white drop-shadow-md">
+												{option.value}
+											</span>
+										</div>
 									</div>
 								</label>
 							);

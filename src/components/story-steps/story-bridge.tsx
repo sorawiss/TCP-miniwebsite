@@ -3,7 +3,7 @@ import type { StoryStep } from "@/lib/config";
 
 export function StoryBridge({ story }: { story: StoryStep }) {
 	return (
-		<div className="absolute inset-0 border">
+		<div className="absolute inset-0">
 			{story.bottomImage && (
 				<Image
 					alt="Bridge scene"

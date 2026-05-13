@@ -37,7 +37,7 @@ function HomeContent() {
 
 	return (
 		<main className="bg-[url('/svg/background.svg')] bg-repeat text-[#2f1b09]">
-			<div className="relative mx-auto flex h-screen max-w-[403px] flex-col border border-red-500 pt-20">
+			<div className="relative mx-auto flex h-screen max-w-[403px] flex-col pt-20">
 				<Image
 					alt="Logo"
 					className="absolute inset-x-1/2 top-4 z-10 -translate-x-1/2"
