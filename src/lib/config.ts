@@ -16,7 +16,7 @@ export interface ResultPower {
 }
 
 export interface StoryStep {
-	body: string;
+	body?: string;
 	bottomImage?: string;
 	id: string;
 	title?: string;
@@ -165,18 +165,18 @@ export const surveySteps: SurveyStep[] = [
 	{
 		id: "0",
 		type: "story",
-		body: "เสียงสตาร์ทดังขึ้น…\nคุณออกตัวมุ่งสู่สนามทันที\nแต่ทันใดนั้นเอง!\nทะเลทรายเริ่มทดสอบหัวใจ\nคุณตั้งแต่ก้าวแรก..",
+		body: "/text/story0-text.svg",
 		bottomImage: "/bottom/story-0.png",
 	},
 	{
 		id: "1",
 		type: "choice",
-		prompt: "เพิ่งสตาร์ทได้ไม่ทันไร ทรายก็เข้าเต็มรองเท้าจนเริ่มเจ็บ... เอาไงดีนักวิ่ง?",
+		prompt: "เพิ่งสตาร์ทได้ไม่ทันไร ก้าวพลาดไปเจอทรายดูดเอาไงดี?",
 		options: [
-			{ value: "A", label: "สลัดทรายออก", powerId: "power-1" },
-			{ value: "B", label: "ขอหยุดดูอาการเจ็บก่อน", powerId: "power-2" },
-			{ value: "C", label: "เปลี่ยนท่าวิ่งดู!", powerId: "power-3" },
-			{ value: "D", label: "วิ่งต่อไม่แคร์ทราย", powerId: "power-4" },
+			{ value: "A", label: "ดึงเท้าออกช้า ๆ", powerId: "power-1" },
+			{ value: "B", label: "นิ่งไว้ก่อน", powerId: "power-2" },
+			{ value: "C", label: "มองหาอะไรเกาะ", powerId: "power-3" },
+			{ value: "D", label: "กระชากขาขึ้น ฮีบเดียวจบ!", powerId: "power-4" },
 		],
 		bottomImage: "/bottom/1st.png",
 	},
@@ -201,13 +201,11 @@ export const surveySteps: SurveyStep[] = [
 	{
 		id: "story-1-1",
 		type: "story",
-		body: "พื้นถล่ม",
 		bottomImage: "/bottom/story-bridge-1.svg",
 	},
 	{
 		id: "story-1-2",
 		type: "story",
-		body: "พื้นถล่ม",
 		bottomImage: "/bottom/story-bridge-2.svg",
 	},
 	{
@@ -217,19 +215,19 @@ export const surveySteps: SurveyStep[] = [
 		options: [
 			{
 				value: "A",
-				label: "เช็กความแข็งแรงของพื้นรอบๆ ก่อน",
+				label: "หาที่กำบัง",
 				powerId: "power-2",
 			},
-			{ value: "B", label: "เอากระบองเพชรมาต่อเป็นสะพาน", powerId: "power-3" },
-			{ value: "C", label: "ใช้แรงขา กระโดดข้ามไปเลย!", powerId: "power-4" },
-			{ value: "D", label: "หาทางเดินอ้อมไปก็ได้", powerId: "power-5" },
+			{ value: "B", label: "คว้าผ้าบัฟคลุมหน้า ใส่แว่นทันที", powerId: "power-3" },
+			{ value: "C", label: "เร่งสปีด ลุยฝ่าพายุเลย!", powerId: "power-4" },
+			{ value: "D", label: "เบี่ยงเส้นทางหลบพายุ", powerId: "power-5" },
 		],
 		bottomImage: "/bottom/3rd.png",
 	},
 	{
 		id: "story-2",
 		type: "story",
-		body: "คุณข้ามมันมาได้สำเร็จ! แต่... ไม่ใช่ทุกคนที่มีรอยยิ้ม",
+		body: "/text/story2-text.svg",
 		bottomImage: "/bottom/story-2.png",
 	},
 	{
@@ -237,10 +235,10 @@ export const surveySteps: SurveyStep[] = [
 		type: "choice",
 		prompt: "นักวิ่งข้างๆ เริ่มถอดใจ คุณจะบอกว่า...",
 		options: [
-			{ value: "A", label: "มา! ไปด้วยกัน", powerId: "power-6" },
-			{ value: "B", label: "นึกถึงรางวัลสิ โคตรคุ้ม!", powerId: "power-7" },
-			{ value: "C", label: "มีสติหน่อย!", powerId: "power-1" },
-			{ value: "D", label: "อีกนิดเดียว ไปต่อ!", powerId: "power-2" },
+			{ value: "A", label: "เฮ้ย! มานี่ไปวิ่งด้วยกัน", powerId: "power-6" },
+			{ value: "B", label: "เปลี่ยนไปวิ่งเส้นทางที่ง่ายขึ้นมั้ย?", powerId: "power-7" },
+			{ value: "C", label: "อย่าเพิ่งท้อหายใจเข้าลึกๆ", powerId: "power-1" },
+			{ value: "D", label: "แวะพักก่อน แล้วค่อยไปต่อนะ", powerId: "power-2" },
 		],
 		bottomImage: "/bottom/4th.png",
 	},
@@ -249,11 +247,11 @@ export const surveySteps: SurveyStep[] = [
 		type: "choice",
 		prompt: 'ใกล้ถึงเส้นชัย! เจอดีล "รับเงินก้อนใหญ่" ไม่ต้องกลับไปวิ่งให้เหนื่อย ดีลนี้เอาไง',
 		options: [
-			{ value: "A", label: "ขอเลือกเส้นทางที่คุ้มสุด", powerId: "power-3" },
-			{ value: "B", label: "รับดีลทันที!", powerId: "power-4" },
+			{ value: "A", label: "มีข้อแลกเปลี่ยนอะไรรึป่าว?", powerId: "power-3" },
+			{ value: "B", label: "น่าสนใจแต่ขอเข้าเส้นชัยด้วยตัวเอง", powerId: "power-4" },
 			{
 				value: "C",
-				label: "น่าสนใจ แต่เส้นชัยสวยงามกว่าเยอะ",
+				label: "รับดีลทันที!",
 				powerId: "power-5",
 			},
 			{
