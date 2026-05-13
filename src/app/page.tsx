@@ -8,7 +8,7 @@ import { SurveyChoiceQuestionPage } from "@/components/survey-question-page";
 import { SurveyStoryStep } from "@/components/survey-story-step";
 import { SurveySummaryStep } from "@/components/survey-summary-step";
 import { SurveyTextQuestionPage } from "@/components/survey-text-question-page";
-import { Button } from "@/components/ui/button";
+import { NextButton } from "@/components/ui/next-button";
 import { totalQuestionCount } from "@/lib/config";
 import { useSurvey } from "@/lib/use-survey";
 
@@ -24,11 +24,9 @@ function HomeContent() {
 		updateChoiceAnswer,
 		updateTextAnswer,
 		nextStep,
-		prevStep,
 	} = useSurvey();
 
 	const showNavigation =
-		currentStep.type !== "intro" &&
 		currentStep.type !== "name" &&
 		currentStep.type !== "birthDate" &&
 		currentStep.type !== "choice" &&
@@ -103,24 +101,12 @@ function HomeContent() {
 				) : null}
 
 				{showNavigation ? (
-					<div className="relative z-10 mt-auto flex items-center justify-between gap-4 border-white/60 border-t px-4 pt-6 pb-8">
-						<Button
-							className="rounded-full border-[#d7b894] px-6 text-[#6c5135]"
-							onClick={prevStep}
-							variant="outline"
-						>
-							ย้อนกลับ
-						</Button>
-
-						<Button
-							className="h-12 rounded-full bg-[#2f1b09] px-8 text-white hover:bg-[#4a2a11]"
-							disabled={!canContinue}
-							onClick={nextStep}
-						>
+					<div className="relative z-10 mt-auto flex w-full items-center justify-center pb-[3rem]">
+						<NextButton disabled={!canContinue} onClick={nextStep}>
 							{currentStep.type === "story" && currentStep.id === "ending"
 								? "เปิดพลังของฉัน!"
 								: "ไปต่อ"}
-						</Button>
+						</NextButton>
 					</div>
 				) : null}
 			</div>
