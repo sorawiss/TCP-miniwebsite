@@ -41,7 +41,7 @@ export function SurveyNameStep({
 					<TextInput
 						autoFocus
 						containerClassName="h-[72px]"
-						onChange={(event) => {
+						onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
 							const value = event.target.value;
 							if (isProfanityFilterReady) {
 								const result = profanityFilter.check(value);
