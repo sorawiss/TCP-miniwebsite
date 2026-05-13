@@ -3,7 +3,7 @@ import { TextInput } from "@/components/ui/text-input";
 import type { NameStep } from "@/lib/config";
 import { isProfanityFilterReady, profanityFilter } from "@/lib/profanity";
 import type { ProfileAnswers } from "@/lib/survey";
-import { SurveyNextButton } from "./survey-next-button";
+import NextButton from "../ui/next-button";
 
 interface NameStepProps {
 	onNext: () => void;
@@ -24,6 +24,9 @@ export function SurveyNameStep({
 	return (
 		<>
 			<div className="relative z-10 flex h-full flex-col items-center px-6 pt-[15vh]">
+				<h2 className="text-[#151F6D] text-[2.5rem] drop-shadow-sm">
+					{step.label}
+				</h2>
 				<div className="relative flex h-[129px] w-[134px] items-center justify-center">
 					<Image
 						alt="Username icon"
@@ -35,12 +38,9 @@ export function SurveyNameStep({
 				</div>
 
 				<div className="mt-12 w-full max-w-md space-y-4">
-					<h2 className="font-bold text-2xl text-bluebrand drop-shadow-sm">
-						{step.label}
-					</h2>
 					<TextInput
 						autoFocus
-						containerClassName="h-[72px]"
+						containerClassName="h-[6rem]"
 						onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
 							const value = event.target.value;
 							if (isProfanityFilterReady) {
@@ -56,11 +56,7 @@ export function SurveyNameStep({
 				</div>
 
 				<div className="mt-10 w-full max-w-md">
-					<SurveyNextButton
-						className="px-8 shadow-lg"
-						disabled={!profile.name.trim()}
-						onClick={onNext}
-					/>
+					<NextButton disabled={!profile.name.trim()} onClick={onNext} />
 				</div>
 			</div>
 			<Image

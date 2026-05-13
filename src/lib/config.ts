@@ -169,7 +169,7 @@ export const surveySteps: SurveyStep[] = [
 	{
 		id: "name",
 		type: "name",
-		label: "สวัสดีพี่นักวิ่งชื่อคุณ :",
+		label: "สวัสดี! คุณ...",
 		placeholder: "ชื่อของคุณ",
 	},
 	{
