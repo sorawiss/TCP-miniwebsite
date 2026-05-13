@@ -56,6 +56,7 @@ const useSurveyStore = create<SurveyStore>((set) => ({
 function isStepComplete(step: SurveyStep, state: SurveyState) {
 	switch (step.type) {
 		case "intro":
+		case "countdown":
 		case "story":
 			return true;
 		case "name":

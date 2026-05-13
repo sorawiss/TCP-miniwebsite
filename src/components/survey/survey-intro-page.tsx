@@ -2,26 +2,21 @@ import Image from "next/image";
 import type { IntroStep } from "@/lib/config";
 
 interface IntroPageProps {
-	onNext: () => void;
 	step: IntroStep;
 }
 
-export function SurveyIntroPage({ onNext, step }: IntroPageProps) {
+export function SurveyIntroPage({ step }: IntroPageProps) {
 	return (
-		<button
-			className="absolute inset-0 z-0 cursor-pointer outline-none"
-			onClick={onNext}
-			type="button"
-		>
+		<div className="absolute inset-0 z-0">
 			{step.topImage && (
 				<Image
 					// TODO
 					alt=""
-					className="-mt-40 object-cover px-4"
-					height={1024}
+					className="mt-[25vh] object-cover px-4"
+					height={380}
 					priority
 					src={step.topImage}
-					width={1024}
+					width={512}
 				/>
 			)}
 			{step.bottomImage && (
@@ -33,6 +28,6 @@ export function SurveyIntroPage({ onNext, step }: IntroPageProps) {
 					src={step.bottomImage}
 				/>
 			)}
-		</button>
+		</div>
 	);
 }

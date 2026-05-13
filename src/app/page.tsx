@@ -2,6 +2,7 @@
 import Image from "next/image";
 import { Suspense } from "react";
 import { SurveyBirthDateStep } from "@/components/survey/survey-birth-date-step";
+import { SurveyCountdownStep } from "@/components/survey/survey-countdown-step";
 import { SurveyIntroPage } from "@/components/survey/survey-intro-page";
 import { SurveyNameStep } from "@/components/survey/survey-name-step";
 import { SurveyChoiceQuestionPage } from "@/components/survey-question-page";
@@ -30,6 +31,7 @@ function HomeContent() {
 		currentStep.type !== "name" &&
 		currentStep.type !== "birthDate" &&
 		currentStep.type !== "choice" &&
+		currentStep.type !== "countdown" &&
 		!isResultStep;
 
 	return (
@@ -43,7 +45,11 @@ function HomeContent() {
 					width={56}
 				/>
 				{currentStep.type === "intro" ? (
-					<SurveyIntroPage onNext={nextStep} step={currentStep} />
+					<SurveyIntroPage step={currentStep} />
+				) : null}
+
+				{currentStep.type === "countdown" ? (
+					<SurveyCountdownStep onNext={nextStep} step={currentStep} />
 				) : null}
 
 				{currentStep.type === "name" ? (

@@ -31,6 +31,13 @@ export interface IntroStep {
 	type: "intro";
 }
 
+export interface CountdownStep {
+	delay?: number;
+	id: string;
+	images: string[];
+	type: "countdown";
+}
+
 export interface NameStep {
 	id: string;
 	label: string;
@@ -73,6 +80,7 @@ export interface ResultStep {
 
 export type SurveyStep =
 	| IntroStep
+	| CountdownStep
 	| NameStep
 	| BirthDateStep
 	| ChoiceQuestionStep
@@ -149,6 +157,11 @@ export const surveySteps: SurveyStep[] = [
 		type: "intro",
 		bottomImage: "/intro/intro1.svg",
 		topImage: "/intro/intro1-text.svg",
+	},
+	{
+		id: "countdown",
+		type: "countdown",
+		images: ["/text/3.svg", "/text/2.svg", "/text/1.svg", "/text/start.svg"],
 	},
 	{
 		id: "name",
