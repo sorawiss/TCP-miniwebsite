@@ -4,12 +4,10 @@ import { Suspense } from "react";
 import { SurveyBirthDateStep } from "@/components/survey/survey-birth-date-step";
 import { SurveyIntroPage } from "@/components/survey/survey-intro-page";
 import { SurveyNameStep } from "@/components/survey/survey-name-step";
-import {
-	SurveyChoiceQuestionPage,
-	SurveyTextQuestionPage,
-} from "@/components/survey-question-page";
+import { SurveyChoiceQuestionPage } from "@/components/survey-question-page";
 import { SurveyStoryStep } from "@/components/survey-story-step";
 import { SurveySummaryStep } from "@/components/survey-summary-step";
+import { SurveyTextQuestionPage } from "@/components/survey-text-question-page";
 import { Button } from "@/components/ui/button";
 import { totalQuestionCount } from "@/lib/config";
 import { useSurvey } from "@/lib/use-survey";
