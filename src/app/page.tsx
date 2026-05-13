@@ -31,6 +31,7 @@ function HomeContent() {
 		currentStep.type !== "intro" &&
 		currentStep.type !== "name" &&
 		currentStep.type !== "birthDate" &&
+		currentStep.type !== "choice" &&
 		!isResultStep;
 
 	return (
@@ -69,7 +70,12 @@ function HomeContent() {
 					<SurveyChoiceQuestionPage
 						answers={state.choiceAnswers}
 						bottomImage={currentStep.bottomImage}
-						onAnswerChange={updateChoiceAnswer}
+						onAnswerChange={(questionId, value) => {
+							updateChoiceAnswer(questionId, value);
+							setTimeout(() => {
+								nextStep();
+							}, 350);
+						}}
 						question={currentStep}
 						questionNumber={Number(currentStep.id)}
 						totalQuestions={totalQuestionCount}
