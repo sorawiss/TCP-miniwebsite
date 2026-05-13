@@ -282,4 +282,4 @@ export const surveySteps: SurveyStep[] = [
 
 export const scoredQuestionIds = ["1", "2", "3", "4", "5"] as const;
 
-export const totalQuestionCount = 7;
+export const totalQuestionCount = 5;

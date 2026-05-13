@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { TextInput } from "@/components/ui/text-input";
 import type { NameStep } from "@/lib/config";
 import { isProfanityFilterReady, profanityFilter } from "@/lib/profanity";
 import type { ProfileAnswers } from "@/lib/survey";
@@ -37,30 +38,21 @@ export function SurveyNameStep({
 					<h2 className="font-bold text-2xl text-bluebrand drop-shadow-sm">
 						{step.label}
 					</h2>
-					<div className="relative h-[72px] w-full overflow-hidden rounded-2xl">
-						{/* Background */}
-						<Image
-							alt="Input Background"
-							className="pointer-events-none z-0 object-cover"
-							fill
-							src="/svg/name-box.svg"
-						/>
-						<input
-							autoFocus
-							className="relative z-10 h-full w-full bg-transparent px-6 text-[#9a5d1b] text-xl placeholder:text-[#a86a24] focus:outline-none"
-							onChange={(event) => {
-								const value = event.target.value;
-								if (isProfanityFilterReady) {
-									const result = profanityFilter.check(value);
-									onProfileChange("name", result.cleanedText ?? value);
-								} else {
-									onProfileChange("name", value);
-								}
-							}}
-							placeholder={step.placeholder}
-							value={profile.name}
-						/>
-					</div>
+					<TextInput
+						autoFocus
+						containerClassName="h-[72px]"
+						onChange={(event) => {
+							const value = event.target.value;
+							if (isProfanityFilterReady) {
+								const result = profanityFilter.check(value);
+								onProfileChange("name", result.cleanedText ?? value);
+							} else {
+								onProfileChange("name", value);
+							}
+						}}
+						placeholder={step.placeholder}
+						value={profile.name}
+					/>
 				</div>
 
 				<div className="mt-10 w-full max-w-md">

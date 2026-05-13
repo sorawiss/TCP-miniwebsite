@@ -81,8 +81,6 @@ function HomeContent() {
 						answers={state.textAnswers}
 						onAnswerChange={updateTextAnswer}
 						question={currentStep}
-						questionNumber={Number(currentStep.id)}
-						totalQuestions={totalQuestionCount}
 					/>
 				) : null}
 
