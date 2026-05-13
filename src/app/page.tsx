@@ -27,6 +27,7 @@ function HomeContent() {
 		nextStep,
 	} = useSurvey();
 
+	// Hide Navigation Settings
 	const showNavigation =
 		currentStep.type !== "name" &&
 		currentStep.type !== "birthDate" &&
