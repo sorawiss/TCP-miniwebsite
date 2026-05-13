@@ -269,12 +269,6 @@ export const surveySteps: SurveyStep[] = [
 		placeholder: "พิมพ์ 3 คำของคุณ",
 	},
 	{
-		id: "ending",
-		type: "story",
-		title: "ก่อนเปิดผลลัพธ์",
-		body: "70 กม. ที่ผ่านมา...ไม่ใช่เรื่องง่าย ทุกการตัดสินใจระหว่างทาง เผยให้เห็นพลังที่ซ่อนอยู่ เปิดพลังของฉัน!",
-	},
-	{
 		id: "result",
 		type: "result",
 	},
