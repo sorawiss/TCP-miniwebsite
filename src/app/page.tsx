@@ -41,9 +41,9 @@ function HomeContent() {
 				<Image
 					alt="Logo"
 					className="absolute inset-x-1/2 top-4 z-10 -translate-x-1/2"
-					height={70}
+					height={56}
 					src="/logo.svg"
-					width={70}
+					width={56}
 				/>
 				{currentStep.type === "intro" ? (
 					<SurveyIntroPage onNext={nextStep} step={currentStep} />

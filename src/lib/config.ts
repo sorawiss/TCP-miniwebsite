@@ -269,12 +269,6 @@ export const surveySteps: SurveyStep[] = [
 		placeholder: "พิมพ์ 3 คำของคุณ",
 	},
 	{
-		id: "7",
-		type: "text",
-		prompt: 'ถ้าเจอ "ทะเลทราย" ในชีวิตจริง... ใครคือคนที่จะพาคุณข้ามอุปสรรคนี้ไปได้?',
-		placeholder: "พิมพ์ชื่อคนที่คุณอยากขอบคุณ",
-	},
-	{
 		id: "ending",
 		type: "story",
 		title: "ก่อนเปิดผลลัพธ์",

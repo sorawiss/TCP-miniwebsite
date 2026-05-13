@@ -25,7 +25,3 @@ body {
 	color: var(--foreground);
 	background: var(--background);
 }
-
-html {
-	font-size: clamp(14px, 1vw, 36px);
-}

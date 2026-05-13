@@ -14,7 +14,6 @@ export function SurveySummaryStep({
 }: SurveySummaryStepProps) {
 	const runnerName = state.profile.name.trim() || "นักวิ่ง";
 	const selfMessage = state.textAnswers["6"]?.trim() || "-";
-	const supportPerson = state.textAnswers["7"]?.trim() || "-";
 
 	return (
 		<section className="space-y-8">
@@ -39,9 +38,6 @@ export function SurveySummaryStep({
 					</p>
 					<p className="text-base leading-8">
 						{runnerName} บอกกับตัวเองว่า: “{selfMessage}”
-					</p>
-					<p className="text-base leading-8">
-						และขอบคุณ “{supportPerson}” ที่ช่วยปลุกพลังให้ไปต่อเสมอ
 					</p>
 				</div>
 			</div>

@@ -37,29 +37,10 @@ export function SurveyChoiceQuestionPage({
 		<>
 			<section className="relative z-10 space-y-6 px-4 pt-6">
 				{/* Custom Progress Bar */}
-				{/* TODO : use real bar */}
-				<div className="relative mx-auto w-full max-w-2xl pt-4 pb-2">
-					<div className="absolute top-0 right-0 z-20 translate-x-2 -translate-y-2 transform">
-						<svg
-							aria-label="Location"
-							fill="#f26522"
-							height="28"
-							viewBox="0 0 24 24"
-							width="28"
-							xmlns="http://www.w3.org/2000/svg"
-						>
-							<path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" />
-						</svg>
-					</div>
-					<div className="relative z-10 h-4 w-full rounded-full border-2 border-[#d97c2a] bg-white p-[2px] shadow-sm">
-						<div
-							className="relative h-full overflow-hidden rounded-full bg-gradient-to-r from-[#ff9b44] to-[#f26522]"
-							style={{ width: `${Math.max(5, progressValue)}%` }}
-						>
-							<div className="absolute inset-0 rounded-full bg-[repeating-linear-gradient(45deg,transparent,transparent_4px,rgba(255,255,255,0.5)_4px,rgba(255,255,255,0.5)_8px)] opacity-30" />
-						</div>
-					</div>
-				</div>
+				<Progress
+					className="mx-auto max-w-2xl pt-6 pb-2"
+					value={progressValue}
+				/>
 
 				{/* TODO: This is not the final design now it just a mockup */}
 				<div className="space-y-6 pt-4">
