@@ -21,14 +21,9 @@ export function SurveyChoiceQuestionPage({
 }: ChoiceQuestionPageProps) {
 	const progressValue = (questionNumber / totalQuestions) * 100;
 
-	const getOptionStyles = (index: number) => {
-		const styles = [
-			{ bg: "bg-[#182359]", border: "border-[#0f173b]" }, // A: Dark blue
-			{ bg: "bg-[#ffbc11]", border: "border-[#e5a80f]" }, // B: Yellow
-			{ bg: "bg-[#f87800]", border: "border-[#d96800]" }, // C: Orange
-			{ bg: "bg-[#e60023]", border: "border-[#cc001f]" }, // D: Red
-		];
-		return styles[index % styles.length];
+	const getOptionIcon = (index: number) => {
+		const icons = ["/svg/a.svg", "/svg/b.svg", "/svg/c.svg", "/svg/d.svg"];
+		return icons[index % icons.length];
 	};
 
 	return (
@@ -49,7 +44,7 @@ export function SurveyChoiceQuestionPage({
 						{question.options.map((option, index) => {
 							const inputId = `${question.id}-${option.value}`;
 							const isSelected = answers[question.id] === option.value;
-							const badgeStyles = getOptionStyles(index);
+							const iconSrc = getOptionIcon(index);
 
 							return (
 								<label
@@ -79,15 +74,13 @@ export function SurveyChoiceQuestionPage({
 											{option.label}
 										</div>
 
-										<div
-											className={`absolute top-1/2 -left-6 flex h-[76px] w-[76px] -translate-y-1/2 items-center justify-center rounded-full border-[4px] shadow-sm ${badgeStyles.bg} ${badgeStyles.border}`}
-										>
-											<div className="absolute inset-0.5 rounded-full border-[2px] border-white/30" />
-											<div className="absolute inset-0 rounded-full bg-gradient-to-b from-white/20 to-transparent" />
-											<span className="relative z-10 font-bold text-3xl text-white drop-shadow-md">
-												{option.value}
-											</span>
-										</div>
+										<Image
+											alt={option.value}
+											className="absolute top-1/2 -left-6 -translate-y-1/2 drop-shadow-sm"
+											height={90}
+											src={iconSrc}
+											width={90}
+										/>
 									</div>
 								</label>
 							);
