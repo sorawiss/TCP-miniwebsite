@@ -21,7 +21,7 @@ export function NextButton({ children, className, ...props }: NextButtonProps) {
 				src="/svg/bottle-next.svg"
 				width={240}
 			/>
-			<span className="relative z-10 pr-[10%] font-bold text-2xl text-white drop-shadow-md">
+			<span className="relative z-10 pr-[10%] text-2xl text-white drop-shadow-md">
 				{children || "ไปต่อ"}
 			</span>
 		</button>

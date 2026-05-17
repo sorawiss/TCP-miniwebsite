@@ -5,7 +5,6 @@ import { useMemo } from "react";
 import { create } from "zustand";
 import {
 	type ChoiceQuestionStep,
-	type PowerId,
 	resultPowers,
 	type SurveyStep,
 	scoredQuestionIds,
@@ -74,15 +73,15 @@ function isStepComplete(step: SurveyStep, state: SurveyState) {
 	}
 }
 
-function getWinningPower(state: SurveyState): PowerId {
-	const scores: Record<PowerId, number> = {
-		"power-1": 0,
-		"power-2": 0,
-		"power-3": 0,
-		"power-4": 0,
-		"power-5": 0,
-		"power-6": 0,
-		"power-7": 0,
+function getWinningPower(state: SurveyState): string {
+	const scores: Record<string, number> = {
+		"1": 0,
+		"2": 0,
+		"3": 0,
+		"4": 0,
+		"5": 0,
+		"6": 0,
+		"7": 0,
 	};
 
 	for (const questionId of scoredQuestionIds) {
@@ -104,10 +103,10 @@ function getWinningPower(state: SurveyState): PowerId {
 		}
 	}
 
-	let bestPower: PowerId = "power-1";
+	let bestPower = "1";
 	let bestScore = -1;
 
-	for (const powerId of Object.keys(scores) as PowerId[]) {
+	for (const powerId of Object.keys(scores)) {
 		if (scores[powerId] > bestScore) {
 			bestPower = powerId;
 			bestScore = scores[powerId];
