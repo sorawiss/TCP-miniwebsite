@@ -16,11 +16,22 @@ export function SurveyTextQuestionPage({
 }: TextQuestionPageProps) {
 	return (
 		<>
-			<section className="relative z-10 h-full space-y-6 px-4 pt-6">
+			<section className="relative z-10 flex h-full flex-col justify-center space-y-6 px-4 pt-6">
 				<div className="space-y-5">
-					<h2 className="max-w-2xl font-bold text-3xl text-[#2f1b09] leading-tight sm:text-5xl">
-						{question.prompt}
-					</h2>
+					{question.promptImage ? (
+						<div className="relative mx-auto h-[120px] w-[80%] max-w-sm">
+							<Image
+								alt={question.prompt}
+								className="object-contain"
+								fill
+								src={question.promptImage}
+							/>
+						</div>
+					) : (
+						<h2 className="max-w-2xl font-bold text-3xl text-[#2f1b09] leading-tight sm:text-5xl">
+							{question.prompt}
+						</h2>
+					)}
 					<TextInput
 						autoFocus
 						containerClassName="h-[10rem]"

@@ -19,12 +19,20 @@ export function SurveySummaryStep({
 	const selfMessage = state.textAnswers["6"]?.trim() || "-";
 
 	return (
-		<Image
-			alt="Story background"
-			className="pointer-events-none absolute bottom-0 left-0 z-0 w-full object-cover"
-			height={800}
-			src={"/svg/result-bg.svg"}
-			width={800}
-		/>
+		<div className="relative w-full py-5 items-center h-full flex flex-col">
+			<Image
+				alt="Story background"
+				className="pointer-events-none absolute bottom-0 left-0 z-0 w-full object-cover"
+				height={800}
+				src={"/svg/result-bg.svg"}
+				width={800}
+			/>
+
+			<h1 className="text-center">
+				พลังที่ซ่อนอยู่ในตัวคุณ
+				<br />
+				{runnerName}
+			</h1>
+		</div>
 	);
 }

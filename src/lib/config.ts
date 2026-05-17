@@ -71,6 +71,7 @@ export interface TextQuestionStep {
 	id: string;
 	placeholder: string;
 	prompt: string;
+	promptImage?: string;
 	type: "text";
 }
 
@@ -282,7 +283,8 @@ export const surveySteps: SurveyStep[] = [
 		id: "6",
 		type: "text",
 		prompt: "ข้ามเส้นชัยแล้ว... ขอ 3 คำที่คุณอยากตะโกนบอกตัวเองคืออะไร?",
-		placeholder: "พิมพ์ 3 คำของคุณ",
+		promptImage: "/text/6.svg",
+		placeholder: "ทำได้ แล้ว ....",
 	},
 	{
 		id: "7",
