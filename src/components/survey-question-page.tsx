@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { A, B, C, D } from "@/components/choice";
 import { Progress } from "@/components/ui/progress";
 import type { ChoiceQuestionStep } from "@/lib/config";
 
@@ -22,8 +23,9 @@ export function SurveyChoiceQuestionPage({
 	const progressValue = (questionNumber / totalQuestions) * 100;
 
 	const getOptionIcon = (index: number) => {
-		const icons = ["/svg/a.svg", "/svg/b.svg", "/svg/c.svg", "/svg/d.svg"];
-		return icons[index % icons.length];
+		const Icons = [A, B, C, D];
+		const Icon = Icons[index % Icons.length];
+		return <Icon />;
 	};
 
 	return (
@@ -44,7 +46,6 @@ export function SurveyChoiceQuestionPage({
 						{question.options.map((option, index) => {
 							const inputId = `${question.id}-${option.value}`;
 							const isSelected = answers[question.id] === option.value;
-							const iconSrc = getOptionIcon(index);
 
 							return (
 								<label
@@ -74,13 +75,9 @@ export function SurveyChoiceQuestionPage({
 											{option.label}
 										</div>
 
-										<Image
-											alt={option.value}
-											className="absolute top-1/2 -left-6 -translate-y-1/2 drop-shadow-sm"
-											height={90}
-											src={iconSrc}
-											width={90}
-										/>
+										<div className="absolute top-1/2 -left-6 -translate-y-1/2 drop-shadow-sm">
+											{getOptionIcon(index)}
+										</div>
 									</div>
 								</label>
 							);

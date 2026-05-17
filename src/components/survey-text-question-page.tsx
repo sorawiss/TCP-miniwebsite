@@ -27,7 +27,7 @@ export function SurveyTextQuestionPage({
 			<section className="relative z-10 flex h-full flex-col justify-center space-y-6 px-4 pt-6">
 				<div className="space-y-5">
 					{question.promptImage ? (
-						<div className="relative mx-auto h-[120px] w-[80%] max-w-sm">
+						<div className="relative mx-auto mt-23 h-[120px] w-[80%] max-w-sm">
 							<Image
 								alt={question.prompt}
 								className="object-contain"
