@@ -3,6 +3,7 @@
 import * as htmlToImage from "html-to-image";
 import Image from "next/image";
 import { useRef, useState } from "react";
+import ButtonDonwload from "@/components/ui/button-donwload";
 import { NextButton } from "@/components/ui/next-button";
 import type { ResultPower } from "@/lib/config";
 import type { SurveyState } from "@/lib/survey";
@@ -31,6 +32,9 @@ export function SurveySummaryStep({
 				pixelRatio: 2,
 				style: {
 					fontFamily: "inherit",
+				},
+				filter: (node) => {
+					return (node as HTMLElement).id !== "action-buttons";
 				},
 			});
 		} catch (error) {
@@ -144,29 +148,30 @@ export function SurveySummaryStep({
 					{power.description}
 				</div>
 
-				{/* Download Button */}
-				<button
-					className={`group relative rounded-full mb-4 flex w-full py-[1rem] items-center justify-center transition-transform ${
-						isProcessing
-							? "cursor-wait opacity-70"
-							: "cursor-pointer active:scale-95"
-					}`}
-					disabled={isProcessing}
-					onClick={() => handleDownload()}
+				<div
+					className="w-full flex flex-col items-center pb-10"
+					id="action-buttons"
 				>
-					<Image
-						alt="Download bg"
-						className="absolute inset-0 z-0 drop-shadow-sm rounded-full"
-						fill
-						src="/results/button.svg"
-					/>
-					<span className="relative z-10 flex items-center gap-2 font-medium text-[#FF8200] text-[1.5rem]">
-						{isProcessing ? "กำลังประมวลผล..." : "ดาวน์โหลดพลังของคุณ"}
-					</span>
-				</button>
+					{/* Download Button */}
+					<button
+						className={`group relative rounded-full mb-4 flex w-full max-w-[300px] py-[1rem] items-center justify-center transition-transform ${
+							isProcessing
+								? "cursor-wait opacity-70"
+								: "cursor-pointer active:scale-95"
+						}`}
+						disabled={isProcessing}
+						onClick={() => handleDownload()}
+					>
+						<ButtonDonwload
+							className="absolute inset-0 z-0 w-full  drop-shadow-sm"
+							preserveAspectRatio="xMidYMid meet"
+						/>
+						<span className="relative z-10 flex items-center gap-2 font-medium text-[#FF8200] text-[1.5rem]">
+							{isProcessing ? "กำลังประมวลผล..." : "ดาวน์โหลดพลังของคุณ"}
+						</span>
+					</button>
 
-				{/* Share Button using NextButton */}
-				<div className="mb-10">
+					{/* Share Button using NextButton */}
 					<NextButton disabled={isProcessing} onClick={handleShare}>
 						{isProcessing ? "กำลังประมวลผล..." : "แชร์พลังของคุณ"}
 					</NextButton>

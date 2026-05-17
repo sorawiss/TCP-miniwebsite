@@ -1,5 +1,5 @@
-import Image from "next/image";
 import type { ButtonHTMLAttributes } from "react";
+import ButtonNext from "@/components/button-next";
 import { cn } from "@/lib/utils";
 
 export interface NextButtonProps
@@ -14,13 +14,7 @@ export function NextButton({ children, className, ...props }: NextButtonProps) {
 			)}
 			{...props}
 		>
-			<Image
-				alt="Next button background"
-				className="absolute inset-0 z-0 h-full w-full object-contain drop-shadow-md"
-				height={60}
-				src="/svg/bottle-next.svg"
-				width={240}
-			/>
+			<ButtonNext className="absolute inset-0 z-0 h-full w-full drop-shadow-md" />
 			<span className="relative z-10 pr-[10%] text-2xl text-white drop-shadow-md">
 				{children || "ไปต่อ"}
 			</span>
