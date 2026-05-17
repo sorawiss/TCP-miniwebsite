@@ -55,7 +55,7 @@ export function SurveyNameStep({
 					/>
 				</div>
 
-				<div className="mt-10 w-full max-w-md">
+				<div className="mt-10">
 					<NextButton disabled={!profile.name.trim()} onClick={onNext} />
 				</div>
 			</div>

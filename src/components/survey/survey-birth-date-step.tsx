@@ -1,7 +1,7 @@
 import Image from "next/image";
 import type { BirthDateStep } from "@/lib/config";
 import type { ProfileAnswers } from "@/lib/survey";
-import { SurveyNextButton } from "./survey-next-button";
+import NextButton from "../ui/next-button";
 
 interface BirthDateStepProps {
 	onNext: () => void;
@@ -87,32 +87,10 @@ export function SurveyBirthDateStep({
 					</div>
 				</div>
 
-				<div className="mt-16 flex w-full max-w-md gap-4">
-					{/* Skip Button */}
-					<button
-						className="relative h-[60px] flex-1 overflow-hidden rounded-xl border border-[#f1a43a]/40 bg-gradient-to-b from-[#fffaf0] to-[#ffe8c4] px-2 font-bold text-[#FF8200] text-xl shadow-md transition-all hover:opacity-90 active:scale-[0.98]"
-						onClick={() => {
-							onProfileChange("skipsBirthDate", true);
-							onNext();
-						}}
-						type="submit"
-					>
-						<div className="pointer-events-none absolute inset-1 rounded-lg border-2 border-[#f1a43a]/30 border-dashed" />
-						<div
-							className="pointer-events-none absolute inset-0 opacity-10"
-							style={{
-								backgroundImage: "url('/svg/background.svg')",
-								backgroundSize: "cover",
-							}}
-						/>
-						<div className="relative flex items-center justify-center">
-							{step.optOutLabel}
-						</div>
-					</button>
-
+				<div className="mt-[3rem] flex w-full flex-col items-center gap-[1rem]">
 					{/* Next Button */}
-					<SurveyNextButton
-						className="flex-1 px-2"
+					<NextButton
+						className="px-2"
 						disabled={!(profile.birthDate || profile.skipsBirthDate)}
 						onClick={() => {
 							if (profile.skipsBirthDate) {
@@ -122,6 +100,20 @@ export function SurveyBirthDateStep({
 						}}
 						type="submit"
 					/>
+
+					{/* Skip Button */}
+					<button
+						className="relative w-full flex-1 overflow-hidden rounded-full border border-[#f1a43a]/40 bg-gradient-to-b from-[#fffaf0] to-[#ffe8c4] px-2 font-bold text-[#FF8200] text-xl shadow-md transition-all hover:opacity-90 active:scale-[0.98]"
+						onClick={() => {
+							onProfileChange("skipsBirthDate", true);
+							onNext();
+						}}
+						type="submit"
+					>
+						<div className="relative flex items-center justify-center py-[0.75rem]">
+							{step.optOutLabel}
+						</div>
+					</button>
 				</div>
 			</div>
 			<Image
