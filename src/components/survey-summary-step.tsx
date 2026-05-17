@@ -96,7 +96,7 @@ export function SurveySummaryStep({
 			className="relative flex h-full w-full flex-col bg-[url('/svg/background.svg')] bg-repeat"
 			ref={cardRef}
 		>
-			<div className="relative z-10 flex h-full w-full flex-col items-center overflow-y-auto px-6 pb-10 pt-2">
+			<div className="relative z-10 flex h-full w-full flex-col items-center overflow-y-auto no-scrollbar px-6 pb-10 pt-2">
 				<h1 className="text-center text-[#FF8200] text-[2.5rem]">
 					พลังที่ซ่อนอยู่ในตัวคุณ
 				</h1>

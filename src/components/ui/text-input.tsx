@@ -21,7 +21,7 @@ export const TextInput = forwardRef<
 	const containerClasses = `relative w-full overflow-hidden rounded-2xl ${
 		containerClassName || "h-[72px]"
 	}`;
-	const inputClasses = `relative z-10 h-full w-full bg-transparent px-6 py-5 text-[#9a5d1b] text-xl placeholder:text-[#a86a24] focus:outline-none resize-none ${
+	const inputClasses = `relative z-10 h-full w-full bg-transparent px-6 py-5 text-[#9a5d1b] text-[2rem] placeholder:text-[#a86a24] focus:outline-none resize-none ${
 		className || ""
 	}`;
 
