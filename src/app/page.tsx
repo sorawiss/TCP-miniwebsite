@@ -18,7 +18,6 @@ function HomeContent() {
 		state,
 		currentStep,
 		canContinue,
-		isResultStep,
 		winningPower,
 		daysLived,
 		updateProfile,
@@ -29,6 +28,10 @@ function HomeContent() {
 
 	const [showPreloader, setShowPreloader] = useState(true);
 	const [fadeOut, setFadeOut] = useState(false);
+
+	// Step-by-step transition states
+	const [activeStep, setActiveStep] = useState(currentStep);
+	const [isTransitioning, setIsTransitioning] = useState(false);
 
 	useEffect(() => {
 		// Wait 1.5s for initial assets to load, then start fade out
@@ -47,14 +50,31 @@ function HomeContent() {
 		};
 	}, []);
 
-	// Hide Navigation Settings
+	// Handle transitions when step changes
+	useEffect(() => {
+		if (
+			currentStep.id !== activeStep.id ||
+			currentStep.type !== activeStep.type
+		) {
+			setIsTransitioning(true);
+			const timer = setTimeout(() => {
+				setActiveStep(currentStep);
+				setIsTransitioning(false);
+			}, 400); // Duration matches transition utility duration-300
+			return () => clearTimeout(timer);
+		}
+	}, [currentStep, activeStep]);
+
+	// Hide Navigation Settings based on active step to match transition
 	const showNavigation =
-		currentStep.type !== "name" &&
-		currentStep.type !== "birthDate" &&
-		currentStep.type !== "choice" &&
-		currentStep.type !== "countdown" &&
-		currentStep.type !== "text" &&
-		!isResultStep;
+		activeStep.type !== "name" &&
+		activeStep.type !== "birthDate" &&
+		activeStep.type !== "choice" &&
+		activeStep.type !== "countdown" &&
+		activeStep.type !== "text" &&
+		activeStep.type !== "result";
+
+	const isActiveResultStep = activeStep.type === "result";
 
 	return (
 		<>
@@ -75,7 +95,11 @@ function HomeContent() {
 				</div>
 			)}
 			<main className="bg-[url('/svg/background.svg')] bg-repeat text-[#2f1b09]">
-				<div className="relative mx-auto flex h-screen max-w-[403px] flex-col pt-20">
+				<div
+					className={`relative mx-auto flex h-screen max-w-[403px] flex-col pt-20 transition-all duration-300 ease-in-out ${
+						isTransitioning ? "opacity-0" : "opacity-100"
+					}`}
+				>
 					<Image
 						alt="Logo"
 						className="absolute inset-x-1/2 top-4 z-10 -translate-x-1/2"
@@ -83,62 +107,62 @@ function HomeContent() {
 						src="/logo.svg"
 						width={56}
 					/>
-					{currentStep.type === "intro" ? (
-						<SurveyIntroPage step={currentStep} />
+					{activeStep.type === "intro" ? (
+						<SurveyIntroPage step={activeStep} />
 					) : null}
 
-					{currentStep.type === "countdown" ? (
-						<SurveyCountdownStep onNext={nextStep} step={currentStep} />
+					{activeStep.type === "countdown" ? (
+						<SurveyCountdownStep onNext={nextStep} step={activeStep} />
 					) : null}
 
-					{currentStep.type === "name" ? (
+					{activeStep.type === "name" ? (
 						<SurveyNameStep
 							onNext={nextStep}
 							onProfileChange={updateProfile}
 							profile={state.profile}
-							step={currentStep}
+							step={activeStep}
 						/>
 					) : null}
 
-					{currentStep.type === "birthDate" ? (
+					{activeStep.type === "birthDate" ? (
 						<SurveyBirthDateStep
 							onNext={nextStep}
 							onProfileChange={updateProfile}
 							profile={state.profile}
-							step={currentStep}
+							step={activeStep}
 						/>
 					) : null}
 
-					{currentStep.type === "choice" ? (
+					{activeStep.type === "choice" ? (
 						<SurveyChoiceQuestionPage
 							answers={state.choiceAnswers}
-							bottomImage={currentStep.bottomImage}
+							bottomImage={activeStep.bottomImage}
 							onAnswerChange={(questionId, value) => {
 								updateChoiceAnswer(questionId, value);
 								setTimeout(() => {
 									nextStep();
 								}, 350);
 							}}
-							question={currentStep}
-							questionNumber={Number(currentStep.id)}
+							question={activeStep}
+							questionNumber={Number(activeStep.id)}
 							totalQuestions={totalQuestionCount}
 						/>
 					) : null}
 
-					{currentStep.type === "text" ? (
+					{activeStep.type === "text" ? (
 						<SurveyTextQuestionPage
 							answers={state.textAnswers}
 							onAnswerChange={updateTextAnswer}
 							onNext={nextStep}
-							question={currentStep}
+							question={activeStep}
 						/>
 					) : null}
 
-					{currentStep.type === "story" ? (
-						<SurveyStoryStep story={currentStep} />
+					{activeStep.type === "story" ? (
+						<SurveyStoryStep story={activeStep} />
 					) : null}
 
-					{isResultStep ? (
+					{isActiveResultStep ? (
 						<SurveySummaryStep
 							daysLived={daysLived}
 							power={winningPower}
@@ -149,7 +173,7 @@ function HomeContent() {
 					{showNavigation ? (
 						<div className="relative z-10 mt-auto flex w-full items-center justify-center pb-[3rem]">
 							<NextButton disabled={!canContinue} onClick={nextStep}>
-								{currentStep.type === "story" && currentStep.id === "ending"
+								{activeStep.type === "story" && activeStep.id === "ending"
 									? "เปิดพลังของฉัน!"
 									: "ไปต่อ"}
 							</NextButton>
