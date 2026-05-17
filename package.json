@@ -2,6 +2,7 @@
   "dependencies": {
     "bad-words-thai": "^3.0.18",
     "clsx": "^2.1.1",
+    "html-to-image": "^1.11.13",
     "install": "^0.13.0",
     "next": "16.2.4",
     "nuqs": "^2.8.9",

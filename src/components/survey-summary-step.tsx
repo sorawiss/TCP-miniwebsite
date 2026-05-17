@@ -1,6 +1,8 @@
 // biome-ignore-all lint: generated file
 
+import * as htmlToImage from "html-to-image";
 import Image from "next/image";
+import { useRef, useState } from "react";
 import { NextButton } from "@/components/ui/next-button";
 import type { ResultPower } from "@/lib/config";
 import type { SurveyState } from "@/lib/survey";
@@ -18,9 +20,82 @@ export function SurveySummaryStep({
 }: SurveySummaryStepProps) {
 	const runnerName = state.profile.name.trim() || "นักวิ่ง";
 	const formattedDays = daysLived ? daysLived.toLocaleString() : "0";
+	const cardRef = useRef<HTMLDivElement>(null);
+	const [isProcessing, setIsProcessing] = useState(false);
+
+	const generateImage = async (): Promise<string | null> => {
+		if (!cardRef.current) return null;
+		try {
+			return await htmlToImage.toPng(cardRef.current, {
+				cacheBust: true,
+				pixelRatio: 2,
+				style: {
+					fontFamily: "inherit",
+				},
+			});
+		} catch (error) {
+			console.error("Failed to generate image", error);
+			return null;
+		}
+	};
+
+	const handleDownload = async (preGeneratedUrl?: string) => {
+		if (isProcessing && !preGeneratedUrl) return;
+		setIsProcessing(true);
+
+		const dataUrl = preGeneratedUrl || (await generateImage());
+
+		if (dataUrl) {
+			const link = document.createElement("a");
+			link.download = "tcp-power.png";
+			link.href = dataUrl;
+			link.click();
+		}
+
+		setIsProcessing(false);
+	};
+
+	const handleShare = async () => {
+		if (isProcessing) return;
+		setIsProcessing(true);
+
+		const dataUrl = await generateImage();
+		if (!dataUrl) {
+			setIsProcessing(false);
+			return;
+		}
+
+		try {
+			const blob = await (await fetch(dataUrl)).blob();
+			const file = new File([blob], "tcp-power.png", { type: "image/png" });
+
+			if (
+				navigator.share &&
+				navigator.canShare &&
+				navigator.canShare({ files: [file] })
+			) {
+				await navigator.share({
+					title: "พลังที่ซ่อนอยู่ในตัวคุณ",
+					text: "นี่คือพลังที่ซ่อนอยู่ในตัวฉัน! มาค้นหาพลังของคุณได้ที่นี่",
+					files: [file],
+				});
+				setIsProcessing(false);
+			} else {
+				// Fallback to download if Web Share API is not supported
+				setIsProcessing(false); // Reset so handleDownload can run
+				await handleDownload(dataUrl);
+			}
+		} catch (error) {
+			console.error("Failed to share image", error);
+			setIsProcessing(false);
+		}
+	};
 
 	return (
-		<>
+		<div
+			className="relative flex h-full w-full flex-col bg-[url('/svg/background.svg')] bg-repeat"
+			ref={cardRef}
+		>
 			<div className="relative z-10 flex h-full w-full flex-col items-center overflow-y-auto px-6 pb-10 pt-2">
 				<h1 className="text-center text-[#FF8200] text-[2.5rem]">
 					พลังที่ซ่อนอยู่ในตัวคุณ
@@ -70,7 +145,15 @@ export function SurveySummaryStep({
 				</div>
 
 				{/* Download Button */}
-				<button className="group relative rounded-full mb-4 flex w-full cursor-pointer py-[1rem] items-center justify-center transition-transform active:scale-95">
+				<button
+					className={`group relative rounded-full mb-4 flex w-full py-[1rem] items-center justify-center transition-transform ${
+						isProcessing
+							? "cursor-wait opacity-70"
+							: "cursor-pointer active:scale-95"
+					}`}
+					disabled={isProcessing}
+					onClick={() => handleDownload()}
+				>
 					<Image
 						alt="Download bg"
 						className="absolute inset-0 z-0 drop-shadow-sm rounded-full"
@@ -78,13 +161,15 @@ export function SurveySummaryStep({
 						src="/results/button.svg"
 					/>
 					<span className="relative z-10 flex items-center gap-2 font-medium text-[#FF8200] text-[1.5rem]">
-						ดาวน์โหลดพลังของคุณ
+						{isProcessing ? "กำลังประมวลผล..." : "ดาวน์โหลดพลังของคุณ"}
 					</span>
 				</button>
 
 				{/* Share Button using NextButton */}
 				<div className="mb-10">
-					<NextButton>แชร์พลังของคุณ</NextButton>
+					<NextButton disabled={isProcessing} onClick={handleShare}>
+						{isProcessing ? "กำลังประมวลผล..." : "แชร์พลังของคุณ"}
+					</NextButton>
 				</div>
 			</div>
 
@@ -95,6 +180,6 @@ export function SurveySummaryStep({
 				src={"/svg/result-bg.svg"}
 				width={800}
 			/>
-		</>
+		</div>
 	);
 }
