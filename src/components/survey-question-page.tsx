@@ -90,6 +90,7 @@ export function SurveyChoiceQuestionPage({
 				className="pointer-events-none absolute bottom-0 left-0 z-0 w-full object-cover"
 				height={800}
 				src={bottomImage}
+				unoptimized
 				width={800}
 			/>
 		</>
