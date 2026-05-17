@@ -33,6 +33,7 @@ function HomeContent() {
 		currentStep.type !== "birthDate" &&
 		currentStep.type !== "choice" &&
 		currentStep.type !== "countdown" &&
+		currentStep.type !== "text" &&
 		!isResultStep;
 
 	return (
@@ -91,6 +92,7 @@ function HomeContent() {
 					<SurveyTextQuestionPage
 						answers={state.textAnswers}
 						onAnswerChange={updateTextAnswer}
+						onNext={nextStep}
 						question={currentStep}
 					/>
 				) : null}

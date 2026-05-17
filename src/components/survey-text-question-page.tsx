@@ -1,4 +1,7 @@
+"use client";
 import Image from "next/image";
+import { useState } from "react";
+import { NextButton } from "@/components/ui/next-button";
 import type { TextQuestionStep } from "@/lib/config";
 import { isProfanityFilterReady, profanityFilter } from "@/lib/profanity";
 import { TextInput } from "./ui/text-input";
@@ -6,6 +9,7 @@ import { TextInput } from "./ui/text-input";
 interface TextQuestionPageProps {
 	answers: Record<string, string>;
 	onAnswerChange: (questionId: string, value: string) => void;
+	onNext: () => void;
 	question: TextQuestionStep;
 }
 
@@ -13,7 +17,11 @@ export function SurveyTextQuestionPage({
 	question,
 	answers,
 	onAnswerChange,
+	onNext,
 }: TextQuestionPageProps) {
+	const [error, setError] = useState<string | null>(null);
+	const currentAnswer = answers[question.id] ?? "";
+
 	return (
 		<>
 			<section className="relative z-10 flex h-full flex-col justify-center space-y-6 px-4 pt-6">
@@ -36,18 +44,34 @@ export function SurveyTextQuestionPage({
 						autoFocus
 						containerClassName="h-[10rem]"
 						multiline
-						onChange={(event: React.ChangeEvent<HTMLTextAreaElement>) => {
+						onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
 							const value = event.target.value;
+							onAnswerChange(question.id, value);
 							if (isProfanityFilterReady) {
 								const result = profanityFilter.check(value);
-								onAnswerChange(question.id, result.cleanedText ?? value);
-							} else {
-								onAnswerChange(question.id, value);
+								if (result.isClean) {
+									setError(null);
+								} else {
+									setError("กรุณาใช้คำที่สุภาพ");
+								}
 							}
 						}}
 						placeholder={question.placeholder}
-						value={answers[question.id] ?? ""}
+						value={currentAnswer}
 					/>
+					{error && (
+						<p className="text-center font-medium text-[#ee1c25] text-[1.5rem]">
+							{error}
+						</p>
+					)}
+				</div>
+				<div className="relative z-10 mt-auto flex w-full items-center justify-center pt-8 pb-10">
+					<NextButton
+						disabled={!currentAnswer.trim() || !!error}
+						onClick={onNext}
+					>
+						ไปต่อ
+					</NextButton>
 				</div>
 			</section>
 			<Image

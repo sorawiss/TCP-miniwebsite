@@ -1,4 +1,7 @@
+"use client";
+
 import Image from "next/image";
+import { useState } from "react";
 import { TextInput } from "@/components/ui/text-input";
 import type { NameStep } from "@/lib/config";
 import { isProfanityFilterReady, profanityFilter } from "@/lib/profanity";
@@ -21,6 +24,8 @@ export function SurveyNameStep({
 	onProfileChange,
 	onNext,
 }: NameStepProps) {
+	const [error, setError] = useState<string | null>(null);
+
 	return (
 		<>
 			<div className="relative z-10 flex h-full flex-col items-center px-6 pt-[15vh]">
@@ -43,20 +48,31 @@ export function SurveyNameStep({
 						containerClassName="h-[6rem]"
 						onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
 							const value = event.target.value;
+							onProfileChange("name", value);
 							if (isProfanityFilterReady) {
 								const result = profanityFilter.check(value);
-								onProfileChange("name", result.cleanedText ?? value);
-							} else {
-								onProfileChange("name", value);
+								if (result.isClean) {
+									setError(null);
+								} else {
+									setError("กรุณาใช้คำที่สุภาพ");
+								}
 							}
 						}}
 						placeholder={step.placeholder}
 						value={profile.name}
 					/>
+					{error && (
+						<p className="text-center font-medium text-[#ee1c25] text-[1.5rem]">
+							{error}
+						</p>
+					)}
 				</div>
 
 				<div className="mt-10">
-					<NextButton disabled={!profile.name.trim()} onClick={onNext} />
+					<NextButton
+						disabled={!profile.name.trim() || !!error}
+						onClick={onNext}
+					/>
 				</div>
 			</div>
 			<Image
