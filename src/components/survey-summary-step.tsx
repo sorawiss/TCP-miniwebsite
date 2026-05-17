@@ -17,7 +17,7 @@ export function SurveySummaryStep({
 	daysLived,
 }: SurveySummaryStepProps) {
 	const runnerName = state.profile.name.trim() || "นักวิ่ง";
-	const hoursLived = daysLived ? (daysLived * 24).toLocaleString() : "12,480";
+	const formattedDays = daysLived ? daysLived.toLocaleString() : "0";
 
 	return (
 		<>
@@ -38,17 +38,19 @@ export function SurveySummaryStep({
 				/>
 
 				{/* Info Box */}
-				<div
-					className="relative border border-[#FFB500] mb-5 flex bg-[#FFEFC7]/50 w-fit rounded-full px-8 
-				flex-col items-center justify-center "
-				>
-					<div className="relative z-10 text-center">
-						<div className="text-[#4A4A4A] text-[1rem]">คุณใช้ชีวิตมาแล้ว</div>
-						<div className="text-[#FF8200] -mt-1 leading-none text-[2rem]">
-							{hoursLived} ชั่วโมง
+				{daysLived !== null && (
+					<div
+						className="relative border border-[#FFB500] mb-5 flex bg-[#FFEFC7]/50 w-fit rounded-full px-8 
+					flex-col items-center justify-center "
+					>
+						<div className="relative z-10 text-center">
+							<div className="text-[#4A4A4A] text-[1rem]">คุณใช้ชีวิตมาแล้ว</div>
+							<div className="text-[#FF8200] -mt-1 leading-none text-[2rem]">
+								{formattedDays} วัน
+							</div>
 						</div>
 					</div>
-				</div>
+				)}
 
 				{/* Separator line with text */}
 				<div className="flex w-full max-w-[300px] items-center">

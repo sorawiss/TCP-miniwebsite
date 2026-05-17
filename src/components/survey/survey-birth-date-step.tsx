@@ -19,15 +19,6 @@ export function SurveyBirthDateStep({
 	onProfileChange,
 	onNext,
 }: BirthDateStepProps) {
-	const ageOptions = [
-		"",
-		"ต่ำกว่า 18 ปี",
-		"18-22 ปี",
-		"23-40 ปี",
-		"41-60 ปี",
-		"60 ปีขึ้นไป",
-	];
-
 	return (
 		<>
 			<div className="relative z-10 flex h-full flex-col items-center px-6 pt-[15vh]">
@@ -54,9 +45,9 @@ export function SurveyBirthDateStep({
 							fill
 							src="/svg/name-box.svg"
 						/>
-						<select
+						<input
 							autoFocus
-							className="h-[60px] w-full appearance-none rounded-xl px-6 text-[#9a5d1b] text-xl shadow-md focus:outline-none"
+							className="relative z-10 h-[60px] w-full appearance-none rounded-xl bg-transparent px-6 text-[#9a5d1b] text-xl shadow-md focus:outline-none [&::-webkit-calendar-picker-indicator]:absolute [&::-webkit-calendar-picker-indicator]:inset-0 [&::-webkit-calendar-picker-indicator]:h-full [&::-webkit-calendar-picker-indicator]:w-full [&::-webkit-calendar-picker-indicator]:cursor-pointer [&::-webkit-calendar-picker-indicator]:opacity-0"
 							onChange={(event) => {
 								onProfileChange("birthDate", event.target.value);
 								onProfileChange("skipsBirthDate", false);
@@ -65,21 +56,13 @@ export function SurveyBirthDateStep({
 								boxShadow:
 									"inset 0px 4px 10px rgba(0,0,0,0.05), 0px 4px 6px rgba(0,0,0,0.15)",
 							}}
+							type="date"
 							value={profile.birthDate}
-						>
-							<option disabled hidden value="">
-								เลือกอายุของคุณ
-							</option>
-							{ageOptions.slice(1).map((opt) => (
-								<option key={opt} value={opt}>
-									{opt}
-								</option>
-							))}
-						</select>
+						/>
 
 						<Image
 							alt="calendar"
-							className="absolute top-1/2 right-6 -translate-y-1/2"
+							className="pointer-events-none absolute top-1/2 right-6 z-20 -translate-y-1/2"
 							height={32}
 							src={"/svg/calendar.svg"}
 							width={32}
