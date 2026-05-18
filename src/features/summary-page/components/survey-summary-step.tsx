@@ -114,6 +114,7 @@ export function SurveySummaryStep({
 						className="mb-4 flex h-[220px] w-[220px] items-center justify-center"
 						data-animate="cap"
 					>
+						{/* // TODO: update sideTextureUrl to be dynamic with power.id */}
 						<CoinFlip
 							powerId={power.id}
 							sideTextureUrl="/results/cap-side.png"
