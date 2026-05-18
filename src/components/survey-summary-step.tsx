@@ -3,6 +3,7 @@
 import * as htmlToImage from "html-to-image";
 import Image from "next/image";
 import { useRef, useState } from "react";
+import { CoinFlip } from "@/components/coin-flip";
 import ButtonDonwload from "@/components/ui/button-donwload";
 import { NextButton } from "@/components/ui/next-button";
 import type { ResultPower } from "@/lib/config";
@@ -27,6 +28,9 @@ export function SurveySummaryStep({
 	const generateImage = async (): Promise<string | null> => {
 		if (!cardRef.current) return null;
 		try {
+			// Small delay to ensure the DOM has swapped the 3D coin for the static image
+			await new Promise((resolve) => setTimeout(resolve, 150));
+
 			return await htmlToImage.toPng(cardRef.current, {
 				cacheBust: true,
 				pixelRatio: 2,
@@ -108,13 +112,21 @@ export function SurveySummaryStep({
 					{runnerName}
 				</div>
 
-				<Image
-					alt="Power image"
-					className="mb-4 object-contain"
-					height={180}
-					src={`/results/${power.id}.png`}
-					width={180}
-				/>
+				{isProcessing ? (
+					<div className="relative mb-4 flex h-[220px] w-[220px] items-center justify-center select-none pointer-events-none">
+						<Image
+							alt="Power image"
+							className="object-contain"
+							height={180}
+							src={`/results/${power.id}.png`}
+							width={180}
+						/>
+					</div>
+				) : (
+					<div className="mb-4 flex h-[220px] w-[220px] items-center justify-center">
+						<CoinFlip powerId={power.id} sideTextureUrl="/results/1.png" />
+					</div>
+				)}
 
 				{/* Info Box */}
 				{daysLived !== null && (
