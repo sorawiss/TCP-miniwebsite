@@ -57,7 +57,7 @@ export function SurveyCountdownStep({
 			<Image
 				alt="Desert background"
 				className="pointer-events-none absolute bottom-0 left-0 z-0 w-full object-cover"
-				height={800}
+				height={500}
 				src="/intro/intro1.png"
 				width={800}
 			/>

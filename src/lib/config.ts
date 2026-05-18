@@ -128,7 +128,7 @@ export const surveySteps: SurveyStep[] = [
 	{
 		id: "intro",
 		type: "intro",
-		bottomImage: "/intro/intro0.svg",
+		bottomImage: "/intro/intro0.png",
 		topImage: "/intro/intro0-text.svg",
 		className: "mt-[20vh]",
 	},
@@ -165,7 +165,8 @@ export const surveySteps: SurveyStep[] = [
 	{
 		id: "1",
 		type: "choice",
-		prompt: "เพิ่งสตาร์ทได้ไม่ทันไร ก้าวพลาดไปเจอทรายดูดเอาไงดี?",
+		prompt:
+			"<p class='text-[#151F6D]'>เพิ่งสตาร์ทได้ไม่ทันไร<br/><span class='text-[#E4002B]'>ก้าวพลาดไปเจอทรายดูด</span><br/>เอาไงดี?</p>",
 		options: [
 			{ value: "A", label: "ดึงเท้าออกช้า ๆ", powerId: "1" },
 			{ value: "B", label: "นิ่งไว้ก่อน", powerId: "2" },
@@ -177,7 +178,8 @@ export const surveySteps: SurveyStep[] = [
 	{
 		id: "2",
 		type: "choice",
-		prompt: "วิ่งมาแล้วเกือบครึ่งทาง แต่น้ำในกระติกจะหมด จะไหวไหมเนี่ย?",
+		prompt:
+			"<span class='text-[#151F6D]'>วิ่งมาแล้วเกือบครึ่งทาง</span><br/><span class='text-[#E4002B]'>แต่น้ำใกล้หมด</span> <span class='text-[#151F6D]'><br/>จะไหวไหมเนี่ย?</span>",
 		options: [
 			{ value: "A", label: "อย่างน้อยก็เหลือ", powerId: "5" },
 			{ value: "B", label: "หันไปถามเพื่อนข้างๆ ว่าไหวไหม", powerId: "6" },
@@ -205,7 +207,7 @@ export const surveySteps: SurveyStep[] = [
 	{
 		id: "3",
 		type: "choice",
-		prompt: "ระวัง!! ข้างหน้าเป็นรอยแยกทรายถล่ม! จะข้ามยังไงดี?",
+		prompt: "พายุทรายโหมกระหน่ำ",
 		options: [
 			{
 				value: "A",
@@ -227,7 +229,8 @@ export const surveySteps: SurveyStep[] = [
 	{
 		id: "4",
 		type: "choice",
-		prompt: "นักวิ่งข้างๆ เริ่มถอดใจ คุณจะบอกว่า...",
+		prompt:
+			"<span class='text-[#151F6D]'>นักวิ่งข้างๆ เริ่มถอดใจ</span> <span class='text-[#E4002B]'>คุณจะบอกว่า...</span>",
 		options: [
 			{ value: "A", label: "เฮ้ย! มานี่ไปวิ่งด้วยกัน", powerId: "6" },
 			{ value: "B", label: "เปลี่ยนไปวิ่งเส้นทางที่ง่ายขึ้นมั้ย?", powerId: "7" },
@@ -239,7 +242,8 @@ export const surveySteps: SurveyStep[] = [
 	{
 		id: "5",
 		type: "choice",
-		prompt: 'ใกล้ถึงเส้นชัย! เจอดีล "รับเงินก้อนใหญ่" ไม่ต้องกลับไปวิ่งให้เหนื่อย ดีลนี้เอาไง',
+		prompt:
+			"<span class='text-[#E4002B]'>ใกล้ถึงเส้นชัย!</span><br/><span class='text-[#151F6D]'>มีรถจิ๊ปผ่านมาให้นั่งไปด้วยกัน</span><br/><span class='text-[#151F6D]'>ไม่ต้องวิ่งต่อให้เหนื่อย ดีลนี้เอาไง ?</span>",
 		options: [
 			{ value: "A", label: "มีข้อแลกเปลี่ยนอะไรรึป่าว?", powerId: "3" },
 			{ value: "B", label: "น่าสนใจแต่ขอเข้าเส้นชัยด้วยตัวเอง", powerId: "4" },

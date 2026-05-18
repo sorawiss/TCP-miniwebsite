@@ -39,9 +39,11 @@ export function SurveyChoiceQuestionPage({
 
 				{/* TODO: This is not the final design now it just a mockup */}
 				<div className="space-y-6 pt-4">
-					<h2 className="mx-auto max-w-2xl whitespace-pre-line text-center text-2xl text-[#1c2b59] leading-relaxed sm:text-3xl">
-						{question.prompt}
-					</h2>
+					<h2
+						className="mx-auto max-w-2xl whitespace-pre-line text-center text-[#1c2b59] text-[2.2rem] leading-tight sm:text-3xl"
+						// biome-ignore lint/security/noDangerouslySetInnerHtml: <the html is safe from config>
+						dangerouslySetInnerHTML={{ __html: question.prompt }}
+					/>
 					<div className="mx-auto mt-8 grid max-w-2xl gap-[1rem]">
 						{question.options.map((option, index) => {
 							const inputId = `${question.id}-${option.value}`;

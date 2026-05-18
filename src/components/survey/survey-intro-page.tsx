@@ -24,10 +24,11 @@ export function SurveyIntroPage({ step }: IntroPageProps) {
 			{step.bottomImage && (
 				<Image
 					alt={step.id}
-					className="object-cover"
-					fill
+					className="pointer-events-none absolute bottom-0 left-0 z-0 w-full object-cover"
+					height={500}
 					priority
 					src={step.bottomImage}
+					width={800}
 				/>
 			)}
 		</div>
