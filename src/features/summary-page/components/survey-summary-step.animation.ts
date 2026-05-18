@@ -1,10 +1,13 @@
 import { gsap } from "gsap";
 import type { RefObject } from "react";
+import { defaultPatterns, WebHaptics } from "web-haptics";
 
 // TODO: Handle if info-box does not exist
 export function playSummaryEntranceAnimation(
 	containerRef: RefObject<HTMLElement | null>
 ) {
+	const haptics = new WebHaptics();
+
 	const ctx = gsap.context(() => {
 		const tl = gsap.timeline({
 			defaults: { ease: "power3.out", duration: 0.8 },
@@ -37,6 +40,14 @@ export function playSummaryEntranceAnimation(
 			rotation: 0,
 			duration: 1.2,
 			ease: "back.out(1.5)",
+			onStart: () => {
+				// Satisfying initial spin rumble
+				haptics.trigger(defaultPatterns.medium);
+			},
+			onComplete: () => {
+				// Settle impact tap
+				haptics.trigger(defaultPatterns.light);
+			},
 		})
 			.to(
 				['[data-animate="title"]', '[data-animate="subtitle"]'],
@@ -76,6 +87,10 @@ export function playSummaryEntranceAnimation(
 					y: 0,
 					duration: 0.6,
 					ease: "back.out(1.7)",
+					onStart: () => {
+						// Success double tap celebration
+						haptics.trigger(defaultPatterns.success);
+					},
 				},
 				"-=0.3"
 			)
