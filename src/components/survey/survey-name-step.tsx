@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { useState } from "react";
+import Name from "@/components/name";
 import { TextInput } from "@/components/ui/text-input";
 import type { NameStep } from "@/lib/config";
 import { isProfanityFilterReady, profanityFilter } from "@/lib/profanity";
@@ -33,13 +34,7 @@ export function SurveyNameStep({
 					{step.label}
 				</h2>
 				<div className="relative flex h-[129px] w-[134px] items-center justify-center">
-					<Image
-						alt="Username icon"
-						className="absolute inset-0 h-full w-full object-contain"
-						height={129}
-						src="/svg/polygon-name.svg"
-						width={134}
-					/>
+					<Name className="absolute inset-0 h-full w-full object-contain" />
 				</div>
 
 				<div className="mt-12 w-full max-w-md space-y-4">

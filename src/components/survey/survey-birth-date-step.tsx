@@ -1,6 +1,8 @@
 import Image from "next/image";
+import Calendar from "@/components/calendar";
 import type { BirthDateStep } from "@/lib/config";
 import type { ProfileAnswers } from "@/lib/survey";
+import BdPolygon from "../bd-polygon";
 import NextButton from "../ui/next-button";
 
 interface BirthDateStepProps {
@@ -24,13 +26,7 @@ export function SurveyBirthDateStep({
 			<div className="relative z-10 flex h-full flex-col items-center px-6 pt-[15vh]">
 				{/* Top Polygon with Calendar Icon */}
 				<div className="relative flex h-[129px] w-[134px] items-center justify-center">
-					<Image
-						alt="Polygon Background"
-						className="absolute inset-0 h-full w-full object-contain"
-						height={129}
-						src="/svg/polygon-bd.svg"
-						width={134}
-					/>
+					<BdPolygon />
 				</div>
 
 				<div className="mt-12 w-full max-w-md space-y-4">
@@ -60,13 +56,7 @@ export function SurveyBirthDateStep({
 							value={profile.birthDate}
 						/>
 
-						<Image
-							alt="calendar"
-							className="pointer-events-none absolute top-1/2 right-6 z-20 -translate-y-1/2"
-							height={32}
-							src={"/svg/calendar.svg"}
-							width={32}
-						/>
+						<Calendar className="pointer-events-none absolute top-1/2 right-6 z-20 -translate-y-1/2" />
 					</div>
 				</div>
 
