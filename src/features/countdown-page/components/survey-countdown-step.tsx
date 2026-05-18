@@ -1,60 +1,62 @@
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import { useEffect, useRef } from "react";
 import type { CountdownStep } from "@/lib/config";
+import { playCountdownAnimation } from "./survey-countdown-step.animation";
 
 interface SurveyCountdownStepProps {
 	onNext: () => void;
 	step: CountdownStep;
 }
 
-const IMAGES = ["/text/3.svg", "/text/2.svg", "/text/1.svg", "/text/start.svg"];
+export function SurveyCountdownStep({ onNext }: SurveyCountdownStepProps) {
+	const containerRef = useRef<HTMLDivElement>(null);
 
-export function SurveyCountdownStep({
-	onNext,
-	step,
-}: SurveyCountdownStepProps) {
-	const delay = step.delay ?? 1000;
-	const [index, setIndex] = useState(0);
-	const [visible, setVisible] = useState(true);
-
-	useEffect(() => {
-		// Reset when the step changes
-		setIndex(0);
-		setVisible(true);
-	}, [step.id]);
-
-	useEffect(() => {
-		// Fade out just before switching to the next image
-		const fadeOut = setTimeout(() => {
-			setVisible(false);
-		}, delay);
-
-		const advance = setTimeout(() => {
-			if (index < IMAGES.length - 1) {
-				setIndex((i) => i + 1);
-				setVisible(true);
-			} else {
-				onNext();
-			}
-		}, delay);
-
-		return () => {
-			clearTimeout(fadeOut);
-			clearTimeout(advance);
-		};
-	}, [index, delay, IMAGES.length, onNext]);
+	useEffect(() => playCountdownAnimation(containerRef, onNext), [onNext]);
 
 	return (
-		<div className="relative inset-0 z-0 flex h-screen items-center justify-center">
-			<Image
-				alt={`countdown-${index}`}
-				className="mb-[25vh] object-contain px-4"
-				height={200}
-				priority
-				src={IMAGES[index]}
-				style={{ opacity: visible ? 1 : 0 }}
-				width={200}
-			/>
+		<div
+			className="relative inset-0 z-0 flex h-screen items-center justify-center overflow-hidden"
+			ref={containerRef}
+		>
+			{/* Countdown container absolute center */}
+			<div className="absolute mb-[25vh] flex h-[200px] w-[200px] items-center justify-center">
+				<Image
+					alt="3"
+					className="absolute object-contain px-4"
+					data-animate="num-3"
+					height={200}
+					priority
+					src="/text/3.svg"
+					width={200}
+				/>
+				<Image
+					alt="2"
+					className="absolute object-contain px-4"
+					data-animate="num-2"
+					height={200}
+					priority
+					src="/text/2.svg"
+					width={200}
+				/>
+				<Image
+					alt="1"
+					className="absolute object-contain px-4"
+					data-animate="num-1"
+					height={200}
+					priority
+					src="/text/1.svg"
+					width={200}
+				/>
+				<Image
+					alt="Start"
+					className="absolute object-contain px-4"
+					data-animate="start"
+					height={200}
+					priority
+					src="/text/start.svg"
+					width={200}
+				/>
+			</div>
 
 			<Image
 				alt="Desert background"
