@@ -3,6 +3,7 @@ import Calendar from "@/components/calendar";
 import type { BirthDateStep } from "@/lib/config";
 import type { ProfileAnswers } from "@/lib/survey";
 import BdPolygon from "../bd-polygon";
+import NameBackground from "../name-background";
 import NextButton from "../ui/next-button";
 
 interface BirthDateStepProps {
@@ -35,12 +36,7 @@ export function SurveyBirthDateStep({
 					</h2>
 					<div className="relative h-[60px] w-full overflow-hidden rounded-2xl">
 						{/* Background */}
-						<Image
-							alt="Input Background"
-							className="pointer-events-none -z-10 object-cover"
-							fill
-							src="/svg/name-box.svg"
-						/>
+						<NameBackground className="pointer-events-none absolute inset-0 z-0 w-full" />
 						<input
 							autoFocus
 							className="relative z-10 h-[60px] w-full appearance-none rounded-xl bg-transparent px-6 text-[#9a5d1b] text-xl shadow-md focus:outline-none [&::-webkit-calendar-picker-indicator]:absolute [&::-webkit-calendar-picker-indicator]:inset-0 [&::-webkit-calendar-picker-indicator]:h-full [&::-webkit-calendar-picker-indicator]:w-full [&::-webkit-calendar-picker-indicator]:cursor-pointer [&::-webkit-calendar-picker-indicator]:opacity-0"

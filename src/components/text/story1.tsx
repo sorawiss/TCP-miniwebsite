@@ -1,10 +1,8 @@
 export function Story1({
 	className,
 	title = "Story 1",
-}: {
-	className?: string;
-	title?: string;
-}) {
+	...props
+}: React.SVGProps<SVGSVGElement> & { title?: string }) {
 	return (
 		<svg
 			aria-label={title}
@@ -15,6 +13,7 @@ export function Story1({
 			viewBox="0 0 288 152"
 			width="288"
 			xmlns="http://www.w3.org/2000/svg"
+			{...props}
 		>
 			<title>{title}</title>
 			<path

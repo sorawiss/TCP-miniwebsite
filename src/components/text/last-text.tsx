@@ -1,6 +1,6 @@
 import type React from "react";
 
-export function LastText({
+export default function LastText({
 	title = "Last Story",
 	className,
 	...props

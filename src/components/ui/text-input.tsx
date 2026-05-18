@@ -1,10 +1,10 @@
-import Image from "next/image";
 import {
 	forwardRef,
 	type InputHTMLAttributes,
 	type Ref,
 	type TextareaHTMLAttributes,
 } from "react";
+import NameBackground from "../name-background";
 
 export type TextInputProps = {
 	containerClassName?: string;
@@ -21,7 +21,7 @@ export const TextInput = forwardRef<
 	const containerClasses = `relative w-full overflow-hidden rounded-2xl ${
 		containerClassName || "h-[72px]"
 	}`;
-	const inputClasses = `relative z-10 h-full w-full bg-transparent px-6 py-5 text-[#9a5d1b] text-[2rem] placeholder:text-[#a86a24] focus:outline-none resize-none ${
+	const inputClasses = `relative z-10 h-full w-full bg-transparent px-8 py-6 text-[#9a5d1b] text-[2rem] placeholder:text-[#a86a24] focus:outline-none resize-none ${
 		className || ""
 	}`;
 
@@ -29,12 +29,7 @@ export const TextInput = forwardRef<
 		return (
 			<div className={containerClasses}>
 				{/* Background */}
-				<Image
-					alt="Input Background"
-					className="pointer-events-none z-0 object-cover"
-					fill
-					src="/svg/name-box.svg"
-				/>
+				<NameBackground className="pointer-events-none absolute inset-0 z-0 h-full w-full object-cover" />
 				<textarea
 					className={inputClasses}
 					ref={ref as Ref<HTMLTextAreaElement>}
@@ -47,12 +42,7 @@ export const TextInput = forwardRef<
 	return (
 		<div className={containerClasses}>
 			{/* Background */}
-			<Image
-				alt="Input Background"
-				className="pointer-events-none z-0 object-cover"
-				fill
-				src="/svg/name-box.svg"
-			/>
+			<NameBackground className="pointer-events-none absolute inset-0 z-0 h-full w-full object-cover" />
 			<input
 				className={inputClasses}
 				ref={ref as Ref<HTMLInputElement>}
