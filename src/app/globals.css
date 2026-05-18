@@ -33,3 +33,8 @@ body {
 		display: none;
 	}
 }
+
+/* Prevent GSAP FOUC (Flash of Unstyled Content) / flicker before animation starts */
+[data-animate] {
+	opacity: 0;
+}
