@@ -3,9 +3,9 @@
 import * as htmlToImage from "html-to-image";
 import Image from "next/image";
 import { useRef, useState } from "react";
-import { CoinFlip } from "@/components/coin-flip";
 import ButtonDonwload from "@/components/ui/button-donwload";
 import { NextButton } from "@/components/ui/next-button";
+import { CoinFlip } from "@/features/summary-page/components/coin-flip";
 import type { ResultPower } from "@/lib/config";
 import type { SurveyState } from "@/lib/survey";
 
