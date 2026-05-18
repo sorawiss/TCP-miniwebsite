@@ -1,6 +1,7 @@
 import { gsap } from "gsap";
 import type { RefObject } from "react";
 
+// TODO: Handle if info-box does not exist
 export function playSummaryEntranceAnimation(
 	containerRef: RefObject<HTMLElement | null>
 ) {
