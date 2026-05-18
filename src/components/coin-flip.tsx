@@ -34,7 +34,7 @@ export function CoinFlip({ powerId, sideTextureUrl }: CoinFlipProps) {
 	const N = 24;
 	const panels = Array.from({ length: N }, (_, i) => {
 		const angle = i * (360 / N);
-		const width = (2 * Math.PI * 84) / N; // Average radius R = 84px
+		const width = ((2 * Math.PI * 84) / N) * 1.1;
 		return { angle, width, i };
 	});
 
