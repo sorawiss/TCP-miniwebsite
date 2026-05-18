@@ -1,12 +1,16 @@
 // biome-ignore-all lint: generated file
 
-import * as htmlToImage from "html-to-image";
 import Image from "next/image";
 import { useRef, useState } from "react";
 import ButtonDonwload from "@/components/ui/button-donwload";
 import { NextButton } from "@/components/ui/next-button";
 import { CoinFlip } from "@/features/summary-page/components/coin-flip";
 import type { ResultPower } from "@/lib/config";
+import {
+	downloadImage,
+	generateImageFromElement,
+	shareImage,
+} from "@/lib/image";
 import type { SurveyState } from "@/lib/survey";
 
 interface SurveySummaryStepProps {
@@ -25,39 +29,18 @@ export function SurveySummaryStep({
 	const cardRef = useRef<HTMLDivElement>(null);
 	const [isProcessing, setIsProcessing] = useState(false);
 
-	const generateImage = async (): Promise<string | null> => {
-		if (!cardRef.current) return null;
-		try {
-			// Small delay to ensure the DOM has swapped the 3D coin for the static image
-			await new Promise((resolve) => setTimeout(resolve, 150));
-
-			return await htmlToImage.toPng(cardRef.current, {
-				cacheBust: true,
-				pixelRatio: 2,
-				style: {
-					fontFamily: "inherit",
-				},
-				filter: (node) => {
-					return (node as HTMLElement).id !== "action-buttons";
-				},
-			});
-		} catch (error) {
-			console.error("Failed to generate image", error);
-			return null;
-		}
-	};
-
 	const handleDownload = async (preGeneratedUrl?: string) => {
 		if (isProcessing && !preGeneratedUrl) return;
 		setIsProcessing(true);
 
-		const dataUrl = preGeneratedUrl || (await generateImage());
+		const dataUrl =
+			preGeneratedUrl ||
+			(await generateImageFromElement(cardRef.current, {
+				filter: (node) => (node as HTMLElement).id !== "action-buttons",
+			}));
 
 		if (dataUrl) {
-			const link = document.createElement("a");
-			link.download = "tcp-power.png";
-			link.href = dataUrl;
-			link.click();
+			downloadImage(dataUrl, "tcp-power.png");
 		}
 
 		setIsProcessing(false);
@@ -67,36 +50,27 @@ export function SurveySummaryStep({
 		if (isProcessing) return;
 		setIsProcessing(true);
 
-		const dataUrl = await generateImage();
+		const dataUrl = await generateImageFromElement(cardRef.current, {
+			filter: (node) => (node as HTMLElement).id !== "action-buttons",
+		});
+
 		if (!dataUrl) {
 			setIsProcessing(false);
 			return;
 		}
 
-		try {
-			const blob = await (await fetch(dataUrl)).blob();
-			const file = new File([blob], "tcp-power.png", { type: "image/png" });
+		const shared = await shareImage(dataUrl, {
+			title: "พลังที่ซ่อนอยู่ในตัวคุณ",
+			text: "นี่คือพลังที่ซ่อนอยู่ในตัวฉัน! มาค้นหาพลังของคุณได้ที่นี่",
+			filename: "tcp-power.png",
+		});
 
-			if (
-				navigator.share &&
-				navigator.canShare &&
-				navigator.canShare({ files: [file] })
-			) {
-				await navigator.share({
-					title: "พลังที่ซ่อนอยู่ในตัวคุณ",
-					text: "นี่คือพลังที่ซ่อนอยู่ในตัวฉัน! มาค้นหาพลังของคุณได้ที่นี่",
-					files: [file],
-				});
-				setIsProcessing(false);
-			} else {
-				// Fallback to download if Web Share API is not supported
-				setIsProcessing(false); // Reset so handleDownload can run
-				await handleDownload(dataUrl);
-			}
-		} catch (error) {
-			console.error("Failed to share image", error);
-			setIsProcessing(false);
+		if (!shared) {
+			// Fallback to download if Web Share API is not supported or fails
+			downloadImage(dataUrl, "tcp-power.png");
 		}
+
+		setIsProcessing(false);
 	};
 
 	return (
