@@ -1,7 +1,8 @@
 // biome-ignore-all lint: generated file
 
+import { gsap } from "gsap";
 import Image from "next/image";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import ButtonDonwload from "@/components/ui/button-donwload";
 import { NextButton } from "@/components/ui/next-button";
 import { CoinFlip } from "@/features/summary-page/components/coin-flip";
@@ -28,6 +29,101 @@ export function SurveySummaryStep({
 	const formattedDays = daysLived ? daysLived.toLocaleString() : "0";
 	const cardRef = useRef<HTMLDivElement>(null);
 	const [isProcessing, setIsProcessing] = useState(false);
+
+	useEffect(() => {
+		// Only run entrance animations once on mount
+		const ctx = gsap.context(() => {
+			const tl = gsap.timeline({
+				defaults: { ease: "power3.out", duration: 0.8 },
+			});
+
+			// 1. Initial states
+			gsap.set(".animate-cap", {
+				opacity: 0,
+				scale: 0.3,
+				y: 350,
+				rotation: -45,
+			});
+			gsap.set(".animate-title", { opacity: 0, y: -30 });
+			gsap.set(".animate-subtitle", { opacity: 0, y: -20 });
+			gsap.set(".animate-info-box", { opacity: 0, scale: 0.8, y: 20 });
+			gsap.set(".animate-separator", { opacity: 0, scaleX: 0 });
+			gsap.set(".animate-power-title", { opacity: 0, scale: 0.9, y: 20 });
+			gsap.set(".animate-power-desc", { opacity: 0, y: 20 });
+			gsap.set(".animate-buttons", { opacity: 0, y: 30 });
+
+			// 2. Timeline sequence
+			tl.to(".animate-cap", {
+				opacity: 1,
+				scale: 1,
+				y: 0,
+				rotation: 0,
+				duration: 1.2,
+				ease: "back.out(1.5)",
+			})
+				.to(
+					[".animate-title", ".animate-subtitle"],
+					{
+						opacity: 1,
+						y: 0,
+						stagger: 0.15,
+						duration: 0.6,
+					},
+					"-=0.6"
+				)
+				.to(
+					".animate-info-box",
+					{
+						opacity: 1,
+						scale: 1,
+						y: 0,
+						duration: 0.6,
+					},
+					"-=0.3"
+				)
+				.to(
+					".animate-separator",
+					{
+						opacity: 1,
+						scaleX: 1,
+						duration: 0.6,
+						ease: "power2.inOut",
+					},
+					"-=0.4"
+				)
+				.to(
+					".animate-power-title",
+					{
+						opacity: 1,
+						scale: 1,
+						y: 0,
+						duration: 0.6,
+						ease: "back.out(1.7)",
+					},
+					"-=0.3"
+				)
+				.to(
+					".animate-power-desc",
+					{
+						opacity: 1,
+						y: 0,
+						duration: 0.6,
+					},
+					"-=0.4"
+				)
+				.to(
+					".animate-buttons",
+					{
+						opacity: 1,
+						y: 0,
+						duration: 0.6,
+					},
+					"-=0.3"
+				);
+		}, cardRef);
+
+		return () => ctx.revert();
+	}, []);
 
 	const handleDownload = async (preGeneratedUrl?: string) => {
 		if (isProcessing && !preGeneratedUrl) return;
@@ -79,10 +175,10 @@ export function SurveySummaryStep({
 			ref={cardRef}
 		>
 			<div className="relative z-10 flex h-full w-full flex-col items-center overflow-y-auto no-scrollbar px-6 pb-10 pt-2">
-				<h1 className="text-center text-[#FF8200] text-[2.5rem]">
+				<h1 className="animate-title text-center text-[#FF8200] text-[2.5rem]">
 					พลังที่ซ่อนอยู่ในตัวคุณ
 				</h1>
-				<div className="mb-2 text-center text-[#151F6D] -mt-4 text-[2.5rem]">
+				<div className="animate-subtitle mb-2 text-center text-[#151F6D] -mt-4 text-[2.5rem]">
 					{runnerName}
 				</div>
 
@@ -97,7 +193,7 @@ export function SurveySummaryStep({
 						/>
 					</div>
 				) : (
-					<div className="mb-4 flex h-[220px] w-[220px] items-center justify-center">
+					<div className="animate-cap mb-4 flex h-[220px] w-[220px] items-center justify-center">
 						<CoinFlip
 							powerId={power.id}
 							sideTextureUrl="/results/cap-side.png"
@@ -108,7 +204,7 @@ export function SurveySummaryStep({
 				{/* Info Box */}
 				{daysLived !== null && (
 					<div
-						className="relative border border-[#FFB500] mb-5 flex bg-[#FFEFC7]/50 w-fit rounded-full px-8 
+						className="animate-info-box relative border border-[#FFB500] mb-5 flex bg-[#FFEFC7]/50 w-fit rounded-full px-8 
 					flex-col items-center justify-center "
 					>
 						<div className="relative z-10 text-center">
@@ -121,24 +217,26 @@ export function SurveySummaryStep({
 				)}
 
 				{/* Separator line with text */}
-				<div className="flex w-full max-w-[300px] items-center">
+				<div className="animate-separator flex w-full max-w-[300px] items-center">
 					<div className="flex-grow border-[#E60000] border-t-[3px]" />
-					<span className="mx-3 text-[1.2rem]">พลังที่ปลุกให้คุณไปต่อได้ คือ</span>
+					<span className="mx-3 text-[1.2rem] whitespace-nowrap">
+						พลังที่ปลุกให้คุณไปต่อได้ คือ
+					</span>
 					<div className="flex-grow border-[#E60000] border-t-[3px]" />
 				</div>
 
 				{/* Power Title */}
-				<h2 className="text-center text-[#ee1c25] text-[3rem]">
+				<h2 className="animate-power-title text-center text-[#ee1c25] text-[3rem]">
 					{power.title}
 				</h2>
 
 				{/* Power Description */}
-				<div className="mb-8 px-2 text-center text-[1.5rem] leading-relaxed">
+				<div className="animate-power-desc mb-8 px-2 text-center text-[1.5rem] leading-relaxed">
 					{power.description}
 				</div>
 
 				<div
-					className="w-full flex flex-col items-center pb-10"
+					className="animate-buttons w-full flex flex-col items-center pb-10"
 					id="action-buttons"
 				>
 					{/* Download Button */}
@@ -150,6 +248,7 @@ export function SurveySummaryStep({
 						}`}
 						disabled={isProcessing}
 						onClick={() => handleDownload()}
+						type="button"
 					>
 						<ButtonDonwload
 							className="absolute inset-0 z-0 w-full  drop-shadow-sm"
