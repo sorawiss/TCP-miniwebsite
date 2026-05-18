@@ -40,6 +40,12 @@ export function playCountdownAnimation(
 			y: 350,
 			scale: 0.7,
 		});
+		gsap.set('[data-animate="underline-container"]', {
+			opacity: 0,
+		});
+		gsap.set("#reveal-rect", {
+			attr: { x: 0, width: 0 },
+		});
 
 		// 2. Animate "3"
 		tl.to('[data-animate="num-3"]', {
@@ -55,6 +61,23 @@ export function playCountdownAnimation(
 			},
 		})
 			.to(
+				'[data-animate="underline-container"]',
+				{
+					opacity: 1,
+					duration: 0.2,
+				},
+				"<"
+			)
+			.to(
+				"#reveal-rect",
+				{
+					attr: { width: 112 },
+					duration: 0.5,
+					ease: "power2.out",
+				},
+				"-=0.2"
+			)
+			.to(
 				'[data-animate="num-3"]',
 				{
 					opacity: 0,
@@ -67,8 +90,20 @@ export function playCountdownAnimation(
 				},
 				"+=0.3"
 			) // Pause at center for 0.3s before exiting
+			.to(
+				"#reveal-rect",
+				{
+					attr: { x: 112, width: 0 },
+					duration: 0.35,
+					ease: "power2.in",
+				},
+				"<"
+			)
 
 			// 3. Animate "2"
+			.set("#reveal-rect", {
+				attr: { x: 0, width: 0 },
+			})
 			.to(
 				'[data-animate="num-2"]',
 				{
@@ -86,6 +121,15 @@ export function playCountdownAnimation(
 				"-=0.1"
 			) // Overlap entry slightly with "3" exiting
 			.to(
+				"#reveal-rect",
+				{
+					attr: { width: 112 },
+					duration: 0.5,
+					ease: "power2.out",
+				},
+				"-=0.2"
+			)
+			.to(
 				'[data-animate="num-2"]',
 				{
 					opacity: 0,
@@ -98,8 +142,20 @@ export function playCountdownAnimation(
 				},
 				"+=0.3"
 			)
+			.to(
+				"#reveal-rect",
+				{
+					attr: { x: 112, width: 0 },
+					duration: 0.35,
+					ease: "power2.in",
+				},
+				"<"
+			)
 
 			// 4. Animate "1"
+			.set("#reveal-rect", {
+				attr: { x: 0, width: 0 },
+			})
 			.to(
 				'[data-animate="num-1"]',
 				{
@@ -117,6 +173,15 @@ export function playCountdownAnimation(
 				"-=0.1"
 			)
 			.to(
+				"#reveal-rect",
+				{
+					attr: { width: 112 },
+					duration: 0.5,
+					ease: "power2.out",
+				},
+				"-=0.2"
+			)
+			.to(
 				'[data-animate="num-1"]',
 				{
 					opacity: 0,
@@ -128,6 +193,23 @@ export function playCountdownAnimation(
 					ease: "power2.in",
 				},
 				"+=0.3"
+			)
+			.to(
+				"#reveal-rect",
+				{
+					attr: { x: 112, width: 0 },
+					duration: 0.35,
+					ease: "power2.in",
+				},
+				"<"
+			)
+			.to(
+				'[data-animate="underline-container"]',
+				{
+					opacity: 0,
+					duration: 0.3,
+				},
+				"<"
 			)
 
 			// 5. Animate "start"
