@@ -18,7 +18,7 @@ export function playSummaryEntranceAnimation(
 		});
 		gsap.set('[data-animate="title"]', { opacity: 0, y: -30 });
 		gsap.set('[data-animate="subtitle"]', { opacity: 0, y: -20 });
-		gsap.set('[data-animate="info-box"]', { opacity: 0, scale: 0.8, y: 20 });
+		gsap.set('[data-animate="info-box"]', { opacity: 0, scale: 0.8, y: -30 });
 		gsap.set('[data-animate="separator"]', { opacity: 0, scaleX: 0 });
 		gsap.set('[data-animate="power-title"]', {
 			opacity: 0,
@@ -45,7 +45,7 @@ export function playSummaryEntranceAnimation(
 					stagger: 0.15,
 					duration: 0.6,
 				},
-				"-=0.6"
+				"-=0.4"
 			)
 			.to(
 				'[data-animate="info-box"]',
@@ -55,7 +55,7 @@ export function playSummaryEntranceAnimation(
 					y: 0,
 					duration: 0.6,
 				},
-				"-=0.3"
+				"+=0.3"
 			)
 			.to(
 				'[data-animate="separator"]',
