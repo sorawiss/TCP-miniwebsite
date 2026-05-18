@@ -2,6 +2,9 @@ import { gsap } from "gsap";
 import type { RefObject } from "react";
 import { defaultPatterns, WebHaptics } from "web-haptics";
 
+const UNDERLINE_WAIT = 0.2;
+const UNDERLINE_DURATION = 0.2;
+
 export function playCountdownAnimation(
 	containerRef: RefObject<HTMLElement | null>,
 	onComplete: () => void
@@ -46,6 +49,12 @@ export function playCountdownAnimation(
 		gsap.set("#reveal-rect", {
 			attr: { x: 0, width: 0 },
 		});
+		gsap.set('[data-animate="start-lines-container"]', {
+			opacity: 0,
+		});
+		gsap.set("#start-reveal-rect", {
+			attr: { y: 206, height: 0 },
+		});
 
 		// 2. Animate "3"
 		tl.to('[data-animate="num-3"]', {
@@ -64,7 +73,7 @@ export function playCountdownAnimation(
 				'[data-animate="underline-container"]',
 				{
 					opacity: 1,
-					duration: 0.2,
+					duration: UNDERLINE_WAIT,
 				},
 				"<"
 			)
@@ -72,10 +81,10 @@ export function playCountdownAnimation(
 				"#reveal-rect",
 				{
 					attr: { width: 112 },
-					duration: 0.5,
+					duration: UNDERLINE_DURATION,
 					ease: "power2.out",
 				},
-				"-=0.2"
+				`<+=${UNDERLINE_WAIT}`
 			)
 			.to(
 				'[data-animate="num-3"]',
@@ -124,10 +133,10 @@ export function playCountdownAnimation(
 				"#reveal-rect",
 				{
 					attr: { width: 112 },
-					duration: 0.5,
+					duration: UNDERLINE_DURATION,
 					ease: "power2.out",
 				},
-				"-=0.2"
+				`-=${UNDERLINE_WAIT}`
 			)
 			.to(
 				'[data-animate="num-2"]',
@@ -146,10 +155,10 @@ export function playCountdownAnimation(
 				"#reveal-rect",
 				{
 					attr: { x: 112, width: 0 },
-					duration: 0.35,
+					duration: UNDERLINE_WAIT,
 					ease: "power2.in",
 				},
-				"<"
+				`<+=${UNDERLINE_WAIT}`
 			)
 
 			// 4. Animate "1"
@@ -176,10 +185,10 @@ export function playCountdownAnimation(
 				"#reveal-rect",
 				{
 					attr: { width: 112 },
-					duration: 0.5,
+					duration: UNDERLINE_DURATION,
 					ease: "power2.out",
 				},
-				"-=0.2"
+				`-=${UNDERLINE_WAIT}`
 			)
 			.to(
 				'[data-animate="num-1"]',
@@ -232,7 +241,24 @@ export function playCountdownAnimation(
 				duration: 0.2,
 				ease: "power1.inOut",
 			})
-			.to({}, { duration: 0.8 }); // Wait at the end so they can see "start"
+			.to(
+				'[data-animate="start-lines-container"]',
+				{
+					opacity: 1,
+					duration: 0.1,
+				},
+				"-=0.2"
+			)
+			.to(
+				"#start-reveal-rect",
+				{
+					attr: { y: 0, height: 206 },
+					duration: 0.8,
+					ease: "power2.out",
+				},
+				"<"
+			)
+			.to({}, { duration: 1.0 }); // Wait at the end so they can see "start" and the full decorative lines
 	}, containerRef);
 
 	return () => ctx.revert();
