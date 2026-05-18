@@ -47,6 +47,18 @@ export async function POST(request: Request) {
 
 		return Response.json({ id: rows[0]?.id }, { status: 201 });
 	} catch (error) {
+		if (
+			typeof error === "object" &&
+			error !== null &&
+			"code" in error &&
+			error.code === "23505"
+		) {
+			return Response.json(
+				{ error: "Name has already been submitted" },
+				{ status: 409 }
+			);
+		}
+
 		console.error("Failed to create survey submission", error);
 		return Response.json(
 			{ error: "Failed to create survey submission" },

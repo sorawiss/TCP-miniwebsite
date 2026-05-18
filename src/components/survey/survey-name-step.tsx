@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Name from "@/components/name";
 import { TextInput } from "@/components/ui/text-input";
 import type { NameStep } from "@/lib/config";
@@ -26,6 +26,66 @@ export function SurveyNameStep({
 	onNext,
 }: NameStepProps) {
 	const [error, setError] = useState<string | null>(null);
+	const [availability, setAvailability] = useState<
+		"checking" | "error" | "idle" | "taken" | "available"
+	>("idle");
+
+	useEffect(() => {
+		const name = profile.name.trim();
+
+		if (!name || error) {
+			setAvailability("idle");
+			return;
+		}
+
+		setAvailability("checking");
+
+		const controller = new AbortController();
+		const timeout = setTimeout(async () => {
+			try {
+				const response = await fetch(
+					`/api/names/availability?name=${encodeURIComponent(name)}`,
+					{ signal: controller.signal }
+				);
+
+				if (!response.ok) {
+					throw new Error(
+						`Availability check failed with status ${response.status}`
+					);
+				}
+
+				const result = (await response.json()) as { available: boolean };
+				setAvailability(result.available ? "available" : "taken");
+			} catch (availabilityError) {
+				if (!controller.signal.aborted) {
+					console.error("Failed to check name availability", availabilityError);
+					setAvailability("error");
+				}
+			}
+		}, 300);
+
+		return () => {
+			clearTimeout(timeout);
+			controller.abort();
+		};
+	}, [error, profile.name]);
+
+	let availabilityError: string | null = null;
+
+	if (availability === "taken") {
+		availabilityError = "ชื่อนี้ถูกใช้แล้ว โปรดเปลี่ยนชื่อของคุณ";
+	}
+
+	if (availability === "error") {
+		availabilityError = "เกิดข้อผิดพลาดในการตรวจสอบชื่อ กรุณาลองใหม่อีกครั้ง";
+	}
+	const isNextDisabled =
+		!profile.name.trim() ||
+		Boolean(error) ||
+		availability === "checking" ||
+		availability === "taken" ||
+		availability === "error" ||
+		availability === "idle";
 
 	return (
 		<>
@@ -61,13 +121,15 @@ export function SurveyNameStep({
 							{error}
 						</p>
 					)}
+					{availabilityError && (
+						<p className="text-center font-medium text-[#ee1c25] text-[1.5rem]">
+							{availabilityError}
+						</p>
+					)}
 				</div>
 
 				<div className="mt-10">
-					<NextButton
-						disabled={!profile.name.trim() || !!error}
-						onClick={onNext}
-					/>
+					<NextButton disabled={isNextDisabled} onClick={onNext} />
 				</div>
 			</div>
 			<Image
