@@ -1,6 +1,5 @@
 // biome-ignore-all lint: generated file
 
-import { gsap } from "gsap";
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import ButtonDonwload from "@/components/ui/button-donwload";
@@ -13,6 +12,7 @@ import {
 	shareImage,
 } from "@/lib/image";
 import type { SurveyState } from "@/lib/survey";
+import { playSummaryEntranceAnimation } from "./survey-summary-step.animation";
 
 interface SurveySummaryStepProps {
 	daysLived: number | null;
@@ -31,98 +31,7 @@ export function SurveySummaryStep({
 	const [isProcessing, setIsProcessing] = useState(false);
 
 	useEffect(() => {
-		// Only run entrance animations once on mount
-		const ctx = gsap.context(() => {
-			const tl = gsap.timeline({
-				defaults: { ease: "power3.out", duration: 0.8 },
-			});
-
-			// 1. Initial states
-			gsap.set(".animate-cap", {
-				opacity: 0,
-				scale: 0.3,
-				y: 350,
-				rotation: -45,
-			});
-			gsap.set(".animate-title", { opacity: 0, y: -30 });
-			gsap.set(".animate-subtitle", { opacity: 0, y: -20 });
-			gsap.set(".animate-info-box", { opacity: 0, scale: 0.8, y: 20 });
-			gsap.set(".animate-separator", { opacity: 0, scaleX: 0 });
-			gsap.set(".animate-power-title", { opacity: 0, scale: 0.9, y: 20 });
-			gsap.set(".animate-power-desc", { opacity: 0, y: 20 });
-			gsap.set(".animate-buttons", { opacity: 0, y: 30 });
-
-			// 2. Timeline sequence
-			tl.to(".animate-cap", {
-				opacity: 1,
-				scale: 1,
-				y: 0,
-				rotation: 0,
-				duration: 1.2,
-				ease: "back.out(1.5)",
-			})
-				.to(
-					[".animate-title", ".animate-subtitle"],
-					{
-						opacity: 1,
-						y: 0,
-						stagger: 0.15,
-						duration: 0.6,
-					},
-					"-=0.6"
-				)
-				.to(
-					".animate-info-box",
-					{
-						opacity: 1,
-						scale: 1,
-						y: 0,
-						duration: 0.6,
-					},
-					"-=0.3"
-				)
-				.to(
-					".animate-separator",
-					{
-						opacity: 1,
-						scaleX: 1,
-						duration: 0.6,
-						ease: "power2.inOut",
-					},
-					"-=0.4"
-				)
-				.to(
-					".animate-power-title",
-					{
-						opacity: 1,
-						scale: 1,
-						y: 0,
-						duration: 0.6,
-						ease: "back.out(1.7)",
-					},
-					"-=0.3"
-				)
-				.to(
-					".animate-power-desc",
-					{
-						opacity: 1,
-						y: 0,
-						duration: 0.6,
-					},
-					"-=0.4"
-				)
-				.to(
-					".animate-buttons",
-					{
-						opacity: 1,
-						y: 0,
-						duration: 0.6,
-					},
-					"-=0.3"
-				);
-		}, cardRef);
-
-		return () => ctx.revert();
+		return playSummaryEntranceAnimation(cardRef);
 	}, []);
 
 	const handleDownload = async (preGeneratedUrl?: string) => {
@@ -175,10 +84,16 @@ export function SurveySummaryStep({
 			ref={cardRef}
 		>
 			<div className="relative z-10 flex h-full w-full flex-col items-center overflow-y-auto no-scrollbar px-6 pb-10 pt-2">
-				<h1 className="animate-title text-center text-[#FF8200] text-[2.5rem]">
+				<h1
+					className="text-center text-[#FF8200] text-[2.5rem]"
+					data-animate="title"
+				>
 					พลังที่ซ่อนอยู่ในตัวคุณ
 				</h1>
-				<div className="animate-subtitle mb-2 text-center text-[#151F6D] -mt-4 text-[2.5rem]">
+				<div
+					className="mb-2 text-center text-[#151F6D] -mt-4 text-[2.5rem]"
+					data-animate="subtitle"
+				>
 					{runnerName}
 				</div>
 
@@ -193,7 +108,10 @@ export function SurveySummaryStep({
 						/>
 					</div>
 				) : (
-					<div className="animate-cap mb-4 flex h-[220px] w-[220px] items-center justify-center">
+					<div
+						className="mb-4 flex h-[220px] w-[220px] items-center justify-center"
+						data-animate="cap"
+					>
 						<CoinFlip
 							powerId={power.id}
 							sideTextureUrl="/results/cap-side.png"
@@ -204,8 +122,9 @@ export function SurveySummaryStep({
 				{/* Info Box */}
 				{daysLived !== null && (
 					<div
-						className="animate-info-box relative border border-[#FFB500] mb-5 flex bg-[#FFEFC7]/50 w-fit rounded-full px-8 
+						className="relative border border-[#FFB500] mb-5 flex bg-[#FFEFC7]/50 w-fit rounded-full px-8 
 					flex-col items-center justify-center "
+						data-animate="info-box"
 					>
 						<div className="relative z-10 text-center">
 							<div className="text-[#4A4A4A] text-[1rem]">คุณใช้ชีวิตมาแล้ว</div>
@@ -217,7 +136,10 @@ export function SurveySummaryStep({
 				)}
 
 				{/* Separator line with text */}
-				<div className="animate-separator flex w-full max-w-[300px] items-center">
+				<div
+					className="flex w-full max-w-[300px] items-center"
+					data-animate="separator"
+				>
 					<div className="flex-grow border-[#E60000] border-t-[3px]" />
 					<span className="mx-3 text-[1.2rem] whitespace-nowrap">
 						พลังที่ปลุกให้คุณไปต่อได้ คือ
@@ -226,17 +148,24 @@ export function SurveySummaryStep({
 				</div>
 
 				{/* Power Title */}
-				<h2 className="animate-power-title text-center text-[#ee1c25] text-[3rem]">
+				<h2
+					className="text-center text-[#ee1c25] text-[3rem]"
+					data-animate="power-title"
+				>
 					{power.title}
 				</h2>
 
 				{/* Power Description */}
-				<div className="animate-power-desc mb-8 px-2 text-center text-[1.5rem] leading-relaxed">
+				<div
+					className="mb-8 px-2 text-center text-[1.5rem] leading-relaxed"
+					data-animate="power-desc"
+				>
 					{power.description}
 				</div>
 
 				<div
-					className="animate-buttons w-full flex flex-col items-center pb-10"
+					className="w-full flex flex-col items-center pb-10"
+					data-animate="buttons"
 					id="action-buttons"
 				>
 					{/* Download Button */}
