@@ -1,12 +1,19 @@
 // biome-ignore-all lint: generated file
 
-import * as htmlToImage from "html-to-image";
 import Image from "next/image";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import { defaultPatterns, WebHaptics } from "web-haptics";
 import ButtonDonwload from "@/components/ui/button-donwload";
 import { NextButton } from "@/components/ui/next-button";
+import { CoinFlip } from "@/features/summary-page/components/coin-flip";
 import type { ResultPower } from "@/lib/config";
+import {
+	downloadImage,
+	generateImageFromElement,
+	shareImage,
+} from "@/lib/image";
 import type { SurveyState } from "@/lib/survey";
+import { playSummaryEntranceAnimation } from "./survey-summary-step.animation";
 
 interface SurveySummaryStepProps {
 	daysLived: number | null;
@@ -23,37 +30,24 @@ export function SurveySummaryStep({
 	const formattedDays = daysLived ? daysLived.toLocaleString() : "0";
 	const cardRef = useRef<HTMLDivElement>(null);
 	const [isProcessing, setIsProcessing] = useState(false);
+	const haptics = new WebHaptics();
 
-	const generateImage = async (): Promise<string | null> => {
-		if (!cardRef.current) return null;
-		try {
-			return await htmlToImage.toPng(cardRef.current, {
-				cacheBust: true,
-				pixelRatio: 2,
-				style: {
-					fontFamily: "inherit",
-				},
-				filter: (node) => {
-					return (node as HTMLElement).id !== "action-buttons";
-				},
-			});
-		} catch (error) {
-			console.error("Failed to generate image", error);
-			return null;
-		}
-	};
+	useEffect(() => {
+		return playSummaryEntranceAnimation(cardRef);
+	}, []);
 
 	const handleDownload = async (preGeneratedUrl?: string) => {
 		if (isProcessing && !preGeneratedUrl) return;
 		setIsProcessing(true);
 
-		const dataUrl = preGeneratedUrl || (await generateImage());
+		const dataUrl =
+			preGeneratedUrl ||
+			(await generateImageFromElement(cardRef.current, {
+				filter: (node) => (node as HTMLElement).id !== "action-buttons",
+			}));
 
 		if (dataUrl) {
-			const link = document.createElement("a");
-			link.download = "tcp-power.png";
-			link.href = dataUrl;
-			link.click();
+			downloadImage(dataUrl, "tcp-power.png");
 		}
 
 		setIsProcessing(false);
@@ -63,36 +57,27 @@ export function SurveySummaryStep({
 		if (isProcessing) return;
 		setIsProcessing(true);
 
-		const dataUrl = await generateImage();
+		const dataUrl = await generateImageFromElement(cardRef.current, {
+			filter: (node) => (node as HTMLElement).id !== "action-buttons",
+		});
+
 		if (!dataUrl) {
 			setIsProcessing(false);
 			return;
 		}
 
-		try {
-			const blob = await (await fetch(dataUrl)).blob();
-			const file = new File([blob], "tcp-power.png", { type: "image/png" });
+		const shared = await shareImage(dataUrl, {
+			title: "พลังที่ซ่อนอยู่ในตัวคุณ",
+			text: "นี่คือพลังที่ซ่อนอยู่ในตัวฉัน! มาค้นหาพลังของคุณได้ที่นี่",
+			filename: "tcp-power.png",
+		});
 
-			if (
-				navigator.share &&
-				navigator.canShare &&
-				navigator.canShare({ files: [file] })
-			) {
-				await navigator.share({
-					title: "พลังที่ซ่อนอยู่ในตัวคุณ",
-					text: "นี่คือพลังที่ซ่อนอยู่ในตัวฉัน! มาค้นหาพลังของคุณได้ที่นี่",
-					files: [file],
-				});
-				setIsProcessing(false);
-			} else {
-				// Fallback to download if Web Share API is not supported
-				setIsProcessing(false); // Reset so handleDownload can run
-				await handleDownload(dataUrl);
-			}
-		} catch (error) {
-			console.error("Failed to share image", error);
-			setIsProcessing(false);
+		if (!shared) {
+			// Fallback to download if Web Share API is not supported or fails
+			downloadImage(dataUrl, "tcp-power.png");
 		}
+
+		setIsProcessing(false);
 	};
 
 	return (
@@ -101,26 +86,48 @@ export function SurveySummaryStep({
 			ref={cardRef}
 		>
 			<div className="relative z-10 flex h-full w-full flex-col items-center overflow-y-auto no-scrollbar px-6 pb-10 pt-2">
-				<h1 className="text-center text-[#FF8200] text-[2.5rem]">
+				<h1
+					className="text-center text-[#FF8200] text-[2.5rem]"
+					data-animate="title"
+				>
 					พลังที่ซ่อนอยู่ในตัวคุณ
 				</h1>
-				<div className="mb-2 text-center text-[#151F6D] -mt-4 text-[2.5rem]">
+				<div
+					className="mb-2 text-center text-[#151F6D] -mt-4 text-[2.5rem]"
+					data-animate="subtitle"
+				>
 					{runnerName}
 				</div>
 
-				<Image
-					alt="Power image"
-					className="mb-4 object-contain"
-					height={180}
-					src={`/results/${power.id}.png`}
-					width={180}
-				/>
+				{isProcessing ? (
+					<div className="relative mb-4 flex h-[220px] w-[220px] items-center justify-center select-none pointer-events-none">
+						<Image
+							alt="Power image"
+							className="object-contain"
+							height={180}
+							src={`/results/${power.id}.png`}
+							width={180}
+						/>
+					</div>
+				) : (
+					<div
+						className="mb-4 flex h-[220px] w-[220px] items-center justify-center"
+						data-animate="cap"
+					>
+						{/* // TODO: update sideTextureUrl to be dynamic with power.id */}
+						<CoinFlip
+							powerId={power.id}
+							sideTextureUrl="/results/cap-side.png"
+						/>
+					</div>
+				)}
 
 				{/* Info Box */}
 				{daysLived !== null && (
 					<div
 						className="relative border border-[#FFB500] mb-5 flex bg-[#FFEFC7]/50 w-fit rounded-full px-8 
 					flex-col items-center justify-center "
+						data-animate="info-box"
 					>
 						<div className="relative z-10 text-center">
 							<div className="text-[#4A4A4A] text-[1rem]">คุณใช้ชีวิตมาแล้ว</div>
@@ -132,24 +139,36 @@ export function SurveySummaryStep({
 				)}
 
 				{/* Separator line with text */}
-				<div className="flex w-full max-w-[300px] items-center">
+				<div
+					className="flex w-full max-w-[300px] items-center"
+					data-animate="separator"
+				>
 					<div className="flex-grow border-[#E60000] border-t-[3px]" />
-					<span className="mx-3 text-[1.2rem]">พลังที่ปลุกให้คุณไปต่อได้ คือ</span>
+					<span className="mx-3 text-[1.2rem] whitespace-nowrap">
+						พลังที่ปลุกให้คุณไปต่อได้ คือ
+					</span>
 					<div className="flex-grow border-[#E60000] border-t-[3px]" />
 				</div>
 
 				{/* Power Title */}
-				<h2 className="text-center text-[#ee1c25] text-[3rem]">
+				<h2
+					className="text-center text-[#ee1c25] text-[3rem]"
+					data-animate="power-title"
+				>
 					{power.title}
 				</h2>
 
 				{/* Power Description */}
-				<div className="mb-8 px-2 text-center text-[1.5rem] leading-relaxed">
+				<div
+					className="mb-8 px-2 text-center text-[1.5rem] leading-relaxed"
+					data-animate="power-desc"
+				>
 					{power.description}
 				</div>
 
 				<div
 					className="w-full flex flex-col items-center pb-10"
+					data-animate="buttons"
 					id="action-buttons"
 				>
 					{/* Download Button */}
@@ -161,6 +180,7 @@ export function SurveySummaryStep({
 						}`}
 						disabled={isProcessing}
 						onClick={() => handleDownload()}
+						type="button"
 					>
 						<ButtonDonwload
 							className="absolute inset-0 z-0 w-full  drop-shadow-sm"

@@ -7,9 +7,9 @@ import { SurveyIntroPage } from "@/components/survey/survey-intro-page";
 import { SurveyNameStep } from "@/components/survey/survey-name-step";
 import { SurveyChoiceQuestionPage } from "@/components/survey-question-page";
 import { SurveyStoryStep } from "@/components/survey-story-step";
-import { SurveySummaryStep } from "@/components/survey-summary-step";
 import { SurveyTextQuestionPage } from "@/components/survey-text-question-page";
 import { NextButton } from "@/components/ui/next-button";
+import { SurveySummaryStep } from "@/features/summary-page/components/survey-summary-step";
 import { totalQuestionCount } from "@/lib/config";
 import { useSurvey } from "@/lib/use-survey";
 
