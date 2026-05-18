@@ -7,6 +7,8 @@ interface SurveyCountdownStepProps {
 	step: CountdownStep;
 }
 
+const IMAGES = ["/text/3.svg", "/text/2.svg", "/text/1.svg", "/text/start.svg"];
+
 export function SurveyCountdownStep({
 	onNext,
 	step,
@@ -28,7 +30,7 @@ export function SurveyCountdownStep({
 		}, delay);
 
 		const advance = setTimeout(() => {
-			if (index < step.images.length - 1) {
+			if (index < IMAGES.length - 1) {
 				setIndex((i) => i + 1);
 				setVisible(true);
 			} else {
@@ -40,7 +42,7 @@ export function SurveyCountdownStep({
 			clearTimeout(fadeOut);
 			clearTimeout(advance);
 		};
-	}, [index, delay, step.images.length, onNext]);
+	}, [index, delay, IMAGES.length, onNext]);
 
 	return (
 		<div className="relative inset-0 z-0 flex h-screen items-center justify-center">
@@ -49,7 +51,7 @@ export function SurveyCountdownStep({
 				className="mb-[25vh] object-contain px-4"
 				height={200}
 				priority
-				src={step.images[index]}
+				src={IMAGES[index]}
 				style={{ opacity: visible ? 1 : 0 }}
 				width={200}
 			/>
