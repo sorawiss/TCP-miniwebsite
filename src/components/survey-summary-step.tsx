@@ -124,7 +124,10 @@ export function SurveySummaryStep({
 					</div>
 				) : (
 					<div className="mb-4 flex h-[220px] w-[220px] items-center justify-center">
-						<CoinFlip powerId={power.id} sideTextureUrl="/results/1.png" />
+						<CoinFlip
+							powerId={power.id}
+							sideTextureUrl="/results/cap-side.png"
+						/>
 					</div>
 				)}
 

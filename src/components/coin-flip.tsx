@@ -62,8 +62,8 @@ export function CoinFlip({ powerId, sideTextureUrl }: CoinFlipProps) {
 								...(sideTextureUrl
 									? {
 											backgroundImage: `url(${sideTextureUrl})`,
-											backgroundSize: `${N * width}px 100%`,
-											backgroundPosition: `-${i * width}px 0px`,
+											backgroundSize: "100% 100%",
+											backgroundPosition: "center",
 											backgroundRepeat: "no-repeat",
 										}
 									: {}),
@@ -75,11 +75,11 @@ export function CoinFlip({ powerId, sideTextureUrl }: CoinFlipProps) {
 					<div className={styles.front}>
 						<Image
 							alt="Power result"
-							className="pointer-events-none select-none object-contain p-2"
-							height={150}
+							className="pointer-events-none size-full select-none object-cover"
+							height={200}
 							priority
 							src={`/results/${powerId}.png`}
-							width={150}
+							width={200}
 						/>
 					</div>
 				</div>
