@@ -182,7 +182,7 @@ export function SurveySummaryStep({
 				alt="Story background"
 				className="pointer-events-none absolute bottom-0 left-0 z-0 w-full object-cover"
 				height={800}
-				src={"/svg/result-bg.svg"}
+				src={"/results/bg.png"}
 				width={800}
 			/>
 		</div>

@@ -135,7 +135,7 @@ export const surveySteps: SurveyStep[] = [
 	{
 		id: "intro-1",
 		type: "intro",
-		bottomImage: "/intro/intro1.svg",
+		bottomImage: "/intro/intro1.png",
 		topImage: "/intro/intro1-text.svg",
 		className: "mt-[25vh]",
 	},
