@@ -210,7 +210,7 @@ export const surveySteps: SurveyStep[] = [
 			{
 				value: "A",
 				label: "หาที่กำบัง",
-				powerId: "power-2",
+				powerId: "2",
 			},
 			{ value: "B", label: "คว้าผ้าบัฟคลุมหน้า ใส่แว่นทันที", powerId: "3" },
 			{ value: "C", label: "เร่งสปีด ลุยฝ่าพายุเลย!", powerId: "4" },

@@ -3,13 +3,8 @@
 import { parseAsInteger, useQueryState } from "nuqs";
 import { useMemo } from "react";
 import { create } from "zustand";
-import {
-	type ChoiceQuestionStep,
-	resultPowers,
-	type SurveyStep,
-	scoredQuestionIds,
-	surveySteps,
-} from "@/lib/config";
+import { resultPowers, type SurveyStep, surveySteps } from "@/lib/config";
+import { getWinningPower } from "@/lib/scoring";
 import { initialSurveyState, type SurveyState } from "@/lib/survey";
 
 interface SurveyStore extends SurveyState {
@@ -73,49 +68,6 @@ function isStepComplete(step: SurveyStep, state: SurveyState) {
 	}
 }
 
-function getWinningPower(state: SurveyState): string {
-	const scores: Record<string, number> = {
-		"1": 0,
-		"2": 0,
-		"3": 0,
-		"4": 0,
-		"5": 0,
-		"6": 0,
-		"7": 0,
-	};
-
-	for (const questionId of scoredQuestionIds) {
-		const answer = state.choiceAnswers[questionId];
-		const question = surveySteps.find(
-			(step): step is ChoiceQuestionStep =>
-				step.type === "choice" && step.id === questionId
-		);
-
-		if (!(question && answer)) {
-			continue;
-		}
-
-		const selectedOption = question.options.find(
-			(option) => option.value === answer
-		);
-		if (selectedOption) {
-			scores[selectedOption.powerId] += 1;
-		}
-	}
-
-	let bestPower = "1";
-	let bestScore = -1;
-
-	for (const powerId of Object.keys(scores)) {
-		if (scores[powerId] > bestScore) {
-			bestPower = powerId;
-			bestScore = scores[powerId];
-		}
-	}
-
-	return bestPower;
-}
-
 export function getDaysLived(birthDate: string) {
 	if (!birthDate) {
 		return null;
@@ -140,11 +92,14 @@ export function useSurvey() {
 	);
 	const store = useSurveyStore();
 
-	const state: SurveyState = {
-		profile: store.profile,
-		choiceAnswers: store.choiceAnswers,
-		textAnswers: store.textAnswers,
-	};
+	const state = useMemo<SurveyState>(
+		() => ({
+			profile: store.profile,
+			choiceAnswers: store.choiceAnswers,
+			textAnswers: store.textAnswers,
+		}),
+		[store.profile, store.choiceAnswers, store.textAnswers]
+	);
 
 	const currentStep = surveySteps[step] ?? surveySteps[0];
 	const isResultStep = currentStep.type === "result";

@@ -1,6 +1,6 @@
 "use client";
 import Image from "next/image";
-import { Suspense, useEffect, useState } from "react";
+import { Suspense, useEffect, useRef, useState } from "react";
 import { SurveyBirthDateStep } from "@/components/survey/survey-birth-date-step";
 import { SurveyCountdownStep } from "@/components/survey/survey-countdown-step";
 import { SurveyIntroPage } from "@/components/survey/survey-intro-page";
@@ -18,6 +18,7 @@ function HomeContent() {
 		state,
 		currentStep,
 		canContinue,
+		isResultStep,
 		winningPower,
 		daysLived,
 		updateProfile,
@@ -28,6 +29,7 @@ function HomeContent() {
 
 	const [showPreloader, setShowPreloader] = useState(true);
 	const [fadeOut, setFadeOut] = useState(false);
+	const hasSubmittedRef = useRef(false);
 
 	// Step-by-step transition states
 	const [activeStep, setActiveStep] = useState(currentStep);
@@ -64,6 +66,31 @@ function HomeContent() {
 			return () => clearTimeout(timer);
 		}
 	}, [currentStep, activeStep]);
+
+	useEffect(() => {
+		if (!isResultStep || hasSubmittedRef.current) {
+			return;
+		}
+
+		hasSubmittedRef.current = true;
+
+		fetch("/api/submissions", {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json",
+			},
+			body: JSON.stringify(state),
+		})
+			.then((response) => {
+				if (!response.ok) {
+					throw new Error(`Submission failed with status ${response.status}`);
+				}
+			})
+			.catch((error) => {
+				hasSubmittedRef.current = false;
+				console.error("Failed to submit survey", error);
+			});
+	}, [isResultStep, state]);
 
 	// Hide Navigation Settings based on active step to match transition
 	const showNavigation =
