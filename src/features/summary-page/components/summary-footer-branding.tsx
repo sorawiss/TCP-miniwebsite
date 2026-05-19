@@ -1,6 +1,7 @@
 // biome-ignore-all lint: generated file
 
 import Image from "next/image";
+import { SummaryFooterContentCarousel } from "./summary-footer-content-carousel";
 
 export function SummaryFooterBranding() {
 	return (
@@ -68,6 +69,7 @@ export function SummaryFooterBranding() {
 					*TCP บริจาคเครื่องดื่มสูงสุดจำนวน 6,000 วด
 				</p>
 			</div>
+			<SummaryFooterContentCarousel />
 		</div>
 	);
 }

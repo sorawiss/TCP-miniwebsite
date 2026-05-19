@@ -174,14 +174,14 @@ export function SurveyPdpaPage({ onNext }: PdpaPageProps) {
 				<footer className="border-[#E8E8E8] border-t bg-white px-3 py-2.5">
 					<div className="grid grid-cols-2 gap-3">
 						<button
-							className="h-[34px] rounded-[5px] border border-[#D3D3D3] bg-white px-3 text-[#222222] text-[11px] transition-colors active:bg-[#F4F4F4]"
+							className="h-[34px] cursor-pointer rounded-[5px] border border-[#D3D3D3] bg-white px-3 text-[#222222] text-[18px] transition-colors active:bg-[#F4F4F4]"
 							onClick={onNext}
 							type="button"
 						>
 							ยืนยันตัวเลือกของฉัน
 						</button>
 						<button
-							className="h-[34px] rounded-[5px] bg-[#E4002B] px-3 text-[11px] text-white transition-colors active:bg-[#C90026]"
+							className="h-[34px] cursor-pointer rounded-[5px] bg-[#E4002B] px-3 text-[18px] text-white transition-colors active:bg-[#C90026]"
 							onClick={acceptAll}
 							type="button"
 						>
