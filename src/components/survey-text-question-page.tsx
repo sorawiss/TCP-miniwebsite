@@ -78,7 +78,7 @@ export function SurveyTextQuestionPage({
 				alt="Question background mockup"
 				className="pointer-events-none absolute bottom-0 left-0 z-0 w-full object-cover"
 				height={800}
-				src={"/bottom/6.png"}
+				src={"/bottom/6.webp"}
 				width={800}
 			/>
 		</>

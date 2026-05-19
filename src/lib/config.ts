@@ -158,7 +158,7 @@ export const surveySteps: SurveyStep[] = [
 		id: "0",
 		type: "story",
 		body: "/text/story0-text.svg",
-		bottomImage: "/bottom/story-0.png",
+		bottomImage: "/bottom/story-0.webp",
 	},
 	{
 		id: "1",
@@ -171,7 +171,7 @@ export const surveySteps: SurveyStep[] = [
 			{ value: "C", label: "มองหาอะไรเกาะ", powerId: "3" },
 			{ value: "D", label: "กระชากขาขึ้น ฮีบเดียวจบ!", powerId: "4" },
 		],
-		bottomImage: "/bottom/1st.png",
+		bottomImage: "/bottom/1st.webp",
 	},
 	{
 		id: "2",
@@ -184,23 +184,23 @@ export const surveySteps: SurveyStep[] = [
 			{ value: "C", label: "มองหาแหล่งน้ำด่วน!", powerId: "7" },
 			{ value: "D", label: "จิบเท่าที่จำเป็นก่อน", powerId: "1" },
 		],
-		bottomImage: "/bottom/2nd.png",
+		bottomImage: "/bottom/2nd.webp",
 	},
 	{
 		id: "story-1",
 		type: "story",
 		body: "/text/story1-text.svg",
-		bottomImage: "/bottom/story1.svg",
+		bottomImage: "/bottom/story-1.webp",
 	},
 	{
 		id: "story-1-1",
 		type: "story",
-		bottomImage: "/bottom/story-bridge-1.png",
+		bottomImage: "/bottom/story-bridge-1.webp",
 	},
 	{
 		id: "story-1-2",
 		type: "story",
-		bottomImage: "/bottom/story-bridge-2.png",
+		bottomImage: "/bottom/story-bridge-2.webp",
 	},
 	{
 		id: "3",
@@ -216,13 +216,13 @@ export const surveySteps: SurveyStep[] = [
 			{ value: "C", label: "เร่งสปีด ลุยฝ่าพายุเลย!", powerId: "4" },
 			{ value: "D", label: "เบี่ยงเส้นทางหลบพายุ", powerId: "5" },
 		],
-		bottomImage: "/bottom/3rd.png",
+		bottomImage: "/bottom/3rd.webp",
 	},
 	{
 		id: "story-2",
 		type: "story",
 		body: "/text/story2-text.svg",
-		bottomImage: "/bottom/story-2.png",
+		bottomImage: "/bottom/story-2.webp",
 	},
 	{
 		id: "4",
@@ -235,7 +235,7 @@ export const surveySteps: SurveyStep[] = [
 			{ value: "C", label: "อย่าเพิ่งท้อหายใจเข้าลึกๆ", powerId: "1" },
 			{ value: "D", label: "แวะพักก่อน แล้วค่อยไปต่อนะ", powerId: "2" },
 		],
-		bottomImage: "/bottom/4th.png",
+		bottomImage: "/bottom/4th.webp",
 	},
 	{
 		id: "5",
@@ -256,7 +256,7 @@ export const surveySteps: SurveyStep[] = [
 				powerId: "6",
 			},
 		],
-		bottomImage: "/bottom/5th.png",
+		bottomImage: "/bottom/5th.webp",
 	},
 	{
 		id: "6",
@@ -269,7 +269,7 @@ export const surveySteps: SurveyStep[] = [
 		id: "7",
 		type: "story",
 		body: "/text/last.svg",
-		bottomImage: "/bottom/last.png",
+		bottomImage: "/bottom/last.webp",
 	},
 	{
 		id: "result",

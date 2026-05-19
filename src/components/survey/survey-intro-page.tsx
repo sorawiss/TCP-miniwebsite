@@ -26,7 +26,7 @@ export function SurveyIntroPage({ onNext, step }: IntroPageProps) {
 			{step.bottomImage && (
 				<Image
 					alt={step.id}
-					className="pointer-events-none absolute top-0 left-0 z-0 w-full object-cover"
+					className="pointer-events-none absolute bottom-0 left-0 z-0 w-full object-cover"
 					height={500}
 					preload
 					src={step.bottomImage}
