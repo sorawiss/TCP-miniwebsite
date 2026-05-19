@@ -1,13 +1,15 @@
 import Image from "next/image";
 import Intro0 from "@/components/text/intro0";
 import Intro1 from "@/components/text/intro1";
+import { NextButton } from "@/components/ui/next-button";
 import type { IntroStep } from "@/lib/config";
 
 interface IntroPageProps {
+	onNext: () => void;
 	step: IntroStep;
 }
 
-export function SurveyIntroPage({ step }: IntroPageProps) {
+export function SurveyIntroPage({ onNext, step }: IntroPageProps) {
 	return (
 		<div className="absolute inset-0 z-0">
 			{step.topImage === "/intro/intro0-text.svg" && (
@@ -24,13 +26,18 @@ export function SurveyIntroPage({ step }: IntroPageProps) {
 			{step.bottomImage && (
 				<Image
 					alt={step.id}
-					className="pointer-events-none absolute bottom-0 left-0 z-0 w-full object-cover"
+					className="pointer-events-none absolute top-0 left-0 z-0 w-full object-cover"
 					height={500}
 					preload
 					src={step.bottomImage}
 					width={800}
 				/>
 			)}
+			<div className="absolute inset-x-0 bottom-[3rem] z-10 flex justify-center">
+				<NextButton onClick={onNext}>
+					{step.id === "intro" ? "เริ่มเลย!" : "ก้าวสู่ทะเลทราย"}
+				</NextButton>
+			</div>
 		</div>
 	);
 }

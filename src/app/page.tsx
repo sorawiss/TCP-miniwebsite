@@ -7,7 +7,6 @@ import { SurveyNameStep } from "@/components/survey/survey-name-step";
 import { SurveyChoiceQuestionPage } from "@/components/survey-question-page";
 import { SurveyStoryStep } from "@/components/survey-story-step";
 import { SurveyTextQuestionPage } from "@/components/survey-text-question-page";
-import { NextButton } from "@/components/ui/next-button";
 import { SurveyCountdownStep } from "@/features/countdown-page/components/survey-countdown-step";
 import { SurveySummaryStep } from "@/features/summary-page/components/survey-summary-step";
 import { totalQuestionCount } from "@/lib/config";
@@ -17,7 +16,6 @@ function HomeContent() {
 	const {
 		state,
 		currentStep,
-		canContinue,
 		isResultStep,
 		winningPower,
 		daysLived,
@@ -92,15 +90,6 @@ function HomeContent() {
 			});
 	}, [isResultStep, state]);
 
-	// Hide Navigation Settings based on active step to match transition
-	const showNavigation =
-		activeStep.type !== "name" &&
-		activeStep.type !== "birthDate" &&
-		activeStep.type !== "choice" &&
-		activeStep.type !== "countdown" &&
-		activeStep.type !== "text" &&
-		activeStep.type !== "result";
-
 	const isActiveResultStep = activeStep.type === "result";
 
 	return (
@@ -135,7 +124,7 @@ function HomeContent() {
 						width={56}
 					/>
 					{activeStep.type === "intro" ? (
-						<SurveyIntroPage step={activeStep} />
+						<SurveyIntroPage onNext={nextStep} step={activeStep} />
 					) : null}
 
 					{activeStep.type === "countdown" ? (
@@ -186,7 +175,7 @@ function HomeContent() {
 					) : null}
 
 					{activeStep.type === "story" ? (
-						<SurveyStoryStep story={activeStep} />
+						<SurveyStoryStep onNext={nextStep} story={activeStep} />
 					) : null}
 
 					{isActiveResultStep ? (
@@ -195,16 +184,6 @@ function HomeContent() {
 							power={winningPower}
 							state={state}
 						/>
-					) : null}
-
-					{showNavigation ? (
-						<div className="relative z-10 mt-auto flex w-full items-center justify-center pb-[3rem]">
-							<NextButton disabled={!canContinue} onClick={nextStep}>
-								{activeStep.type === "story" && activeStep.id === "ending"
-									? "เปิดพลังของฉัน!"
-									: "ไปต่อ"}
-							</NextButton>
-						</div>
 					) : null}
 				</div>
 			</main>

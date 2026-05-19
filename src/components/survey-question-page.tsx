@@ -37,14 +37,13 @@ export function SurveyChoiceQuestionPage({
 					value={progressValue}
 				/>
 
-				{/* TODO: This is not the final design now it just a mockup */}
-				<div className="space-y-6 pt-4">
+				<div className="">
 					<h2
-						className="mx-auto max-w-2xl whitespace-pre-line text-center text-[#1c2b59] text-[2.2rem] leading-tight sm:text-3xl"
+						className="mx-auto max-w-2xl whitespace-pre-line pb-4 text-center text-[#1c2b59] text-[2.5rem] leading-10"
 						// biome-ignore lint/security/noDangerouslySetInnerHtml: <the html is safe from config>
 						dangerouslySetInnerHTML={{ __html: question.prompt }}
 					/>
-					<div className="mx-auto mt-8 grid max-w-2xl gap-[1rem]">
+					<div className="mx-auto grid max-w-2xl gap-[1rem]">
 						{question.options.map((option, index) => {
 							const inputId = `${question.id}-${option.value}`;
 							const isSelected = answers[question.id] === option.value;
