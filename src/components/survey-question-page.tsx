@@ -33,7 +33,7 @@ export function SurveyChoiceQuestionPage({
 			<section className="relative z-10 space-y-6 px-4 pt-6">
 				{/* Custom Progress Bar */}
 				<Progress
-					className="mx-auto max-w-2xl pt-3 pb-0 md:pt-6 md:pb-2"
+					className="mx-auto max-w-2xl pt-2 pb-0 md:pt-6 md:pb-2"
 					value={progressValue}
 				/>
 
@@ -77,7 +77,7 @@ export function SurveyChoiceQuestionPage({
 											{option.label}
 										</div>
 
-										<div className="absolute top-1/2 -left-6 -translate-y-1/2 drop-shadow-sm">
+										<div className="absolute top-1/2 -left-6 size-24 -translate-y-1/2 rounded-full drop-shadow-sm">
 											{getOptionIcon(index)}
 										</div>
 									</div>

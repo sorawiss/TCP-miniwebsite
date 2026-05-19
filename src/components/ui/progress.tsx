@@ -1,5 +1,6 @@
 import Image from "next/image";
 import type * as React from "react";
+import { cn } from "@/lib/utils";
 
 interface ProgressProps extends React.HTMLAttributes<HTMLDivElement> {
 	value: number;
@@ -14,7 +15,7 @@ export function Progress({ value, className, ...props }: ProgressProps) {
 			aria-valuemax={100}
 			aria-valuemin={0}
 			aria-valuenow={value}
-			className={` ${className || ""} relative w-full pt-10 pb-2`}
+			className={cn("relative w-full pt-10 pb-2", className)}
 			role="progressbar"
 			{...props}
 		>
@@ -37,7 +38,7 @@ export function Progress({ value, className, ...props }: ProgressProps) {
 
 				{/* Bottle Marker */}
 				<div
-					className="absolute bottom-[2px] z-30 -translate-x-1/2 transition-all duration-300 ease-in-out"
+					className="absolute bottom-[2px] z-30 -translate-x-1/2 translate-y-[30%] transition-all duration-300 ease-in-out"
 					style={{ left: `${safeValue}%` }}
 				>
 					<Image
