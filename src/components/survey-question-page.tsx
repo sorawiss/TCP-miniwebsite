@@ -30,21 +30,22 @@ export function SurveyChoiceQuestionPage({
 
 	return (
 		<>
-			<section className="relative z-10 space-y-6 px-4 pt-3">
+			<section className="relative z-10 flex h-[65%] flex-col justify-between space-y-6 px-4 pt-3">
 				{/* Custom Progress Bar */}
 				<Progress
-					className="mx-auto w-[85%] max-w-2xl pt-2 pb-0 md:pt-6 md:pb-2"
+					className="mx-auto mt-2 w-[85%] max-w-2xl pt-0 pb-0"
 					value={progressValue}
 				/>
 
+				<h2
+					className="mx-auto max-w-2xl whitespace-pre-line text-center text-[#1c2b59] text-[2.2rem] leading-[100%] sm:text-3xl"
+					// biome-ignore lint/security/noDangerouslySetInnerHtml: <the html is safe from config>
+					dangerouslySetInnerHTML={{ __html: question.prompt }}
+				/>
+
 				{/* TODO: This is not the final design now it just a mockup */}
-				<div className="space-y-[clamp(1rem,2.3vh,4rem)]">
-					<h2
-						className="mx-auto max-w-2xl whitespace-pre-line text-center text-[#1c2b59] text-[2.2rem] leading-[100%] sm:text-3xl"
-						// biome-ignore lint/security/noDangerouslySetInnerHtml: <the html is safe from config>
-						dangerouslySetInnerHTML={{ __html: question.prompt }}
-					/>
-					<div className="mx-auto mt-0 grid max-w-2xl gap-2 md:mt-8 md:gap-[1rem]">
+				<div>
+					<div className="mx-auto grid max-w-2xl gap-2 md:gap-[1rem]">
 						{question.options.map((option, index) => {
 							const inputId = `${question.id}-${option.value}`;
 							const isSelected = answers[question.id] === option.value;
