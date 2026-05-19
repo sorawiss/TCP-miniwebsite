@@ -77,7 +77,7 @@ export function CoinFlip({ powerId, sideTextureUrl }: CoinFlipProps) {
 							alt="Power result"
 							className="pointer-events-none size-full select-none object-cover"
 							height={200}
-							priority
+							preload
 							src={`/results/${powerId}.png`}
 							width={200}
 						/>
