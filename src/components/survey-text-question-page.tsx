@@ -66,7 +66,7 @@ export function SurveyTextQuestionPage({
 						</p>
 					)}
 				</div>
-				<div className="relative z-10 mt-auto flex w-full items-center justify-center pt-8 pb-10">
+				<div className="relative z-10 mt-auto flex w-full items-center justify-center pb-70">
 					<NextButton
 						disabled={!currentAnswer.trim() || !!error}
 						onClick={onNext}

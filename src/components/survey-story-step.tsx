@@ -37,7 +37,9 @@ export function SurveyStoryStep({ onNext, story }: SurveyStoryStepProps) {
 	return (
 		<>
 			{content}
-			<div className="relative z-10 mt-auto flex w-full items-center justify-center pb-[3rem]">
+			<div
+				className={`${story.id === "7" ? "absolute bottom-40" : "relative mb-10"} z-10 mt-auto flex w-full items-center justify-center`}
+			>
 				<NextButton onClick={onNext}>{buttonLabel}</NextButton>
 			</div>
 		</>
