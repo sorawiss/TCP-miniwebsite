@@ -4,6 +4,7 @@ import { Suspense, useEffect, useRef, useState } from "react";
 import { SurveyBirthDateStep } from "@/components/survey/survey-birth-date-step";
 import { SurveyIntroPage } from "@/components/survey/survey-intro-page";
 import { SurveyNameStep } from "@/components/survey/survey-name-step";
+import { SurveyPdpaPage } from "@/components/survey/survey-pdpa-page";
 import { SurveyChoiceQuestionPage } from "@/components/survey-question-page";
 import { SurveyStoryStep } from "@/components/survey-story-step";
 import { SurveyTextQuestionPage } from "@/components/survey-text-question-page";
@@ -131,6 +132,10 @@ function HomeContent() {
 					/>
 					{activeStep.type === "intro" ? (
 						<SurveyIntroPage onNext={nextStep} step={activeStep} />
+					) : null}
+
+					{activeStep.type === "pdpa" ? (
+						<SurveyPdpaPage onNext={nextStep} step={activeStep} />
 					) : null}
 
 					{activeStep.type === "countdown" ? (

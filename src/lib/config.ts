@@ -21,6 +21,11 @@ export interface IntroStep {
 	type: "intro";
 }
 
+export interface PdpaStep {
+	id: string;
+	type: "pdpa";
+}
+
 export interface CountdownStep {
 	delay?: number;
 	id: string;
@@ -70,6 +75,7 @@ export interface ResultStep {
 
 export type SurveyStep =
 	| IntroStep
+	| PdpaStep
 	| CountdownStep
 	| NameStep
 	| BirthDateStep
@@ -130,6 +136,10 @@ export const surveySteps: SurveyStep[] = [
 		bottomImage: "/intro/intro0.webp",
 		topImage: "/intro/intro0-text.svg",
 		className: "mt-[20vh]",
+	},
+	{
+		id: "pdpa",
+		type: "pdpa",
 	},
 	{
 		id: "intro-1",
