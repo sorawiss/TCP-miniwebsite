@@ -88,7 +88,10 @@ export function SurveyBirthDateStep({
 			<Image
 				alt="Desert background"
 				className="pointer-events-none absolute bottom-0 left-0 z-0 w-full object-cover"
+				fetchPriority="high"
 				height={800}
+				loading="eager"
+				sizes="(max-width: 403px) 100vw, 403px"
 				src="/intro/intro1.png"
 				width={800}
 			/>

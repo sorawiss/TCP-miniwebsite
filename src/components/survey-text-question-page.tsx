@@ -32,6 +32,7 @@ export function SurveyTextQuestionPage({
 								alt={question.prompt}
 								className="object-contain"
 								fill
+								sizes="(max-width: 403px) 80vw, 322px"
 								src={question.promptImage}
 							/>
 						</div>
@@ -77,7 +78,10 @@ export function SurveyTextQuestionPage({
 			<Image
 				alt="Question background mockup"
 				className="pointer-events-none absolute bottom-0 left-0 z-0 w-full object-cover"
+				fetchPriority="high"
 				height={800}
+				loading="eager"
+				sizes="(max-width: 403px) 100vw, 403px"
 				src={"/bottom/6.webp"}
 				width={800}
 			/>
