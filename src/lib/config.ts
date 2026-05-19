@@ -177,7 +177,7 @@ export const surveySteps: SurveyStep[] = [
 		id: "2",
 		type: "choice",
 		prompt:
-			"<span class='text-[#151F6D]'>วิ่งมาแล้วเกือบครึ่งทาง</span><br/><span class='text-[#E4002B]'>แต่น้ำใกล้หมด</span> <span class='text-[#151F6D]'><br/>จะไหวไหมเนี่ย?</span>",
+			"<span class='text-[#151F6D]'>วิ่งมาแล้วเกือบครึ่งทาง</span><br/><span class='text-[#E4002B]'>แต่น้ำใกล้หมด</span> <span class='text-[#151F6D]'>จะไหวไหมเนี่ย?</span>",
 		options: [
 			{ value: "A", label: "อย่างน้อยก็เหลือ", powerId: "5" },
 			{ value: "B", label: "หันไปถามเพื่อนข้างๆ ว่าไหวไหม", powerId: "6" },

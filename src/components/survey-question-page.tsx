@@ -33,12 +33,12 @@ export function SurveyChoiceQuestionPage({
 			<section className="relative z-10 space-y-6 px-4 pt-6">
 				{/* Custom Progress Bar */}
 				<Progress
-					className="mx-auto max-w-2xl pt-6 pb-2"
+					className="mx-auto max-w-2xl pt-3 pb-0 md:pt-6 md:pb-2"
 					value={progressValue}
 				/>
 
 				{/* TODO: This is not the final design now it just a mockup */}
-				<div className="space-y-6 pt-4">
+				<div className="space-y-6">
 					<h2
 						className="mx-auto max-w-2xl whitespace-pre-line text-center text-[#1c2b59] text-[2.2rem] leading-tight sm:text-3xl"
 						// biome-ignore lint/security/noDangerouslySetInnerHtml: <the html is safe from config>
@@ -67,13 +67,13 @@ export function SurveyChoiceQuestionPage({
 										value={option.value}
 									/>
 									<div
-										className={`relative flex min-h-[64px] w-full items-center rounded-full border-[2px] bg-[#fffaf0] py-3 pr-3 pl-[4.5rem] transition-all duration-200 ${
+										className={`relative flex min-h-[48px] w-full items-center rounded-full border-[2px] bg-[#fffaf0] py-3 pr-3 pl-[4.5rem] transition-all duration-200 md:min-h-[64px] ${
 											isSelected
 												? "translate-y-[4px] border-[#d97c2a] shadow-[0_0px_0_0_#d97c2a]"
 												: "border-[#e08a3c] shadow-[0_4px_0_0_#d97c2a] group-hover:translate-y-[2px] group-hover:shadow-[0_2px_0_0_#d97c2a]"
 										}`}
 									>
-										<div className="text-[#151F6D] text-[1.8rem] leading-8">
+										<div className="text-[#151F6D] text-[1.5rem] leading-8 md:text-[1.8rem]">
 											{option.label}
 										</div>
 
