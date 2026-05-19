@@ -25,26 +25,26 @@ export function SurveyChoiceQuestionPage({
 	const getOptionIcon = (index: number) => {
 		const Icons = [A, B, C, D];
 		const Icon = Icons[index % Icons.length];
-		return <Icon />;
+		return <Icon height={72} width={72} />;
 	};
 
 	return (
 		<>
-			<section className="relative z-10 space-y-6 px-4 pt-6">
+			<section className="relative z-10 space-y-6 px-4 pt-3">
 				{/* Custom Progress Bar */}
 				<Progress
-					className="mx-auto max-w-2xl pt-2 pb-0 md:pt-6 md:pb-2"
+					className="mx-auto w-[85%] max-w-2xl pt-2 pb-0 md:pt-6 md:pb-2"
 					value={progressValue}
 				/>
 
 				{/* TODO: This is not the final design now it just a mockup */}
-				<div className="space-y-6">
+				<div className="space-y-[clamp(1rem,2.3vh,4rem)]">
 					<h2
-						className="mx-auto max-w-2xl whitespace-pre-line text-center text-[#1c2b59] text-[2.2rem] leading-tight sm:text-3xl"
+						className="mx-auto max-w-2xl whitespace-pre-line text-center text-[#1c2b59] text-[2.2rem] leading-[100%] sm:text-3xl"
 						// biome-ignore lint/security/noDangerouslySetInnerHtml: <the html is safe from config>
 						dangerouslySetInnerHTML={{ __html: question.prompt }}
 					/>
-					<div className="mx-auto mt-8 grid max-w-2xl gap-[1rem]">
+					<div className="mx-auto mt-0 grid max-w-2xl gap-2 md:mt-8 md:gap-[1rem]">
 						{question.options.map((option, index) => {
 							const inputId = `${question.id}-${option.value}`;
 							const isSelected = answers[question.id] === option.value;
@@ -67,7 +67,7 @@ export function SurveyChoiceQuestionPage({
 										value={option.value}
 									/>
 									<div
-										className={`relative flex min-h-[48px] w-full items-center rounded-full border-[2px] bg-[#fffaf0] py-3 pr-3 pl-[4.5rem] transition-all duration-200 md:min-h-[64px] ${
+										className={`relative flex min-h-[48px] w-full items-center rounded-full border-[2px] bg-[#fffaf0] py-2 pr-1 pl-13 transition-all duration-200 md:min-h-[64px] md:py-3 md:pr-3 md:pl-[4.5rem] ${
 											isSelected
 												? "translate-y-[4px] border-[#d97c2a] shadow-[0_0px_0_0_#d97c2a]"
 												: "border-[#e08a3c] shadow-[0_4px_0_0_#d97c2a] group-hover:translate-y-[2px] group-hover:shadow-[0_2px_0_0_#d97c2a]"
@@ -77,7 +77,7 @@ export function SurveyChoiceQuestionPage({
 											{option.label}
 										</div>
 
-										<div className="absolute top-1/2 -left-6 size-24 -translate-y-1/2 rounded-full drop-shadow-sm">
+										<div className="absolute top-1/2 -left-6 -translate-y-1/2 rounded-full drop-shadow-sm">
 											{getOptionIcon(index)}
 										</div>
 									</div>

@@ -129,7 +129,7 @@ function HomeContent() {
 				>
 					<Image
 						alt="Logo"
-						className="absolute inset-x-1/2 top-4 z-50 h-auto w-14 -translate-x-1/2"
+						className="absolute inset-x-1/2 top-4 z-50 h-auto w-12 -translate-x-1/2 md:w-14"
 						height={128}
 						src="/logo.png"
 						width={128}
