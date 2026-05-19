@@ -45,7 +45,7 @@ function CookieToggle({
 				>
 					<span className="block truncate text-[14px]">{title}</span>
 					{disabled && (
-						<span className="mt-1 inline-flex rounded-full bg-[#FFE9E3] px-2 py-0.5 font-medium text-[#E4002B] text-[9px] leading-none">
+						<span className="mt-1 inline-flex rounded-full bg-[#FFE9E3] px-2 py-0.5 font-medium text-[#E4002B] text-[12px] leading-none">
 							เปิดใช้งานตลอดเวลา
 						</span>
 					)}
@@ -117,8 +117,8 @@ export function SurveyPdpaPage({ onNext }: PdpaPageProps) {
 	};
 
 	return (
-		<div className="relative min-h-[90dvh]">
-			<div className="relative z-10 mx-3 mt-9 flex flex-col overflow-hidden rounded-2xl bg-white shadow-sm">
+		<div className="relative flex h-screen items-center">
+			<div className="relative z-10 mb-30 flex flex-col overflow-hidden rounded-2xl bg-white shadow-sm">
 				<div className="px-3 pt-4 pb-3">
 					<div className="pb-4">
 						<h2 className="font-bold text-[#1F1F1F] text-[18px] leading-tight">
