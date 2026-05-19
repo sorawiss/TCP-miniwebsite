@@ -28,7 +28,7 @@ export function Story0({ story }: { story: StoryStep }) {
 		<>
 			<section className="relative z-10 flex h-full flex-col items-center justify-center space-y-4 px-6 pt-10 text-center">
 				{StoryComponent ? (
-					<StoryComponent className="pointer-events-none absolute top-[40%] left-1/2 z-0 w-full -translate-x-1/2 -translate-y-1/2" />
+					<StoryComponent className="pointer-events-none absolute top-[40%] left-1/2 z-0 w-full -translate-x-1/2 -translate-y-1/2 px-2" />
 				) : null}
 			</section>
 			{story.bottomImage ? (
