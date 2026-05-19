@@ -2,8 +2,9 @@ import { gsap } from "gsap";
 import type { RefObject } from "react";
 import { defaultPatterns, WebHaptics } from "web-haptics";
 
-const UNDERLINE_WAIT = 0.2;
+const UNDERLINE_WAIT = 0.25;
 const UNDERLINE_DURATION = 0.2;
+const NUMBER_DURATION = 0.3;
 
 export function playCountdownAnimation(
 	containerRef: RefObject<HTMLElement | null>,
@@ -63,7 +64,7 @@ export function playCountdownAnimation(
 			y: 0,
 			rotation: 0,
 			scale: 1,
-			duration: 0.5,
+			duration: NUMBER_DURATION,
 			ease: "back.out(1.5)",
 			onStart: () => {
 				haptics.trigger(defaultPatterns.medium);
@@ -75,7 +76,7 @@ export function playCountdownAnimation(
 					opacity: 1,
 					duration: UNDERLINE_WAIT,
 				},
-				"<"
+				"<+=0.2"
 			)
 			.to(
 				"#reveal-rect",
@@ -93,7 +94,7 @@ export function playCountdownAnimation(
 					x: 250,
 					y: -250,
 					rotation: 30,
-					scale: 0.5,
+					scale: NUMBER_DURATION,
 					duration: 0.4,
 					ease: "power2.in",
 				},
@@ -106,7 +107,7 @@ export function playCountdownAnimation(
 					duration: 0.35,
 					ease: "power2.in",
 				},
-				"<"
+				`<+=${UNDERLINE_WAIT}`
 			)
 
 			// 3. Animate "2"
@@ -121,7 +122,7 @@ export function playCountdownAnimation(
 					y: 0,
 					rotation: 0,
 					scale: 1,
-					duration: 0.5,
+					duration: NUMBER_DURATION,
 					ease: "back.out(1.5)",
 					onStart: () => {
 						haptics.trigger(defaultPatterns.medium);
@@ -136,7 +137,7 @@ export function playCountdownAnimation(
 					duration: UNDERLINE_DURATION,
 					ease: "power2.out",
 				},
-				`-=${UNDERLINE_WAIT}`
+				`<+=${UNDERLINE_WAIT}`
 			)
 			.to(
 				'[data-animate="num-2"]',
