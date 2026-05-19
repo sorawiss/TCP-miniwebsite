@@ -11,7 +11,7 @@ interface SurveyCountdownStepProps {
 export function SurveyCountdownStep({ onNext }: SurveyCountdownStepProps) {
 	const containerRef = useRef<HTMLDivElement>(null);
 
-	useEffect(() => playCountdownAnimation(containerRef, onNext), [onNext]);
+	useEffect(() => playCountdownAnimation(containerRef, onNext), []);
 
 	return (
 		<div

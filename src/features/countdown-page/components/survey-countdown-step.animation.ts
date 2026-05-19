@@ -228,7 +228,7 @@ export function playCountdownAnimation(
 				{
 					opacity: 1,
 					y: 0,
-					scale: 1.1,
+					scale: 1.6,
 					duration: 0.6,
 					ease: "back.out(1.5)",
 					onStart: () => {
@@ -238,7 +238,7 @@ export function playCountdownAnimation(
 				"-=0.1"
 			)
 			.to('[data-animate="start"]', {
-				scale: 1.0,
+				scale: 1.5,
 				duration: 0.2,
 				ease: "power1.inOut",
 			})
