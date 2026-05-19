@@ -13,6 +13,7 @@ import {
 	shareImage,
 } from "@/lib/image";
 import type { SurveyState } from "@/lib/survey";
+import { SummaryFooterBranding } from "./summary-footer-branding";
 import { playSummaryEntranceAnimation } from "./survey-summary-step.animation";
 
 interface SurveySummaryStepProps {
@@ -43,7 +44,10 @@ export function SurveySummaryStep({
 		const dataUrl =
 			preGeneratedUrl ||
 			(await generateImageFromElement(cardRef.current, {
-				filter: (node) => (node as HTMLElement).id !== "action-buttons",
+				filter: (node) => {
+					const id = (node as HTMLElement).id;
+					return id !== "action-buttons" && id !== "branding-footer";
+				},
 			}));
 
 		if (dataUrl) {
@@ -58,7 +62,10 @@ export function SurveySummaryStep({
 		setIsProcessing(true);
 
 		const dataUrl = await generateImageFromElement(cardRef.current, {
-			filter: (node) => (node as HTMLElement).id !== "action-buttons",
+			filter: (node) => {
+				const id = (node as HTMLElement).id;
+				return id !== "action-buttons" && id !== "branding-footer";
+			},
 		});
 
 		if (!dataUrl) {
@@ -169,11 +176,12 @@ export function SurveySummaryStep({
 				>
 					{/* Download Button */}
 					<button
-						className={`group relative rounded-full mb-4 flex w-full max-w-[300px] py-[1rem] items-center justify-center transition-transform ${
-							isProcessing
-								? "cursor-wait opacity-70"
-								: "cursor-pointer active:scale-95"
-						}`}
+						className={`group relative rounded-full mb-4 flex w-full max-w-[300px] py-[1rem] 
+							items-center justify-center transition-transform ${
+								isProcessing
+									? "cursor-wait opacity-70"
+									: "cursor-pointer active:scale-95"
+							}`}
 						disabled={isProcessing}
 						onClick={() => handleDownload()}
 						type="button"
@@ -191,6 +199,11 @@ export function SurveySummaryStep({
 					<NextButton disabled={isProcessing} onClick={handleShare}>
 						{isProcessing ? "กำลังประมวลผล..." : "แชร์พลังของคุณ"}
 					</NextButton>
+				</div>
+
+				{/* Branding footer: logos + product bottles — excluded from image capture */}
+				<div id="branding-footer">
+					<SummaryFooterBranding />
 				</div>
 			</div>
 
