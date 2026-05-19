@@ -1,12 +1,21 @@
-export const A = () => (
+import type { SVGProps } from "react";
+
+export const A = ({
+	className,
+	width,
+	height,
+	...props
+}: SVGProps<SVGSVGElement>) => (
 	<svg
 		aria-label="Option A"
+		className={className}
 		fill="none"
-		height="91"
+		height={height ?? "91"}
 		role="img"
 		viewBox="0 0 90 91"
-		width="90"
+		width={width ?? "90"}
 		xmlns="http://www.w3.org/2000/svg"
+		{...props}
 	>
 		<title>Option A</title>
 		<g filter="url(#filter0_di_1648_364)">
@@ -95,16 +104,23 @@ export const A = () => (
 	</svg>
 );
 
-export function B() {
+export function B({
+	className,
+	width,
+	height,
+	...props
+}: SVGProps<SVGSVGElement>) {
 	return (
 		<svg
 			aria-label="Option B"
+			className={className}
 			fill="none"
-			height="91"
+			height={height ?? "91"}
 			role="img"
 			viewBox="0 0 90 91"
-			width="90"
+			width={width ?? "90"}
 			xmlns="http://www.w3.org/2000/svg"
+			{...props}
 		>
 			<title>Option B</title>
 			<g filter="url(#filter0_di_1648_402)">
@@ -194,16 +210,23 @@ export function B() {
 	);
 }
 
-export function C() {
+export function C({
+	className,
+	width,
+	height,
+	...props
+}: SVGProps<SVGSVGElement>) {
 	return (
 		<svg
 			aria-label="Option C"
+			className={className}
 			fill="none"
-			height="91"
+			height={height ?? "91"}
 			role="img"
 			viewBox="0 0 90 91"
-			width="90"
+			width={width ?? "90"}
 			xmlns="http://www.w3.org/2000/svg"
+			{...props}
 		>
 			<title>Option C</title>
 			<g filter="url(#filter0_di_1648_439)">
@@ -293,16 +316,23 @@ export function C() {
 	);
 }
 
-export function D() {
+export function D({
+	className,
+	width,
+	height,
+	...props
+}: SVGProps<SVGSVGElement>) {
 	return (
 		<svg
 			aria-label="Option D"
+			className={className}
 			fill="none"
-			height="91"
+			height={height ?? "91"}
 			role="img"
 			viewBox="0 0 90 91"
-			width="90"
+			width={width ?? "90"}
 			xmlns="http://www.w3.org/2000/svg"
+			{...props}
 		>
 			<title>Option D</title>
 			<g filter="url(#filter0_di_1648_443)">
