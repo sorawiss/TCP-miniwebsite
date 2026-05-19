@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Name from "@/components/name";
 import { TextInput } from "@/components/ui/text-input";
 import type { NameStep } from "@/lib/config";
@@ -30,45 +30,38 @@ export function SurveyNameStep({
 		"checking" | "error" | "idle" | "taken" | "available"
 	>("idle");
 
-	useEffect(() => {
+	const handleNext = async () => {
 		const name = profile.name.trim();
 
 		if (!name || error) {
-			setAvailability("idle");
 			return;
 		}
 
 		setAvailability("checking");
 
-		const controller = new AbortController();
-		const timeout = setTimeout(async () => {
-			try {
-				const response = await fetch(
-					`/api/names/availability?name=${encodeURIComponent(name)}`,
-					{ signal: controller.signal }
+		try {
+			const response = await fetch(
+				`/api/names/availability?name=${encodeURIComponent(name)}`
+			);
+
+			if (!response.ok) {
+				throw new Error(
+					`Availability check failed with status ${response.status}`
 				);
-
-				if (!response.ok) {
-					throw new Error(
-						`Availability check failed with status ${response.status}`
-					);
-				}
-
-				const result = (await response.json()) as { available: boolean };
-				setAvailability(result.available ? "available" : "taken");
-			} catch (availabilityError) {
-				if (!controller.signal.aborted) {
-					console.error("Failed to check name availability", availabilityError);
-					setAvailability("error");
-				}
 			}
-		}, 300);
 
-		return () => {
-			clearTimeout(timeout);
-			controller.abort();
-		};
-	}, [error, profile.name]);
+			const result = (await response.json()) as { available: boolean };
+			if (result.available) {
+				setAvailability("available");
+				onNext();
+			} else {
+				setAvailability("taken");
+			}
+		} catch (availabilityError) {
+			console.error("Failed to check name availability", availabilityError);
+			setAvailability("error");
+		}
+	};
 
 	let availabilityError: string | null = null;
 
@@ -83,9 +76,7 @@ export function SurveyNameStep({
 		!profile.name.trim() ||
 		Boolean(error) ||
 		availability === "checking" ||
-		availability === "taken" ||
-		availability === "error" ||
-		availability === "idle";
+		availability === "taken";
 
 	return (
 		<>
@@ -104,6 +95,7 @@ export function SurveyNameStep({
 						onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
 							const value = event.target.value;
 							onProfileChange("name", value);
+							setAvailability("idle");
 							if (isProfanityFilterReady) {
 								const result = profanityFilter.check(value);
 								if (result.isClean) {
@@ -129,7 +121,7 @@ export function SurveyNameStep({
 				</div>
 
 				<div className="mt-10">
-					<NextButton disabled={isNextDisabled} onClick={onNext} />
+					<NextButton disabled={isNextDisabled} onClick={handleNext} />
 				</div>
 			</div>
 			<Image
