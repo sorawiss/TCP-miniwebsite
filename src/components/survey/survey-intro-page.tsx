@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import Intro0 from "@/components/text/intro0";
 import Intro1 from "@/components/text/intro1";
 import { NextButton } from "@/components/ui/next-button";
@@ -13,9 +14,21 @@ export function SurveyIntroPage({ onNext, step }: IntroPageProps) {
 	return (
 		<div className="absolute inset-0 z-0">
 			{step.topImage === "/intro/intro0-text.svg" && (
-				<Intro0
-					className={`w-full object-cover px-4 ${step.className ?? ""}`}
-				/>
+				<>
+					<Intro0
+						className={`w-full object-cover px-4 ${step.className ?? ""}`}
+					/>
+					<p className="absolute bottom-2 left-1/2 w-full -translate-x-1/2 -translate-y-1/2 text-center text-[#151F6D] text-[1rem]">
+						โปรดศึกษาน{" "}
+						<Link
+							className="underline"
+							href="https://privacy.tcp.com/privacy/4ddf1f02-9722-4fe8-d135-08ddb905412e"
+							target="_blank"
+						>
+							นโยบายความเป็นส่วนตัว privacy notice
+						</Link>
+					</p>
+				</>
 			)}
 			{step.topImage === "/intro/intro1-text.svg" && (
 				<Intro1
