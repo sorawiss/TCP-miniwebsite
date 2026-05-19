@@ -9,12 +9,14 @@ import { SurveyStoryStep } from "@/components/survey-story-step";
 import { SurveyTextQuestionPage } from "@/components/survey-text-question-page";
 import { SurveyCountdownStep } from "@/features/countdown-page/components/survey-countdown-step";
 import { SurveySummaryStep } from "@/features/summary-page/components/survey-summary-step";
-import { totalQuestionCount } from "@/lib/config";
+import { preloadStepImages } from "@/lib/asset-preloader";
+import { surveySteps, totalQuestionCount } from "@/lib/config";
 import { useSurvey } from "@/lib/use-survey";
 
 function HomeContent() {
 	const {
 		state,
+		step,
 		currentStep,
 		isResultStep,
 		winningPower,
@@ -49,6 +51,10 @@ function HomeContent() {
 			clearTimeout(timer2);
 		};
 	}, []);
+
+	useEffect(() => {
+		preloadStepImages([surveySteps[step + 1], surveySteps[step + 2]]);
+	}, [step]);
 
 	// Handle transitions when step changes
 	useEffect(() => {
@@ -104,7 +110,7 @@ function HomeContent() {
 						alt="Loading..."
 						className="animate-pulse"
 						height={80}
-						priority
+						preload
 						src="/logo.svg"
 						width={80}
 					/>

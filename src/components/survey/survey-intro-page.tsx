@@ -27,8 +27,10 @@ export function SurveyIntroPage({ onNext, step }: IntroPageProps) {
 				<Image
 					alt={step.id}
 					className="pointer-events-none absolute bottom-0 left-0 z-0 w-full object-cover"
+					fetchPriority="high"
 					height={500}
-					preload
+					loading="eager"
+					sizes="(max-width: 403px) 100vw, 403px"
 					src={step.bottomImage}
 					width={800}
 				/>
