@@ -14,9 +14,22 @@ export async function generateImageFromElement(
 		return null;
 	}
 	try {
-		// Small delay to ensure the DOM has completed rendering/state updates
-		await new Promise((resolve) => setTimeout(resolve, 150));
+		// Wait for document fonts to load completely
+		if (typeof document !== "undefined" && document.fonts) {
+			await document.fonts.ready;
+		}
 
+		// Small delay to ensure the DOM has completed rendering/state updates
+		await new Promise((resolve) => setTimeout(resolve, 200));
+
+		// First pass: Warm up Safari cache (handles Safari blank canvas issue)
+		try {
+			await toPng(element, { cacheBust: true, ...options });
+		} catch (warmupError) {
+			console.warn("Safari image generation warm-up warning:", warmupError);
+		}
+
+		// Second pass: Generate actual PNG
 		return await toPng(element, {
 			cacheBust: true,
 			pixelRatio: 2,

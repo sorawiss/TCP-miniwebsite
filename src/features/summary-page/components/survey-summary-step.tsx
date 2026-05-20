@@ -29,8 +29,18 @@ export function SurveySummaryStep({
 	const runnerName = state.profile.name.trim() || "นักวิ่ง";
 	const formattedDays = daysLived ? daysLived.toLocaleString() : "0";
 	const cardRef = useRef<HTMLDivElement>(null);
+	const shareCardRef = useRef<HTMLDivElement>(null);
 	const [isProcessing, setIsProcessing] = useState(false);
 	const [cachedDataUrl, setCachedDataUrl] = useState<string | null>(null);
+	const [showShareModal, setShowShareModal] = useState(false);
+	const [generatedImageUrl, setGeneratedImageUrl] = useState<string | null>(
+		null
+	);
+
+	const isMobileDevice = (): boolean => {
+		if (typeof window === "undefined") return false;
+		return /Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+	};
 
 	useEffect(() => {
 		return playSummaryEntranceAnimation(cardRef);
@@ -38,12 +48,9 @@ export function SurveySummaryStep({
 
 	const getCardImageUrl = async (): Promise<string | null> => {
 		if (cachedDataUrl) return cachedDataUrl;
-		const url = await generateImageFromElement(cardRef.current, {
-			filter: (node) => {
-				const id = (node as HTMLElement).id;
-				return id !== "action-buttons" && id !== "branding-footer";
-			},
-		});
+		if (!shareCardRef.current) return null;
+
+		const url = await generateImageFromElement(shareCardRef.current);
 		if (url) {
 			setCachedDataUrl(url);
 		}
@@ -57,7 +64,12 @@ export function SurveySummaryStep({
 		const dataUrl = await getCardImageUrl();
 
 		if (dataUrl) {
-			downloadImage(dataUrl, "tcp-power.png");
+			if (isMobileDevice()) {
+				setGeneratedImageUrl(dataUrl);
+				setShowShareModal(true);
+			} else {
+				downloadImage(dataUrl, "tcp-power.png");
+			}
 		}
 
 		setIsProcessing(false);
@@ -81,8 +93,12 @@ export function SurveySummaryStep({
 		});
 
 		if (!shared) {
-			// Fallback to download if Web Share API is not supported or fails
-			downloadImage(dataUrl, "tcp-power.png");
+			if (isMobileDevice()) {
+				setGeneratedImageUrl(dataUrl);
+				setShowShareModal(true);
+			} else {
+				downloadImage(dataUrl, "tcp-power.png");
+			}
 		}
 
 		setIsProcessing(false);
@@ -222,6 +238,127 @@ export function SurveySummaryStep({
 				src={"/results/bg.png"}
 				width={800}
 			/>
+
+			{/* Off-screen hidden card for high-fidelity image capture */}
+			<div
+				className="pointer-events-none absolute"
+				style={{
+					position: "absolute",
+					left: "-9999px",
+					top: "-9999px",
+					overflow: "hidden",
+					width: "400px",
+					height: "750px",
+				}}
+			>
+				<div
+					className="relative flex flex-col items-center justify-between px-6 py-8 overflow-hidden select-none bg-[#FFEFC7]"
+					ref={shareCardRef}
+					style={{
+						width: "400px",
+						height: "750px",
+						backgroundImage: "url('/svg/background.svg')",
+						backgroundRepeat: "repeat",
+					}}
+				>
+					{/* Card content area */}
+					<div className="relative z-10 flex w-full flex-col items-center pt-2">
+						<h1 className="text-center text-[#FF8200] text-[2.2rem] font-bold leading-tight">
+							พลังที่ซ่อนอยู่ในตัวคุณ
+						</h1>
+						<div className="mb-4 text-center text-[#151F6D] text-[2.2rem] font-bold -mt-2">
+							{runnerName}
+						</div>
+
+						{/* Static Power Image (No 3D CoinFlip in screenshot to avoid blank WebGL canvas issues) */}
+						<div className="relative mb-4 flex h-[200px] w-[200px] items-center justify-center bg-white/20 rounded-full border border-white/40 shadow-inner">
+							<img
+								alt="Power image"
+								className="object-contain"
+								height={160}
+								src={`/results/${power.id}.png`}
+								style={{ display: "block" }}
+								width={160}
+							/>
+						</div>
+
+						{/* Info Box */}
+						{daysLived !== null && (
+							<div className="relative border border-[#FFB500] mb-5 flex bg-[#FFEFC7]/80 w-fit rounded-full px-8 py-1 flex-col items-center justify-center shadow-sm">
+								<div className="text-[#4A4A4A] text-[0.95rem] font-medium">
+									คุณใช้ชีวิตมาแล้ว
+								</div>
+								<div className="text-[#FF8200] leading-none text-[1.8rem] font-bold">
+									{formattedDays} วัน
+								</div>
+							</div>
+						)}
+
+						{/* Separator line with text */}
+						<div className="flex w-full max-w-[280px] items-center my-2">
+							<div className="flex-grow border-[#E60000] border-t-[2px]" />
+							<span className="mx-3 text-[1.1rem] text-[#E60000] font-medium whitespace-nowrap">
+								พลังที่ปลุกให้คุณไปต่อได้ คือ
+							</span>
+							<div className="flex-grow border-[#E60000] border-t-[2px]" />
+						</div>
+
+						{/* Power Title */}
+						<h2 className="text-center text-[#ee1c25] text-[2.6rem] font-bold leading-tight my-1">
+							{power.title}
+						</h2>
+
+						{/* Power Description */}
+						<div className="px-2 text-center text-[1.25rem] leading-relaxed text-[#4A4A4A] mt-2">
+							{power.description}
+						</div>
+					</div>
+
+					{/* Story background bottom */}
+					<img
+						alt=""
+						className="pointer-events-none absolute bottom-0 left-0 z-0 w-full object-cover"
+						src="/results/bg.png"
+						style={{ height: "45%", width: "100%" }}
+					/>
+				</div>
+			</div>
+
+			{/* Fallback image share/saving overlay for mobile devices */}
+			{showShareModal && (
+				<div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm p-4 animate-in fade-in duration-200">
+					<div className="relative flex flex-col items-center bg-[#FFEFC7] border-4 border-[#FFB500] rounded-3xl p-6 max-w-sm w-full shadow-2xl animate-in zoom-in-95 duration-200">
+						{/* Close Button */}
+						<button
+							className="absolute top-3 right-3 text-[#FF8200] hover:text-[#E60000] text-2xl font-bold bg-white/90 rounded-full w-8 h-8 flex items-center justify-center shadow-sm cursor-pointer border border-[#FFB500]/30 transition-transform active:scale-90"
+							onClick={() => setShowShareModal(false)}
+							type="button"
+						>
+							&times;
+						</button>
+
+						{/* Instructions */}
+						<h3 className="text-center text-[#151F6D] text-[1.4rem] font-bold mb-1 mt-2">
+							บันทึกรูปภาพพลังของคุณ
+						</h3>
+						<p className="text-center text-[#6B3E1F] text-[1.05rem] mb-4">
+							กดค้างที่รูปภาพเพื่อบันทึก หรือส่งต่อให้เพื่อน
+						</p>
+
+						{/* Real HTML <img> showing generated image data URL */}
+						<div className="relative border-4 border-white rounded-2xl overflow-hidden shadow-md bg-white w-full max-h-[50vh] flex items-center justify-center">
+							{generatedImageUrl && (
+								<img
+									alt="TCP Power Result"
+									className="w-full h-auto object-contain"
+									src={generatedImageUrl}
+									style={{ WebkitTouchCallout: "default" }}
+								/>
+							)}
+						</div>
+					</div>
+				</div>
+			)}
 		</div>
 	);
 }
