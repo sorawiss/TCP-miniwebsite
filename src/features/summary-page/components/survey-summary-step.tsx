@@ -31,24 +31,32 @@ export function SurveySummaryStep({
 	const formattedDays = daysLived ? daysLived.toLocaleString() : "0";
 	const cardRef = useRef<HTMLDivElement>(null);
 	const [isProcessing, setIsProcessing] = useState(false);
+	const [cachedDataUrl, setCachedDataUrl] = useState<string | null>(null);
 	const haptics = new WebHaptics();
 
 	useEffect(() => {
 		return playSummaryEntranceAnimation(cardRef);
 	}, []);
 
-	const handleDownload = async (preGeneratedUrl?: string) => {
-		if (isProcessing && !preGeneratedUrl) return;
+	const getCardImageUrl = async (): Promise<string | null> => {
+		if (cachedDataUrl) return cachedDataUrl;
+		const url = await generateImageFromElement(cardRef.current, {
+			filter: (node) => {
+				const id = (node as HTMLElement).id;
+				return id !== "action-buttons" && id !== "branding-footer";
+			},
+		});
+		if (url) {
+			setCachedDataUrl(url);
+		}
+		return url;
+	};
+
+	const handleDownload = async () => {
+		if (isProcessing) return;
 		setIsProcessing(true);
 
-		const dataUrl =
-			preGeneratedUrl ||
-			(await generateImageFromElement(cardRef.current, {
-				filter: (node) => {
-					const id = (node as HTMLElement).id;
-					return id !== "action-buttons" && id !== "branding-footer";
-				},
-			}));
+		const dataUrl = await getCardImageUrl();
 
 		if (dataUrl) {
 			downloadImage(dataUrl, "tcp-power.png");
@@ -61,12 +69,7 @@ export function SurveySummaryStep({
 		if (isProcessing) return;
 		setIsProcessing(true);
 
-		const dataUrl = await generateImageFromElement(cardRef.current, {
-			filter: (node) => {
-				const id = (node as HTMLElement).id;
-				return id !== "action-buttons" && id !== "branding-footer";
-			},
-		});
+		const dataUrl = await getCardImageUrl();
 
 		if (!dataUrl) {
 			setIsProcessing(false);
