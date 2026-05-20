@@ -64,6 +64,11 @@ export function SurveyChoiceQuestionPage({
 										onChange={(event) =>
 											onAnswerChange(question.id, event.target.value)
 										}
+										onClick={(event) => {
+											if (isSelected) {
+												onAnswerChange(question.id, event.currentTarget.value);
+											}
+										}}
 										type="radio"
 										value={option.value}
 									/>
