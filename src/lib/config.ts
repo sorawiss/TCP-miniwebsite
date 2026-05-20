@@ -266,7 +266,7 @@ export const surveySteps: SurveyStep[] = [
 				powerId: "6",
 			},
 		],
-		bottomImage: "/bottom/5th.webp",
+		bottomImage: "/bottom/5th.png",
 	},
 	{
 		id: "6",
