@@ -205,12 +205,12 @@ export const surveySteps: SurveyStep[] = [
 	{
 		id: "story-1-1",
 		type: "story",
-		bottomImage: "/bottom/story-bridge-1.webp",
+		bottomImage: "/bottom/story-bridge-1.png",
 	},
 	{
 		id: "story-1-2",
 		type: "story",
-		bottomImage: "/bottom/story-bridge-2.webp",
+		bottomImage: "/bottom/story-bridge-2.png",
 	},
 	{
 		id: "3",

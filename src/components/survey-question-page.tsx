@@ -43,7 +43,6 @@ export function SurveyChoiceQuestionPage({
 					dangerouslySetInnerHTML={{ __html: question.prompt }}
 				/>
 
-				{/* TODO: This is not the final design now it just a mockup */}
 				<div>
 					<div className="mx-auto grid max-w-2xl gap-2">
 						{question.options.map((option, index) => {
