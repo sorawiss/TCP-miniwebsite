@@ -1,6 +1,7 @@
 "use client";
 import Image from "next/image";
 import { Suspense, useEffect, useRef, useState } from "react";
+import { FormLogo } from "@/components/form-logo";
 import { SurveyBirthDateStep } from "@/components/survey/survey-birth-date-step";
 import { SurveyIntroPage } from "@/components/survey/survey-intro-page";
 import { SurveyNameStep } from "@/components/survey/survey-name-step";
@@ -119,17 +120,14 @@ function HomeContent() {
 			)}
 			<main className="bg-[url('/svg/background.svg')] bg-repeat text-[#2f1b09]">
 				<div
-					className={`relative mx-auto flex h-dvh max-w-[403px] flex-col pt-20 transition-all duration-300 ease-in-out ${
+					className={`relative mx-auto flex h-dvh max-w-md flex-col pt-20 transition-all duration-300 ease-in-out ${
 						isTransitioning ? "opacity-0" : "opacity-100"
 					}`}
 				>
-					<Image
-						alt="Logo"
-						className="absolute inset-x-1/2 top-4 z-50 h-auto w-12 -translate-x-1/2 md:w-14"
-						height={128}
-						src="/logo.png"
-						width={128}
-					/>
+					<Suspense fallback={null}>
+						<FormLogo />
+					</Suspense>
+
 					{activeStep.type === "intro" ? (
 						<SurveyIntroPage onNext={nextStep} step={activeStep} />
 					) : null}
