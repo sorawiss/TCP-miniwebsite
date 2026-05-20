@@ -131,7 +131,7 @@ export function SurveyNameStep({
 				height={800}
 				loading="eager"
 				sizes="(max-width: 403px) 100vw, 403px"
-				src="/bottom/desert.webp"
+				src="/bottom/desert.png"
 				width={800}
 			/>
 		</>

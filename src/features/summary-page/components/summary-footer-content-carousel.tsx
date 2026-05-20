@@ -11,30 +11,30 @@ import {
 const shortFilms = [
 	{
 		title: "อิ่มใจและทราย คืนพลังอย่างไร?",
-		image: "/bottom/desert.webp",
+		image: "/bottom/desert.png",
 	},
 	{
 		title: "อิ่มใจและถนน คืนพลังอย่างไร?",
-		image: "/bottom/desert.webp",
+		image: "/bottom/desert.png",
 	},
 	{
 		title: "อิ่มใจและเส้นทาง คืนพลังอย่างไร?",
-		image: "/bottom/desert.webp",
+		image: "/bottom/desert.png",
 	},
 ];
 
 const articles = [
 	{
 		title: "อิ่มใจและทราย คืนพลังอย่างไร?",
-		image: "/bottom/desert.webp",
+		image: "/bottom/desert.png",
 	},
 	{
 		title: "Desert Marathon เติมพลังให้คุณอย่างไร",
-		image: "/bottom/desert.webp",
+		image: "/bottom/desert.png",
 	},
 	{
 		title: "รับมือวันที่เหนื่อยล้า ได้อย่างไร",
-		image: "/bottom/desert.webp",
+		image: "/bottom/desert.png",
 	},
 ];
 
