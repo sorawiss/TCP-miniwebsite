@@ -66,7 +66,7 @@ export function SummaryFooterBranding() {
 					/>
 				</div>
 				<p className="text-center text-[#151F6D]/50">
-					*TCP บริจาคเครื่องดื่มสูงสุดจำนวน 6,000 วด
+					*TCP บริจาคเครื่องดื่มสูงสุดจำนวน 6,000 ขวด
 				</p>
 			</div>
 			<SummaryFooterContentCarousel />
