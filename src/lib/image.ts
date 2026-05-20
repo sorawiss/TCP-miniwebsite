@@ -1,5 +1,7 @@
 import { toPng } from "html-to-image";
 
+const SAFARI_REGEX = /^((?!chrome|android).)*safari/i;
+
 /**
  * Generates a PNG data URL from an HTML element with a render stability delay.
  *
@@ -14,17 +16,34 @@ export async function generateImageFromElement(
 		return null;
 	}
 	try {
+		// Ensure fonts are fully loaded/decoded before capturing
+		if (typeof document !== "undefined" && document.fonts) {
+			await document.fonts.ready;
+		}
+
 		// Small delay to ensure the DOM has completed rendering/state updates
 		await new Promise((resolve) => setTimeout(resolve, 150));
 
-		return await toPng(element, {
+		const captureOptions = {
 			cacheBust: true,
 			pixelRatio: 2,
 			style: {
 				fontFamily: "inherit",
 			},
 			...options,
-		});
+		};
+
+		// Safari first-run workaround: WebKit fails to draw fonts/images inside SVG foreignObject
+		// on the first pass. Pre-rendering it once forces Safari to resolve and cache assets.
+		const isSafari =
+			typeof navigator !== "undefined" &&
+			SAFARI_REGEX.test(navigator.userAgent);
+		if (isSafari) {
+			await toPng(element, captureOptions);
+			await new Promise((resolve) => setTimeout(resolve, 100));
+		}
+
+		return await toPng(element, captureOptions);
 	} catch (error) {
 		console.error("Failed to generate image from element", error);
 		return null;
