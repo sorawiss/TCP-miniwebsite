@@ -36,9 +36,7 @@ export function SurveySummaryStep({
 	const [generatedImageUrl, setGeneratedImageUrl] = useState<string | null>(
 		null
 	);
-	const randomUuid = Math.floor(Math.random() * 1000)
-		.toString()
-		.padStart(4, "0");
+	const randomUuid = state.uuid; // TODO: Remove UUID display and logic in the future
 
 	const isMobileDevice = (): boolean => {
 		if (typeof window === "undefined") return false;
@@ -113,9 +111,10 @@ export function SurveySummaryStep({
 			ref={cardRef}
 		>
 			<div className="relative z-10 flex h-full w-full flex-col items-center overflow-y-auto no-scrollbar px-6 pb-10 pt-2">
-				<div className="fixed top-10 right-4 rounded-full stroke-2 stroke-[#FF8200] bg-[#FFE5D7]/50 px-4 py-1 text-[#FF8200]">
+				<div className="fixed top-10 right-4 rounded-full border border-[#FF8200] bg-[#FFE5D7]/50 px-4 py-1 text-[#FF8200]">
 					UUID: {randomUuid}
 				</div>
+
 				<h1
 					className="text-center text-[#FF8200] text-[2.5rem]"
 					data-animate="title"
@@ -254,21 +253,22 @@ export function SurveySummaryStep({
 					top: "-9999px",
 					overflow: "hidden",
 					width: "400px",
-					height: "750px",
+					height: "700px",
 				}}
 			>
 				<div
-					className="relative flex flex-col items-center justify-between px-6 py-8 overflow-hidden select-none bg-[#FFEFC7]"
+					className="relative flex flex-col items-center gap-4 px-3 py-3 overflow-hidden select-none bg-[#FFEFC7] h-[70vh]"
 					ref={shareCardRef}
 					style={{
 						width: "400px",
-						height: "750px",
+						height: "700px",
 						backgroundImage: "url('/svg/background.svg')",
 					}}
 				>
-					<div className="absolute top-4 right-4 rounded-full stroke-1 stroke-[#FF8200] bg-[#FFE5D7]/50 px-4 py-1 text-[#FF8200]">
+					<div className="fixed top-10 right-4 rounded-full border border-[#FF8200] bg-[#FFE5D7]/50 px-4 py-1 text-[#FF8200]">
 						UUID: {randomUuid}
 					</div>
+					<img alt="Logo" className="w-14 mx-auto" src="/logo.png" />
 					{/* Card content area */}
 					<div className="relative z-10 flex w-full flex-col items-center pt-2">
 						<h1 className="text-center text-[#FF8200] text-[2.2rem] font-bold leading-tight">
@@ -279,7 +279,7 @@ export function SurveySummaryStep({
 						</div>
 
 						{/* Static Power Image (No 3D CoinFlip in screenshot to avoid blank WebGL canvas issues) */}
-						<div className="relative mb-4 flex h-[200px] w-[200px] items-center justify-center bg-white/20 rounded-full border border-white/40 shadow-inner">
+						<div className="relative mb-4 flex justify-center  shadow-inner">
 							<img
 								alt="Power image"
 								className="object-contain"
@@ -354,7 +354,7 @@ export function SurveySummaryStep({
 						</p>
 
 						{/* Real HTML <img> showing generated image data URL */}
-						<div className="relative border-4 border-white rounded-2xl overflow-hidden shadow-md bg-white w-full max-h-[50vh] flex items-center justify-center">
+						<div className="relative border-4 border-white rounded-2xl overflow-hidden shadow-md bg-white w-full flex items-center justify-center">
 							{generatedImageUrl && (
 								<img
 									alt="TCP Power Result"

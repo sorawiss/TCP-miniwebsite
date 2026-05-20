@@ -11,6 +11,7 @@ export interface SurveySubmission {
 	choiceAnswers: Record<string, string>;
 	profile: SurveyState["profile"];
 	textAnswers: Record<string, string>;
+	uuid: string; // TODO: Remove this in the future
 }
 
 function isRecord(value: unknown): value is Record<string, unknown> {
@@ -39,7 +40,7 @@ export function parseSurveySubmission(value: unknown): SurveySubmission | null {
 		return null;
 	}
 
-	const { profile, choiceAnswers, textAnswers } = value;
+	const { profile, choiceAnswers, textAnswers, uuid } = value;
 
 	if (
 		!(isRecord(profile) && isRecord(choiceAnswers) && isRecord(textAnswers))
@@ -76,6 +77,7 @@ export function parseSurveySubmission(value: unknown): SurveySubmission | null {
 		textAnswers: {
 			"6": textAnswer.trim(),
 		},
+		uuid: typeof uuid === "string" ? uuid : "", // TODO: Remove this in the future
 	};
 }
 

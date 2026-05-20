@@ -8,6 +8,7 @@ export interface SurveyState {
 	choiceAnswers: Record<string, string>;
 	profile: ProfileAnswers;
 	textAnswers: Record<string, string>;
+	uuid: string; // TODO: Remove this in the future
 }
 
 export const initialSurveyState: SurveyState = {
@@ -18,4 +19,5 @@ export const initialSurveyState: SurveyState = {
 	},
 	textAnswers: {},
 	choiceAnswers: {},
+	uuid: "", // TODO: Remove this in the future
 };

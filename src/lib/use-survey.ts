@@ -1,13 +1,14 @@
 "use client";
 
 import { parseAsInteger, useQueryState } from "nuqs";
-import { useMemo } from "react";
+import { useEffect, useMemo } from "react";
 import { create } from "zustand";
 import { resultPowers, type SurveyStep, surveySteps } from "@/lib/config";
 import { getWinningPower } from "@/lib/scoring";
 import { initialSurveyState, type SurveyState } from "@/lib/survey";
 
 interface SurveyStore extends SurveyState {
+	setUuid: (uuid: string) => void; // TODO: Remove this in the future
 	updateChoiceAnswer: (questionId: string, value: string) => void;
 	updateProfile: (
 		field: keyof SurveyState["profile"],
@@ -44,6 +45,11 @@ const useSurveyStore = create<SurveyStore>((set) => ({
 				...state.textAnswers,
 				[questionId]: value,
 			},
+		})),
+	// TODO: Remove setUuid in the future
+	setUuid: (uuid) =>
+		set(() => ({
+			uuid,
 		})),
 }));
 
@@ -92,13 +98,30 @@ export function useSurvey() {
 	);
 	const store = useSurveyStore();
 
+	// TODO: Remove this useEffect and UUID persistence in the future
+	useEffect(() => {
+		if (typeof window !== "undefined") {
+			let stored = localStorage.getItem("survey_uuid");
+			if (!stored) {
+				stored = Math.floor(Math.random() * 1000)
+					.toString()
+					.padStart(4, "0");
+				localStorage.setItem("survey_uuid", stored);
+			}
+			if (store.uuid !== stored) {
+				store.setUuid(stored);
+			}
+		}
+	}, [store.uuid, store.setUuid]);
+
 	const state = useMemo<SurveyState>(
 		() => ({
 			profile: store.profile,
 			choiceAnswers: store.choiceAnswers,
 			textAnswers: store.textAnswers,
+			uuid: store.uuid, // TODO: Remove this in the future
 		}),
-		[store.profile, store.choiceAnswers, store.textAnswers]
+		[store.profile, store.choiceAnswers, store.textAnswers, store.uuid]
 	);
 
 	const currentStep = surveySteps[step] ?? surveySteps[0];
