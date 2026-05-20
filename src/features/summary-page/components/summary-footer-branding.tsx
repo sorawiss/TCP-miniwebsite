@@ -43,9 +43,12 @@ export function SummaryFooterBranding() {
 						ค้นหาพลังที่ซ่อนอยู่ในตัวคุณจบแล้ว
 						<br />
 						เพียงแชร์พลังของคุณไปยังโซเชียลมีเดียช่องทางใดก็ได้ ทุก{" "}
-						<span className="text-[2rem]">1</span> แชร์ ={" "}
-						<span className="text-[2rem]">TCP</span> ร่วมบริจาคเครื่องดื่มในเครือ{" "}
-						<span className="text-[2rem]">1 ขวด*</span>
+						<div className="inline-block">
+							<span className="text-[2rem]">1</span> แชร์ ={" "}
+							<span className="text-[2rem]">TCP</span>
+							ร่วมบริจาคเครื่องดื่มในเครือ{" "}
+						</div>
+						<div className="text-[2rem] inline-block">1 ขวด*</div>
 						ให้เหล่าอาสาจัดการภัยพิบัติภาคประชาชน โดยมูลนิธิกระจกเงา
 						ได้มีพลังกาย-พลังใจไปช่วยเหลือผู้อื่นต่อ
 						<br />
