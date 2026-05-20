@@ -25,7 +25,7 @@ export function SurveyChoiceQuestionPage({
 	const getOptionIcon = (index: number) => {
 		const Icons = [A, B, C, D];
 		const Icon = Icons[index % Icons.length];
-		return <Icon height={72} width={72} />;
+		return <Icon height={74} width={74} />;
 	};
 
 	return (
@@ -45,7 +45,7 @@ export function SurveyChoiceQuestionPage({
 
 				{/* TODO: This is not the final design now it just a mockup */}
 				<div>
-					<div className="mx-auto grid max-w-2xl gap-2 md:gap-[1rem]">
+					<div className="mx-auto grid max-w-2xl gap-2">
 						{question.options.map((option, index) => {
 							const inputId = `${question.id}-${option.value}`;
 							const isSelected = answers[question.id] === option.value;
@@ -78,7 +78,7 @@ export function SurveyChoiceQuestionPage({
 											{option.label}
 										</div>
 
-										<div className="absolute top-1/2 -left-6 -translate-y-1/2 rounded-full drop-shadow-sm">
+										<div className="absolute top-1/2 -left-6 -translate-y-[45%] rounded-full drop-shadow-sm">
 											{getOptionIcon(index)}
 										</div>
 									</div>
