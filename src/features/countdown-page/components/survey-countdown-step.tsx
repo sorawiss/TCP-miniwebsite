@@ -25,38 +25,38 @@ export function SurveyCountdownStep({ onNext }: SurveyCountdownStepProps) {
 						alt="3"
 						className="absolute object-contain px-4"
 						data-animate="num-3"
-						height={200}
+						height={800}
 						priority
 						src="/text/3.svg"
-						width={200}
+						width={800}
 					/>
 					<Image
 						alt="2"
 						className="absolute object-contain px-4"
 						data-animate="num-2"
-						height={200}
+						height={800}
 						priority
 						src="/text/2.svg"
-						width={200}
+						width={800}
 					/>
 					<Image
 						alt="1"
 						className="absolute object-contain px-4"
 						data-animate="num-1"
-						height={200}
+						height={800}
 						priority
 						src="/text/1.svg"
-						width={200}
+						width={800}
 					/>
 
 					<Image
 						alt="Start"
 						className="absolute object-contain px-4"
 						data-animate="start"
-						height={200}
+						height={800}
 						priority
 						src="/text/start.svg"
-						width={200}
+						width={800}
 					/>
 
 					{/* Start Lines Decorative SVG */}
