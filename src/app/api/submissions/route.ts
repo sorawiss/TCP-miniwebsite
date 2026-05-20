@@ -45,6 +45,8 @@ export async function POST(request: Request) {
 			returning id
 		`;
 
+		console.log("Submitted successfully", rows[0]?.id);
+
 		return Response.json({ id: rows[0]?.id }, { status: 201 });
 	} catch (error) {
 		if (

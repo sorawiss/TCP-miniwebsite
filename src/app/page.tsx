@@ -26,6 +26,7 @@ function HomeContent() {
 		updateProfile,
 		updateChoiceAnswer,
 		updateTextAnswer,
+		setUuid,
 		nextStep,
 	} = useSurvey();
 
@@ -91,12 +92,19 @@ function HomeContent() {
 				if (!response.ok) {
 					throw new Error(`Submission failed with status ${response.status}`);
 				}
+				return response.json();
+			})
+			.then((data) => {
+				if (data && typeof data.id === "string") {
+					localStorage.setItem("survey_uuid", data.id);
+					setUuid(data.id);
+				}
 			})
 			.catch((error) => {
 				hasSubmittedRef.current = false;
 				console.error("Failed to submit survey", error);
 			});
-	}, [isResultStep, state]);
+	}, [isResultStep, state, setUuid]);
 
 	const isActiveResultStep = activeStep.type === "result";
 

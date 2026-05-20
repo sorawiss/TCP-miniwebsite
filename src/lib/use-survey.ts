@@ -147,6 +147,7 @@ export function useSurvey() {
 		updateProfile: store.updateProfile,
 		updateChoiceAnswer: store.updateChoiceAnswer,
 		updateTextAnswer: store.updateTextAnswer,
+		setUuid: store.setUuid,
 		nextStep: () =>
 			setStep((prev) => Math.min((prev ?? 0) + 1, surveySteps.length - 1)),
 		prevStep: () => setStep((prev) => Math.max((prev ?? 0) - 1, 0)),

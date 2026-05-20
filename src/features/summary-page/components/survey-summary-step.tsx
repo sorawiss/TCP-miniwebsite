@@ -47,6 +47,11 @@ export function SurveySummaryStep({
 		return playSummaryEntranceAnimation(cardRef);
 	}, []);
 
+	// Clear the cached image URL when the UUID updates, forcing regeneration with the correct UUID
+	useEffect(() => {
+		setCachedDataUrl(null);
+	}, [randomUuid]);
+
 	const getCardImageUrl = async (): Promise<string | null> => {
 		if (cachedDataUrl) return cachedDataUrl;
 		if (!shareCardRef.current) return null;
@@ -111,7 +116,10 @@ export function SurveySummaryStep({
 			ref={cardRef}
 		>
 			<div className="relative z-10 flex h-full w-full flex-col items-center overflow-y-auto no-scrollbar px-6 pb-10 pt-2">
-				<div className="fixed top-10 right-4 rounded-full border border-[#FF8200] bg-[#FFE5D7]/50 px-4 py-1 text-[#FF8200]">
+				<div
+					className="mb-4 rounded-full border border-[#FF8200] px-4 py-1 text-[#FF8200] z-20 text-[0.85rem]"
+					style={{ backgroundColor: "rgba(255, 229, 215, 0.5)" }}
+				>
 					UUID: {randomUuid}
 				</div>
 
@@ -257,7 +265,7 @@ export function SurveySummaryStep({
 				}}
 			>
 				<div
-					className="relative flex flex-col items-center gap-4 px-3 py-3 overflow-hidden select-none bg-[#FFEFC7] h-[70vh]"
+					className="relative flex flex-col items-center gap-4 px-3 py-3 overflow-hidden select-none bg-[#FFEFC7]"
 					ref={shareCardRef}
 					style={{
 						width: "400px",
@@ -265,12 +273,19 @@ export function SurveySummaryStep({
 						backgroundImage: "url('/svg/background.svg')",
 					}}
 				>
-					<div className="fixed top-10 right-4 rounded-full border border-[#FF8200] bg-[#FFE5D7]/50 px-4 py-1 text-[#FF8200]">
-						UUID: {randomUuid}
-					</div>
-					<img alt="Logo" className="w-14 mx-auto" src="/logo.png" />
+					<img
+						alt="Logo"
+						className="w-14 mx-auto relative z-10"
+						src="/logo.png"
+					/>
 					{/* Card content area */}
 					<div className="relative z-10 flex w-full flex-col items-center pt-2">
+						<div
+							className="mb-2 rounded-full border border-[#FF8200] px-4 py-1 text-[#FF8200] z-20 text-[0.85rem]"
+							style={{ backgroundColor: "rgba(255, 229, 215, 0.5)" }}
+						>
+							UUID: {randomUuid}
+						</div>
 						<h1 className="text-center text-[#FF8200] text-[2.2rem] font-bold leading-tight">
 							พลังที่ซ่อนอยู่ในตัวคุณ
 						</h1>
