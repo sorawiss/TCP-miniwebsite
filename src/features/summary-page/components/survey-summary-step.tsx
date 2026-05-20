@@ -36,6 +36,9 @@ export function SurveySummaryStep({
 	const [generatedImageUrl, setGeneratedImageUrl] = useState<string | null>(
 		null
 	);
+	const randomUuid = Math.floor(Math.random() * 1000)
+		.toString()
+		.padStart(4, "0");
 
 	const isMobileDevice = (): boolean => {
 		if (typeof window === "undefined") return false;
@@ -110,6 +113,9 @@ export function SurveySummaryStep({
 			ref={cardRef}
 		>
 			<div className="relative z-10 flex h-full w-full flex-col items-center overflow-y-auto no-scrollbar px-6 pb-10 pt-2">
+				<div className="fixed top-10 right-4 rounded-full stroke-2 stroke-[#FF8200] bg-[#FFE5D7]/50 px-4 py-1 text-[#FF8200]">
+					UUID: {randomUuid}
+				</div>
 				<h1
 					className="text-center text-[#FF8200] text-[2.5rem]"
 					data-animate="title"
@@ -260,6 +266,9 @@ export function SurveySummaryStep({
 						backgroundImage: "url('/svg/background.svg')",
 					}}
 				>
+					<div className="absolute top-4 right-4 rounded-full stroke-1 stroke-[#FF8200] bg-[#FFE5D7]/50 px-4 py-1 text-[#FF8200]">
+						UUID: {randomUuid}
+					</div>
 					{/* Card content area */}
 					<div className="relative z-10 flex w-full flex-col items-center pt-2">
 						<h1 className="text-center text-[#FF8200] text-[2.2rem] font-bold leading-tight">
