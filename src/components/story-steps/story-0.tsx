@@ -34,7 +34,7 @@ export function Story0({ story }: { story: StoryStep }) {
 			{story.bottomImage ? (
 				<Image
 					alt="Story background"
-					className="pointer-events-none absolute bottom-0 left-0 z-0 w-full object-cover"
+					className="pointer-events-none absolute bottom-0 left-0 z-0 w-full object-cover object-top [@media(max-height:700px)]:h-[40dvh]"
 					fetchPriority="high"
 					height={800}
 					loading="eager"

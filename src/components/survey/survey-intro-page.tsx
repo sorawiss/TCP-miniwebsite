@@ -39,14 +39,14 @@ export function SurveyIntroPage({ onNext, step }: IntroPageProps) {
 			)}
 			{step.topImage === "/intro/intro1-text.svg" && (
 				<Intro1
-					className={`w-full object-cover px-4 ${step.className ?? ""}`}
+					className={`w-full object-cover px-4 ${step.className ?? ""} [@media(max-height:576px)]:mt-[12vh]`}
 				/>
 			)}
 
 			{step.bottomImage && (
 				<Image
 					alt={step.id}
-					className="pointer-events-none absolute bottom-0 left-0 -z-10 w-full translate-y-[50px] object-cover"
+					className="pointer-events-none absolute bottom-0 left-0 -z-10 w-full object-cover object-top [@media(max-height:560px)]:h-[45dvh]"
 					fetchPriority="high"
 					height={500}
 					loading="eager"

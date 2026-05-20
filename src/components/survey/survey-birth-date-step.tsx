@@ -24,7 +24,7 @@ export function SurveyBirthDateStep({
 }: BirthDateStepProps) {
 	return (
 		<>
-			<div className="relative z-10 flex h-full flex-col items-center px-6 pt-[15vh]">
+			<div className="relative z-10 flex h-screen flex-col items-center px-6 pt-[5vh]">
 				{/* Top Polygon with Calendar Icon */}
 				<div className="relative flex h-[129px] w-[134px] items-center justify-center">
 					<BdPolygon />

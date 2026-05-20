@@ -133,7 +133,7 @@ export const surveySteps: SurveyStep[] = [
 	{
 		id: "intro",
 		type: "intro",
-		bottomImage: "/intro/intro0.webp",
+		bottomImage: "/intro/intro0.png",
 		topImage: "/intro/intro0-text.svg",
 		className: "mt-[13vh]",
 	},
@@ -146,7 +146,7 @@ export const surveySteps: SurveyStep[] = [
 		type: "intro",
 		bottomImage: "/intro/intro1.png",
 		topImage: "/intro/intro1-text.svg",
-		className: "mt-[25vh]",
+		className: "mt-[15vh]",
 	},
 	{
 		id: "countdown",

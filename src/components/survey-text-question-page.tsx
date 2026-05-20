@@ -24,10 +24,10 @@ export function SurveyTextQuestionPage({
 
 	return (
 		<>
-			<section className="relative z-10 flex h-full flex-col justify-center space-y-6 px-4 pt-6">
+			<section className="relative z-10 flex flex-col justify-center space-y-6 px-4 pt-6">
 				<div className="space-y-5">
 					{question.promptImage ? (
-						<div className="relative mx-auto mt-23 h-[120px] w-[80%] max-w-sm">
+						<div className="relative mx-auto mt-[2vh] h-[120px] w-[80%]">
 							<Image
 								alt={question.prompt}
 								className="object-contain"
@@ -43,7 +43,7 @@ export function SurveyTextQuestionPage({
 					)}
 					<TextInput
 						autoFocus
-						containerClassName="h-[10rem]"
+						containerClassName="h-[20vh]"
 						multiline
 						onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
 							const value = event.target.value;
@@ -66,7 +66,7 @@ export function SurveyTextQuestionPage({
 						</p>
 					)}
 				</div>
-				<div className="relative z-10 mt-auto flex w-full items-center justify-center pb-70">
+				<div className="relative z-10 mt-auto flex w-full items-center justify-center">
 					<NextButton
 						disabled={!currentAnswer.trim() || !!error}
 						onClick={onNext}
@@ -76,7 +76,7 @@ export function SurveyTextQuestionPage({
 				</div>
 			</section>
 			<Image
-				alt="Question background mockup"
+				alt="Question background"
 				className="pointer-events-none absolute bottom-0 left-0 z-0 w-full object-cover"
 				fetchPriority="high"
 				height={800}
