@@ -258,7 +258,6 @@ export function SurveySummaryStep({
 						width: "400px",
 						height: "750px",
 						backgroundImage: "url('/svg/background.svg')",
-						backgroundRepeat: "repeat",
 					}}
 				>
 					{/* Card content area */}
@@ -319,7 +318,7 @@ export function SurveySummaryStep({
 						alt=""
 						className="pointer-events-none absolute bottom-0 left-0 z-0 w-full object-cover"
 						src="/results/bg.png"
-						style={{ height: "45%", width: "100%" }}
+						style={{ height: "100%", width: "100%" }}
 					/>
 				</div>
 			</div>
