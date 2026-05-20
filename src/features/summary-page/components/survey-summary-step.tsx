@@ -2,7 +2,6 @@
 
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
-import { defaultPatterns, WebHaptics } from "web-haptics";
 import ButtonDonwload from "@/components/ui/button-donwload";
 import { NextButton } from "@/components/ui/next-button";
 import { CoinFlip } from "@/features/summary-page/components/coin-flip";
@@ -32,7 +31,6 @@ export function SurveySummaryStep({
 	const cardRef = useRef<HTMLDivElement>(null);
 	const [isProcessing, setIsProcessing] = useState(false);
 	const [cachedDataUrl, setCachedDataUrl] = useState<string | null>(null);
-	const haptics = new WebHaptics();
 
 	useEffect(() => {
 		return playSummaryEntranceAnimation(cardRef);
