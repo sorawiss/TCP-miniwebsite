@@ -48,7 +48,7 @@ export function CoinFlip({ powerId, sideTextureUrl }: CoinFlipProps) {
 				>
 					{/* Back face (Mystery / Start state) */}
 					<div className={styles.back}>
-						<span className={styles.mysteryText}>?</span>
+						{/* <span className={styles.mysteryText}>?</span> */}
 					</div>
 
 					{/* Multi-faceted 3D Tapered Cylinder Side Panels (Bottle Cap Crimps/Texture) */}
