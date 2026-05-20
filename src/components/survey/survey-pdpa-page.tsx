@@ -43,9 +43,9 @@ function CookieToggle({
 					onClick={() => setExpanded((v) => !v)}
 					type="button"
 				>
-					<span className="block truncate text-[14px]">{title}</span>
+					<span className="block truncate text-lg">{title}</span>
 					{disabled && (
-						<span className="mt-1 inline-flex rounded-full bg-[#FFE9E3] px-2 py-0.5 font-medium text-[#E4002B] text-[12px] leading-none">
+						<span className="mt-1 inline-flex rounded-full bg-[#FFE9E3] px-2 py-0.5 font-medium text-[#E4002B] text-sm leading-none">
 							เปิดใช้งานตลอดเวลา
 						</span>
 					)}
@@ -96,7 +96,7 @@ function CookieToggle({
 			</div>
 
 			{expanded && (
-				<p className="px-3 pb-3 text-[#666666] text-[14px] leading-relaxed">
+				<p className="px-3 pb-3 text-[#666666] text-lg leading-relaxed">
 					{description}
 				</p>
 			)}
@@ -121,16 +121,16 @@ export function SurveyPdpaPage({ onNext }: PdpaPageProps) {
 			<div className="relative z-10 mb-30 flex flex-col overflow-hidden rounded-2xl bg-white shadow-sm">
 				<div className="px-3 pt-4 pb-3">
 					<div className="pb-4">
-						<h2 className="font-bold text-[#1F1F1F] text-[18px] leading-tight">
+						<h2 className="font-bold text-[#1F1F1F] text-xl leading-tight">
 							การตั้งค่าคุกกี้
 						</h2>
-						<p className="mt-1.5 text-[#777777] text-[14px] leading-[1.45]">
+						<p className="mt-1.5 text-[#777777] text-lg leading-[1.45]">
 							โดยท่านสามารถคลิกปรับเปลี่ยนแต่ละประเภทตามด้านล่าง
 							เพื่อเรียนรู้เพิ่มเติมและปรับเปลี่ยนการตั้งค่า ทั้งนี้การปิดการใช้งานคุกกี้บางประเภท
 							อาจส่งผลกระทบต่อประสบการณ์การใช้งานเว็บไซต์หรือบริการที่บริษัทฯ เสนอให้ท่าน
 						</p>
 						<Link
-							className="mt-1 inline-block text-[#777777] text-[10px] underline"
+							className="mt-1 inline-block text-[#777777] text-sm underline"
 							href="https://privacy.tcp.com/privacy/4ddf1f02-9722-4fe8-d135-08ddb905412e"
 							target="_blank"
 						>

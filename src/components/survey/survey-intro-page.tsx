@@ -12,11 +12,18 @@ interface IntroPageProps {
 
 export function SurveyIntroPage({ onNext, step }: IntroPageProps) {
 	return (
-		<div className="absolute inset-0 z-0">
+		<div className="absolute inset-0 z-0 overflow-hidden">
 			{step.topImage === "/intro/intro0-text.svg" && (
 				<>
 					<Intro0
 						className={`w-full object-cover px-4 ${step.className ?? ""}`}
+					/>
+					<Image
+						alt="sun"
+						className="absolute top-0 left-0 size-32 -translate-x-1/3 -translate-y-1/3"
+						height={64}
+						src="/intro/sun.svg"
+						width={64}
 					/>
 					<p className="absolute bottom-2 left-1/2 w-full -translate-x-1/2 -translate-y-1/2 text-center text-[#151F6D] text-[1rem]">
 						โปรดศึกษาน{" "}
@@ -39,7 +46,7 @@ export function SurveyIntroPage({ onNext, step }: IntroPageProps) {
 			{step.bottomImage && (
 				<Image
 					alt={step.id}
-					className="pointer-events-none absolute bottom-0 left-0 -z-10 w-full object-cover"
+					className="pointer-events-none absolute bottom-0 left-0 -z-10 w-full translate-y-[50px] object-cover"
 					fetchPriority="high"
 					height={500}
 					loading="eager"
