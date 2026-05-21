@@ -8,21 +8,6 @@ import {
 	CarouselItem,
 } from "@/components/ui/carousel";
 
-const shortFilms = [
-	{
-		title: "อิ่มใจและทราย คืนพลังอย่างไร?",
-		image: "/bottom/desert.png",
-	},
-	{
-		title: "อิ่มใจและถนน คืนพลังอย่างไร?",
-		image: "/bottom/desert.png",
-	},
-	{
-		title: "อิ่มใจและเส้นทาง คืนพลังอย่างไร?",
-		image: "/bottom/desert.png",
-	},
-];
-
 const articles = [
 	{
 		title: "อิ่มใจและทราย คืนพลังอย่างไร?",
@@ -91,15 +76,12 @@ export function SummaryFooterContentCarousel() {
 		<section className="mt-5 w-full max-w-[360px] overflow-hidden rounded-sm bg-center bg-cover px-2.5 py-4">
 			<div className="px-1 py-1">
 				<SectionHeader title="TCP 70 Years Short Films" />
-				<Carousel opts={{ align: "start", dragFree: true }}>
-					<CarouselContent className="-ml-2">
-						{shortFilms.map((film) => (
-							<CarouselItem className="basis-[52%] pl-2" key={film.title}>
-								<FilmCard {...film} />
-							</CarouselItem>
-						))}
-					</CarouselContent>
-				</Carousel>
+				<div className="w-full">
+					<FilmCard
+						image="/bottom/desert.png"
+						title="อิ่มใจและทราย คืนพลังอย่างไร?"
+					/>
+				</div>
 
 				<div className="mt-4">
 					<SectionHeader title="Articles" />
