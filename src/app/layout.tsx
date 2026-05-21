@@ -23,7 +23,7 @@ const HeaventRounded = localFont({
 const UidDeepSea = localFont({
 	src: [
 		{
-			path: "../../public/fonts/Uid-deepsea.woff2",
+			path: "../../public/fonts/uid-deepsea.woff2",
 			weight: "normal",
 			style: "normal",
 		},
