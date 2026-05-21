@@ -179,7 +179,7 @@ export const surveySteps: SurveyStep[] = [
 			{ value: "A", label: "ดึงเท้าออกช้า ๆ", powerId: "1" },
 			{ value: "B", label: "นิ่งไว้ก่อน", powerId: "2" },
 			{ value: "C", label: "มองหาอะไรเกาะ", powerId: "3" },
-			{ value: "D", label: "กระชากขาขึ้น ฮีบเดียวจบ!", powerId: "4" },
+			{ value: "D", label: "กระชากขาขึ้น ฮึบเดียวจบ!", powerId: "4" },
 		],
 		bottomImage: "/bottom/1st.webp",
 	},

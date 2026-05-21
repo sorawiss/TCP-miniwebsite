@@ -26,57 +26,18 @@ export function SurveyNameStep({
 	onNext,
 }: NameStepProps) {
 	const [error, setError] = useState<string | null>(null);
-	const [availability, setAvailability] = useState<
-		"checking" | "error" | "idle" | "taken" | "available"
-	>("idle");
 
-	const handleNext = async () => {
+	const handleNext = () => {
 		const name = profile.name.trim();
 
 		if (!name || error) {
 			return;
 		}
 
-		setAvailability("checking");
-
-		try {
-			const response = await fetch(
-				`/api/names/availability?name=${encodeURIComponent(name)}`
-			);
-
-			if (!response.ok) {
-				throw new Error(
-					`Availability check failed with status ${response.status}`
-				);
-			}
-
-			const result = (await response.json()) as { available: boolean };
-			if (result.available) {
-				setAvailability("available");
-				onNext();
-			} else {
-				setAvailability("taken");
-			}
-		} catch (availabilityError) {
-			console.error("Failed to check name availability", availabilityError);
-			setAvailability("error");
-		}
+		onNext();
 	};
 
-	let availabilityError: string | null = null;
-
-	if (availability === "taken") {
-		availabilityError = "ชื่อนี้ถูกใช้แล้ว โปรดเปลี่ยนชื่อของคุณ";
-	}
-
-	if (availability === "error") {
-		availabilityError = "เกิดข้อผิดพลาดในการตรวจสอบชื่อ กรุณาลองใหม่อีกครั้ง";
-	}
-	const isNextDisabled =
-		!profile.name.trim() ||
-		Boolean(error) ||
-		availability === "checking" ||
-		availability === "taken";
+	const isNextDisabled = !profile.name.trim() || Boolean(error);
 
 	return (
 		<>
@@ -95,7 +56,6 @@ export function SurveyNameStep({
 						onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
 							const value = event.target.value;
 							onProfileChange("name", value);
-							setAvailability("idle");
 							if (isProfanityFilterReady) {
 								const result = profanityFilter.check(value);
 								if (result.isClean) {
@@ -111,11 +71,6 @@ export function SurveyNameStep({
 					{error && (
 						<p className="text-center font-medium text-[#ee1c25] text-[1.5rem]">
 							{error}
-						</p>
-					)}
-					{availabilityError && (
-						<p className="text-center font-medium text-[#ee1c25] text-[1.5rem]">
-							{availabilityError}
 						</p>
 					)}
 				</div>
