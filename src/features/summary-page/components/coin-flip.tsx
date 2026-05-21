@@ -30,11 +30,11 @@ export function CoinFlip({ powerId, sideTextureUrl }: CoinFlipProps) {
 		}, 2500);
 	};
 
-	// 24 panels to form a smooth 3D tapered cylinder/frustum (bottle cap side)
+	// 24 panels to form a smooth 3D cylinder (round coin edge)
 	const N = 24;
 	const panels = Array.from({ length: N }, (_, i) => {
 		const angle = i * (360 / N);
-		const width = ((2 * Math.PI * 84) / N) * 1.1;
+		const width = ((2 * Math.PI * 90) / N) * 1.1;
 		return { angle, width, i };
 	});
 
@@ -48,17 +48,23 @@ export function CoinFlip({ powerId, sideTextureUrl }: CoinFlipProps) {
 				>
 					{/* Back face (Mystery / Start state) */}
 					<div className={styles.back}>
-						{/* <span className={styles.mysteryText}>?</span> */}
+						<Image
+							alt="Logo"
+							className="pointer-events-none select-none object-contain opacity-80"
+							height={100}
+							src="/logo.png"
+							width={100}
+						/>
 					</div>
 
-					{/* Multi-faceted 3D Tapered Cylinder Side Panels (Bottle Cap Crimps/Texture) */}
+					{/* Multi-faceted 3D Cylinder Side Panels (Coin Edge) */}
 					{panels.map(({ angle, width, i }) => (
 						<div
 							className={styles.capPanel}
 							key={i}
 							style={{
 								width: `${width}px`,
-								transform: `translate(-50%, -50%) rotateZ(${angle}deg) translateY(-84px) rotateX(63deg)`,
+								transform: `translate(-50%, -50%) rotateZ(${angle}deg) translateY(-90px) rotateX(90deg)`,
 								...(sideTextureUrl
 									? {
 											backgroundImage: `url(${sideTextureUrl})`,
