@@ -22,6 +22,9 @@ export function SurveyBirthDateStep({
 	onProfileChange,
 	onNext,
 }: BirthDateStepProps) {
+	const now = new Date();
+	const today = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, "0")}-${String(now.getDate()).padStart(2, "0")}`;
+
 	return (
 		<>
 			<div className="relative z-10 flex h-screen flex-col items-center px-6 pt-[5vh]">
@@ -40,6 +43,7 @@ export function SurveyBirthDateStep({
 						<input
 							autoFocus
 							className="relative z-10 h-[60px] w-full appearance-none rounded-xl bg-transparent px-6 text-[#9a5d1b] text-xl shadow-md focus:outline-none [&::-webkit-calendar-picker-indicator]:absolute [&::-webkit-calendar-picker-indicator]:inset-0 [&::-webkit-calendar-picker-indicator]:h-full [&::-webkit-calendar-picker-indicator]:w-full [&::-webkit-calendar-picker-indicator]:cursor-pointer [&::-webkit-calendar-picker-indicator]:opacity-0"
+							max={today}
 							onChange={(event) => {
 								onProfileChange("birthDate", event.target.value);
 								onProfileChange("skipsBirthDate", false);
