@@ -20,13 +20,28 @@ const HeaventRounded = localFont({
 	display: "swap",
 });
 
+const UidDeepSea = localFont({
+	src: [
+		{
+			path: "../../public/fonts/Uid-deepsea.woff2",
+			weight: "normal",
+			style: "normal",
+		},
+	],
+	variable: "--font-uid-deepsea",
+	display: "swap",
+});
+
 export default function RootLayout({
 	children,
 }: Readonly<{
 	children: React.ReactNode;
 }>) {
 	return (
-		<html className={`h-full antialiased ${HeaventRounded.variable}`} lang="th">
+		<html
+			className={`h-full antialiased ${HeaventRounded.variable} ${UidDeepSea.variable}`}
+			lang="th"
+		>
 			<body className="flex min-h-full flex-col font-sans">
 				<NuqsAdapter>{children}</NuqsAdapter>
 			</body>

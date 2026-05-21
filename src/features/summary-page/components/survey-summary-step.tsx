@@ -124,13 +124,13 @@ export function SurveySummaryStep({
 				</div>
 
 				<h1
-					className="text-center text-[#FF8200] text-[2.5rem]"
+					className="text-center text-[#FF8200] font-uid  text-[2.5rem]"
 					data-animate="title"
 				>
 					พลังที่ซ่อนอยู่ในตัวคุณ
 				</h1>
 				<div
-					className="mb-2 text-center text-[#151F6D] -mt-4 text-[2.5rem]"
+					className="mb-2 text-center text-[#151F6D] font-uid  text-[2.5rem]"
 					data-animate="subtitle"
 				>
 					{runnerName}
@@ -167,7 +167,9 @@ export function SurveySummaryStep({
 						data-animate="info-box"
 					>
 						<div className="relative z-10 text-center">
-							<div className="text-[#4A4A4A] text-[1rem]">คุณใช้ชีวิตมาแล้ว</div>
+							<div className="text-[#4A4A4A] text-[1rem]">
+								คุณผ่าน“ทะเลทราย” ของตัวเองมาแล้ว
+							</div>
 							<div className="text-[#FF8200] -mt-1 leading-none text-[2rem]">
 								{formattedDays} วัน
 							</div>
@@ -189,7 +191,7 @@ export function SurveySummaryStep({
 
 				{/* Power Title */}
 				<h2
-					className="text-center text-[#ee1c25] text-[3rem]"
+					className="text-center font-uid text-[#ee1c25] text-[3rem]"
 					data-animate="power-title"
 				>
 					{power.title}
@@ -253,6 +255,7 @@ export function SurveySummaryStep({
 			/>
 
 			{/* Off-screen hidden card for high-fidelity image capture */}
+			{/* --------------------------------------------- */}
 			<div
 				className="pointer-events-none absolute"
 				style={{
@@ -286,10 +289,10 @@ export function SurveySummaryStep({
 						>
 							UUID: {randomUuid}
 						</div>
-						<h1 className="text-center text-[#FF8200] text-[2.2rem] font-bold leading-tight">
+						<h1 className="text-center text-[#FF8200] font-uid  text-[2.2rem] leading-tight">
 							พลังที่ซ่อนอยู่ในตัวคุณ
 						</h1>
-						<div className="mb-4 text-center text-[#151F6D] text-[2.2rem] font-bold -mt-2">
+						<div className="mb-4 text-center text-[#151F6D] text-[2.2rem] font-uid ">
 							{runnerName}
 						</div>
 
@@ -309,7 +312,7 @@ export function SurveySummaryStep({
 						{daysLived !== null && (
 							<div className="relative border border-[#FFB500] mb-5 flex bg-[#FFEFC7]/80 w-fit rounded-full px-8 py-1 flex-col items-center justify-center shadow-sm">
 								<div className="text-[#4A4A4A] text-[0.95rem] font-medium">
-									คุณใช้ชีวิตมาแล้ว
+									คุณผ่าน“ทะเลทราย” ของตัวเองมาแล้ว
 								</div>
 								<div className="text-[#FF8200] leading-none text-[1.8rem] font-bold">
 									{formattedDays} วัน
@@ -327,7 +330,7 @@ export function SurveySummaryStep({
 						</div>
 
 						{/* Power Title */}
-						<h2 className="text-center text-[#ee1c25] text-[2.6rem] font-bold leading-tight my-1">
+						<h2 className="text-center text-[#ee1c25] font-uid  text-[2.6rem] leading-tight my-1">
 							{power.title}
 						</h2>
 
