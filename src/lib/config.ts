@@ -161,7 +161,7 @@ export const surveySteps: SurveyStep[] = [
 	{
 		id: "birthDate",
 		type: "birthDate",
-		label: "",
+		label: "วันเกิดของคุณคือวัน...",
 		optOutLabel: "ไม่ระบุวันเกิดและอายุ",
 	},
 	{

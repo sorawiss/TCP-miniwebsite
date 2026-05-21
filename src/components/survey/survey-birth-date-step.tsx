@@ -34,9 +34,7 @@ export function SurveyBirthDateStep({
 				</div>
 
 				<div className="mt-12 w-full max-w-md space-y-4">
-					<h2 className="font-bold text-2xl text-[#FF8200] drop-shadow-sm">
-						{step.label}
-					</h2>
+					<h2 className="text-2xl text-[#FF8200]">{step.label}</h2>
 					<div className="relative h-[60px] w-full overflow-hidden rounded-2xl">
 						{/* Background */}
 						<NameBackground className="pointer-events-none absolute inset-0 z-0 w-full" />
