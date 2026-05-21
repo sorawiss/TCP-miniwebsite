@@ -117,7 +117,7 @@ export function SurveySummaryStep({
 		>
 			<div className="relative z-10 flex h-full w-full flex-col items-center overflow-y-auto no-scrollbar px-6 pb-10 pt-2">
 				<div
-					className="mb-4 rounded-full border border-[#FF8200] px-4 py-1 text-[#FF8200] z-20 text-[0.85rem]"
+					className="z-20 mb-4 self-end rounded-full border border-[#FF8200] px-1 text-[0.5rem] text-[#FF8200]"
 					style={{ backgroundColor: "rgba(255, 229, 215, 0.5)" }}
 				>
 					UUID: {randomUuid}
@@ -281,7 +281,7 @@ export function SurveySummaryStep({
 					{/* Card content area */}
 					<div className="relative z-10 flex w-full flex-col items-center pt-2">
 						<div
-							className="mb-2 rounded-full border border-[#FF8200] px-4 py-1 text-[#FF8200] z-20 text-[0.85rem]"
+							className="z-20 mb-4 self-end rounded-full border border-[#FF8200] px-1 text-[0.5rem] text-[#FF8200]"
 							style={{ backgroundColor: "rgba(255, 229, 215, 0.5)" }}
 						>
 							UUID: {randomUuid}
