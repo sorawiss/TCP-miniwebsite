@@ -26,6 +26,7 @@
 
 /* Base style for the interactive coin disk */
 .coin {
+	--cap-thickness: 48px;
 	position: relative;
 	flex-shrink: 0;
 	width: 180px;
@@ -73,7 +74,7 @@
 	box-shadow:
 		inset 0 0 15px rgba(255, 130, 0, 0.3),
 		0 5px 15px rgba(0, 0, 0, 0.2);
-	transform: translateZ(12px);
+	transform: translateZ(calc(var(--cap-thickness) / 2));
 }
 
 /* back side configuration (facing away from camera) */
@@ -83,7 +84,7 @@
 	box-shadow:
 		inset 0 0 20px rgba(0, 0, 0, 0.4),
 		0 5px 15px rgba(0, 0, 0, 0.2);
-	transform: rotateY(180deg) translateZ(12px);
+	transform: rotateY(180deg) translateZ(calc(var(--cap-thickness) / 2));
 }
 
 /* Multi-faceted 3D bottle cap side panel */
@@ -91,7 +92,7 @@
 	position: absolute;
 	top: 50%;
 	left: 50%;
-	height: 24px; /* Thickness of the bottle cap */
+	height: var(--cap-thickness); /* Thickness of the bottle cap */
 	/* Default metallic crimp style if no image is provided */
 	background: linear-gradient(to right, #b57000, #ffd700, #b57000);
 	border-top: 1px solid #aa5200;
