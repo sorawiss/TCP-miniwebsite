@@ -205,7 +205,7 @@ export const surveySteps: SurveyStep[] = [
 	{
 		id: "story-1-1",
 		type: "story",
-		bottomImage: "/bottom/sandstorm.mp4",
+		bottomImage: "/bottom/video-tcp-loop.mp4",
 	},
 	{
 		id: "3",
