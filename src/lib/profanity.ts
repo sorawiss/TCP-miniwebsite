@@ -1,7 +1,6 @@
-// biome-ignore-all lint: <explanation>
 import { ProfanityFilter } from "bad-words-thai";
-// @ts-ignore - injecting directly into the library's internal dictionary
-import * as dictionaries from "bad-words-thai/dist/dictionaries";
+// @ts-expect-error - injecting directly into the library's internal dictionary
+import { profanityList } from "bad-words-thai/dist/dictionaries";
 
 const customProfanityWords = [
 	"คดีบอส",
@@ -38,17 +37,17 @@ const customProfanityWords = [
 ];
 
 // bad-words-thai ignores the customBadWords option and requires words to be lowercased without spaces
-customProfanityWords.forEach((word) => {
+for (const word of customProfanityWords) {
 	const cleanWord = word
 		.replace(/[^a-zA-Z0-9\u0E00-\u0E7F]/g, "")
 		.toLowerCase();
-	if (cleanWord && dictionaries.profanityList) {
-		dictionaries.profanityList[cleanWord] = {
+	if (cleanWord && profanityList) {
+		(profanityList as Record<string, unknown>)[cleanWord] = {
 			severity: "severe",
 			variants: [],
 		};
 	}
-});
+}
 
 export const profanityFilter = new ProfanityFilter();
 export let isProfanityFilterReady = false;
