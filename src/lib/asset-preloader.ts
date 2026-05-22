@@ -3,7 +3,7 @@
 import { getImageProps } from "next/image";
 import type { SurveyStep } from "@/lib/config";
 
-const preloadedImages = new Set<string>();
+const preloadedAssets = new Set<string>();
 const stepImageSizes = "(max-width: 403px) 100vw, 403px";
 
 export function getStepImageSources(step: SurveyStep | undefined) {
@@ -33,11 +33,24 @@ export function getStepImageSources(step: SurveyStep | undefined) {
 }
 
 export function preloadImage(src: string | undefined) {
-	if (!src || preloadedImages.has(src) || typeof document === "undefined") {
+	if (!src || preloadedAssets.has(src) || typeof document === "undefined") {
 		return;
 	}
 
-	preloadedImages.add(src);
+	preloadedAssets.add(src);
+
+	const isVideo =
+		src.endsWith(".mp4") || src.endsWith(".webm") || src.endsWith(".mov");
+
+	if (isVideo) {
+		const link = document.createElement("link");
+		link.as = "video";
+		link.fetchPriority = "low";
+		link.href = src;
+		link.rel = "preload";
+		document.head.appendChild(link);
+		return;
+	}
 
 	const {
 		props: { src: fallbackSrc, srcSet },
