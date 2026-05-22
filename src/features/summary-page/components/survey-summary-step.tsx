@@ -260,9 +260,9 @@ export function SurveySummaryStep({
 				className="pointer-events-none absolute"
 				style={{
 					position: "absolute",
-					// left: "-9999px",
-					// top: "-9999px",
-					// // overflow: "hidden",
+					left: "-9999px",
+					top: "-9999px",
+					overflow: "hidden",
 					width: "400px",
 					height: "700px",
 				}}
@@ -276,19 +276,19 @@ export function SurveySummaryStep({
 						backgroundImage: "url('/svg/background.svg')",
 					}}
 				>
+					<div
+						className="absolute top-4 right-4 rounded-full border border-[#FF8200] px-1 text-[0.5rem] text-[#FF8200]"
+						style={{ backgroundColor: "rgba(255, 229, 215, 0.5)" }}
+					>
+						UUID: {randomUuid}
+					</div>
 					<img
 						alt="Logo"
 						className="w-14 mx-auto relative z-10"
 						src="/logo.png"
 					/>
 					{/* Card content area */}
-					<div className="relative z-10 flex w-full flex-col items-center pt-2">
-						<div
-							className="z-20 mb-4 self-end rounded-full border border-[#FF8200] px-1 text-[0.5rem] text-[#FF8200]"
-							style={{ backgroundColor: "rgba(255, 229, 215, 0.5)" }}
-						>
-							UUID: {randomUuid}
-						</div>
+					<div className="relative z-10 flex w-full flex-col items-center">
 						<h1 className="text-center text-[#FF8200] font-uid  text-[2.2rem] leading-tight">
 							พลังที่ซ่อนอยู่ในตัวคุณ
 						</h1>
@@ -335,9 +335,9 @@ export function SurveySummaryStep({
 						</h2>
 
 						{/* Power Description */}
-						<div className="px-2 text-center text-[1.25rem] leading-relaxed text-[#4A4A4A] mt-2">
+						<p className="px-2 text-center text-[1.75rem] leading-[100%] text-[#4A4A4A] mt-2">
 							{power.description}
-						</div>
+						</p>
 					</div>
 
 					{/* Story background bottom */}
