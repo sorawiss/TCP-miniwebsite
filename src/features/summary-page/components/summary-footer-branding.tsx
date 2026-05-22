@@ -37,19 +37,22 @@ export function SummaryFooterBranding() {
 				</div>
 
 				{/* Inner body box */}
-				<div className="mx-4 my-3 ">
-					<p className="text-[#151F6D] text-[1.2rem] leading-7 text-center">
-						เมื่อทำ <span className="text-[2rem]">Quiz</span>{" "}
+				<div className="mx-4 my-3 overflow-hidden">
+					<p className="text-center text-[#151F6D] text-[1rem] sm:text-[1.2rem] leading-6 sm:leading-7 whitespace-nowrap">
+						เมื่อทำ <span className="text-[1.6rem] sm:text-[2rem]">Quiz</span>{" "}
 						ค้นหาพลังที่ซ่อนอยู่ในตัวคุณจบแล้ว
 						<br />
-						เพียงแชร์พลังของคุณไปยังโซเชียลมีเดียช่องทางใดก็ได้ ทุก{" "}
-						<div className="inline-block">
-							<span className="text-[2rem]">1</span> แชร์ ={" "}
-							<span className="text-[2rem]">TCP</span>
-							ร่วมบริจาคเครื่องดื่มในเครือ{" "}
-						</div>
-						<div className="text-[2rem] inline-block">1 ขวด*</div>
-						ให้เหล่าอาสาจัดการภัยพิบัติภาคประชาชน โดยมูลนิธิกระจกเงา
+						เพียงแชร์พลังของคุณไปยังโซเชียลมีเดียช่องทางใดก็ได้
+						<br />
+						ทุก <span className="text-[1.6rem] sm:text-[2rem]">1</span> แชร์ ={" "}
+						<span className="text-[1.6rem] sm:text-[2rem]">TCP</span>{" "}
+						ร่วมบริจาคเครื่องดื่มในเครือ{" "}
+						<span className="text-[1.6rem] sm:text-[2rem]">1 ขวด*</span>
+						<br />
+						ให้เหล่าอาสาจัดการภัยพิบัติภาคประชาชน
+						<br />
+						โดยมูลนิธิกระจกเงา
+						<br />
 						ได้มีพลังกาย-พลังใจไปช่วยเหลือผู้อื่นต่อ
 						<br />
 						<span className="opacity-40">
