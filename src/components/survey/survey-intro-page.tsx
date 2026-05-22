@@ -26,7 +26,7 @@ export function SurveyIntroPage({ onNext, step }: IntroPageProps) {
 						width={64}
 					/>
 					<p className="absolute bottom-2 left-1/2 w-full -translate-x-1/2 -translate-y-1/2 text-center text-[#151F6D] text-[1rem]">
-						โปรดศึกษาน{" "}
+						โปรดศึกษา{" "}
 						<Link
 							className="underline"
 							href="https://privacy.tcp.com/privacy/4ddf1f02-9722-4fe8-d135-08ddb905412e"
