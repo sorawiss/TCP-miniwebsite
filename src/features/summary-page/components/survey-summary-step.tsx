@@ -260,9 +260,9 @@ export function SurveySummaryStep({
 				className="pointer-events-none absolute"
 				style={{
 					position: "absolute",
-					left: "-9999px",
-					top: "-9999px",
-					overflow: "hidden",
+					// left: "-9999px",
+					// top: "-9999px",
+					// // overflow: "hidden",
 					width: "400px",
 					height: "700px",
 				}}
@@ -343,9 +343,9 @@ export function SurveySummaryStep({
 					{/* Story background bottom */}
 					<img
 						alt=""
-						className="pointer-events-none absolute bottom-0 left-0 z-0 w-full object-cover"
-						src="/results/bg.png"
-						style={{ height: "100%", width: "100%" }}
+						className="pointer-events-none absolute bottom-0 left-0 z-0 w-full h-auto object-cover"
+						src="/share-bg.png"
+						style={{ width: "100%" }}
 					/>
 				</div>
 			</div>
