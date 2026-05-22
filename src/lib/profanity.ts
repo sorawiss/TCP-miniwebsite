@@ -34,6 +34,7 @@ const customProfanityWords = [
 	"Teaplus",
 	"Ready Energy",
 	"Sting Energy",
+	"ตุย",
 ];
 
 // bad-words-thai ignores the customBadWords option and requires words to be lowercased without spaces
