@@ -1,5 +1,4 @@
 import { ProfanityFilter } from "bad-words-thai";
-// @ts-expect-error - injecting directly into the library's internal dictionary
 import { profanityList } from "bad-words-thai/dist/dictionaries";
 
 const customProfanityWords = [
