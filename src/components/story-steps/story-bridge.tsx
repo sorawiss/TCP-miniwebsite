@@ -9,7 +9,7 @@ export function StoryBridge({ story }: { story: StoryStep }) {
 	const popupRef1 = useRef<HTMLDivElement>(null);
 
 	useEffect(() => {
-		const cleanup1 = playSandstormPopupAnimation(popupRef1, 500);
+		const cleanup1 = playSandstormPopupAnimation(popupRef1, 200);
 
 		return () => {
 			cleanup1();
@@ -19,15 +19,15 @@ export function StoryBridge({ story }: { story: StoryStep }) {
 	return (
 		<div className="absolute inset-0 overflow-hidden">
 			{story.bottomImage && (
-				<Image
-					alt="Bridge scene"
-					className="pointer-events-none object-cover"
-					fetchPriority="high"
-					fill
-					loading="eager"
-					sizes="(max-width: 403px) 100vw, 403px"
-					src={story.bottomImage}
-				/>
+				<video
+					autoPlay
+					className="h-full w-full object-cover"
+					loop
+					muted
+					playsInline
+				>
+					<source src={story.bottomImage} type="video/mp4" />
+				</video>
 			)}
 
 			{/* Sandstorm sound effect popup 1 */}
