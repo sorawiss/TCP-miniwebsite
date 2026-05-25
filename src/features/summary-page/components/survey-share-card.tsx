@@ -70,7 +70,7 @@ export function SurveyShareCard({
 
 				{/* Info Box */}
 				{daysLived !== null && (
-					<div className="relative mb-2 flex w-fit flex-col items-center justify-center rounded-full border border-[#FFB500] bg-[#FFEFC7]/80 px-8 py-1 shadow-sm">
+					<div className="relative mb-2 flex w-fit flex-col items-center justify-center rounded-full border border-[#FFB500] bg-[#FFEFC7]/80 px-8 py-1">
 						<div className="font-medium text-[#4A4A4A] text-[0.95rem]">
 							คุณผ่าน“ทะเลทราย” ของตัวเองมาแล้ว
 						</div>
