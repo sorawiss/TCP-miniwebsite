@@ -48,13 +48,18 @@ export function CoinFlip({ powerId, sideTextureUrl }: CoinFlipProps) {
 				>
 					{/* Back face (Mystery / Start state) */}
 					<div className={styles.back}>
-						<Image
-							alt="Logo"
-							className="pointer-events-none select-none object-contain opacity-80"
-							height={100}
-							src="/logo.png"
-							width={100}
-						/>
+						{/* Inner sunken liner */}
+						<div className={styles.backLiner}>
+							<Image
+								alt="Logo"
+								className="pointer-events-none select-none object-contain opacity-80"
+								height={90}
+								src="/logo.png"
+								width={90}
+							/>
+						</div>
+						{/* Outer metal rim overlay */}
+						<div className={styles.backRim} />
 					</div>
 
 					{/* Multi-faceted 3D Cylinder Side Panels (Coin Edge) */}
