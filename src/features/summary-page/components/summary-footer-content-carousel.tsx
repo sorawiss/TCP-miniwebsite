@@ -73,7 +73,7 @@ function ArticleCard({ image, title }: { image: string; title: string }) {
 
 export function SummaryFooterContentCarousel() {
 	return (
-		<section className="mt-5 w-full max-w-[360px] overflow-hidden rounded-sm bg-center bg-cover px-2.5 py-4">
+		<section className="mt-5 w-full overflow-hidden rounded-sm bg-center bg-cover px-2.5 py-4">
 			<div className="px-1 py-1">
 				<SectionHeader title="TCP 70 Years Short Films" />
 				<div className="w-full">
