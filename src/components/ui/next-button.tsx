@@ -15,7 +15,7 @@ export function NextButton({ children, className, ...props }: NextButtonProps) {
 			{...props}
 		>
 			<ButtonNext className="absolute inset-0 z-0 h-full w-full drop-shadow-md" />
-			<span className="relative z-10 inline-block pr-[10%] text-2xl text-white drop-shadow-md">
+			<span className="relative z-10 inline-block pr-[10%] text-[1.8rem] text-white drop-shadow-md">
 				{children || "ไปต่อ"}
 			</span>
 		</button>
