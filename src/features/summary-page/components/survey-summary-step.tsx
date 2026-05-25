@@ -154,7 +154,7 @@ export function SurveySummaryStep({
 						{/* TODO: make sideTextureUrl Dynamic */}
 						<CoinFlip
 							powerId={power.id}
-							sideTextureUrl="/results/cap-side.png"
+							sideTextureUrl={`/results/cap-${power.id}.png`}
 						/>
 					</div>
 				)}
