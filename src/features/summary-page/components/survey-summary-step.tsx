@@ -241,7 +241,7 @@ export function SurveySummaryStep({
 						<span className="text-[1.4rem] text-[#FF8200]">70years.tcp.com</span>
 					</div> */}
 					<p className="text-[1.4rem] mt-2">
-						ร่วมกิจกรรมได้ตั้งแต่วันนี้ - 9 สิงหาคม 2569
+						ร่วมกิจกรรมได้ตั้งแต่ 22 พฤษภาคม - 9 สิงหาคม 2569
 					</p>
 				</div>
 
