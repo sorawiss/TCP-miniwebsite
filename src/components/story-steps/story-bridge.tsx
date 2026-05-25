@@ -9,7 +9,7 @@ export function StoryBridge({ story }: { story: StoryStep }) {
 	const popupRef1 = useRef<HTMLDivElement>(null);
 
 	useEffect(() => {
-		const cleanup1 = playSandstormPopupAnimation(popupRef1, 200);
+		const cleanup1 = playSandstormPopupAnimation(popupRef1, 700);
 
 		return () => {
 			cleanup1();
