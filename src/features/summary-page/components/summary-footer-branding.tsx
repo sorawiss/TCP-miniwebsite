@@ -42,7 +42,7 @@ export function SummaryFooterBranding() {
 
 				{/* Inner body box */}
 				<div className="mx-4 my-3 overflow-hidden ">
-					<p className="text-center text-[#151F6D] text-[1rem] sm:text-[1.2rem] leading-[110%] sm:leading-7 whitespace-nowrap">
+					<p className="text-center text-[#151F6D] text-[1rem] sm:text-[1.2rem] leading-[130%] sm:leading-7 whitespace-nowrap">
 						เมื่อทำ <span className="text-[1.6rem] sm:text-[2rem]">Quiz</span>{" "}
 						ค้นหาพลังที่ซ่อนอยู่ในตัวคุณจบแล้ว
 						<br />

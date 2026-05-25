@@ -167,7 +167,7 @@ export function SurveySummaryStep({
 						data-animate="info-box"
 					>
 						<div className="relative z-10 text-center">
-							<div className="text-[#4A4A4A] text-[1rem]">
+							<div className="text-[#4A4A4A] text-[1.2rem]">
 								คุณผ่าน“ทะเลทราย” ของตัวเองมาแล้ว
 							</div>
 							<div className="text-[#FF8200] -mt-1 leading-none text-[2rem]">
