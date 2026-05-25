@@ -1,4 +1,4 @@
-// biome-ignore-all lint: <explanation>
+// biome-ignore-all lint: auto-generated carousel template
 "use client";
 
 import useEmblaCarousel, {

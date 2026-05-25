@@ -3,6 +3,7 @@ import "./globals.css";
 import localFont from "next/font/local";
 import { NuqsAdapter } from "nuqs/adapters/next/app";
 import { BackgroundMusic } from "@/components/background-music";
+import { OrientationLock } from "@/components/orientation-lock";
 
 export const metadata: Metadata = {
 	title: "Desert Marathon Quiz",
@@ -46,6 +47,7 @@ export default function RootLayout({
 			<body className="flex min-h-full flex-col font-sans">
 				<NuqsAdapter>{children}</NuqsAdapter>
 				<BackgroundMusic />
+				<OrientationLock />
 			</body>
 		</html>
 	);
