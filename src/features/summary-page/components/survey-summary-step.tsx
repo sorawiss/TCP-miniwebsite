@@ -95,7 +95,7 @@ export function SurveySummaryStep({
 
 		const shared = await shareImage(dataUrl, {
 			title: "พลังที่ซ่อนอยู่ในตัวคุณ",
-			text: "นี่คือพลังที่ซ่อนอยู่ในตัวฉัน! มาค้นหาพลังของคุณได้ที่นี่",
+			text: "นี่คือพลังที่ซ่อนอยู่ในตัวฉัน! มาค้นหาพลังของคุณได้ที่นี่ https://70years.tcp.com/",
 			filename: "tcp-power.png",
 		});
 
@@ -236,6 +236,10 @@ export function SurveySummaryStep({
 					<NextButton disabled={isProcessing} onClick={handleShare}>
 						{isProcessing ? "กำลังประมวลผล..." : "แชร์พลังของคุณ"}
 					</NextButton>
+					{/* <div className="mt-4 flex flex-col items-center">
+						<span className="text-[1.2rem] text-[#151F6D]">เล่นเลยที่</span>
+						<span className="text-[1.4rem] text-[#FF8200]">70years.tcp.com</span>
+					</div> */}
 					<p className="text-[1.4rem] mt-2">
 						ร่วมกิจกรรมได้ตั้งแต่วันนี้ - 9 สิงหาคม 2569
 					</p>

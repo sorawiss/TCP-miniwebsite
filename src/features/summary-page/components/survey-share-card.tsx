@@ -98,6 +98,16 @@ export function SurveyShareCard({
 				<p className="px-2 text-center font-sans text-[#151F6D] text-[1.75rem] leading-[100%]">
 					{power.description}
 				</p>
+
+				{/* URL */}
+				<div className="mt-3 flex flex-col items-center">
+					<span className="text-[#151F6D] text-[1.2rem] leading-tight">
+						เล่นเลยที่
+					</span>
+					<span className="text-[#FF8200] text-[1.4rem] leading-tight">
+						70years.tcp.com/
+					</span>
+				</div>
 			</div>
 
 			{/* Bottom share bg */}
