@@ -32,13 +32,17 @@ export function SummaryFooterBranding() {
 
 				{/* Headline */}
 				<div className="px-5 text-center">
-					<p className="text-[#151F6D] text-[2rem]">แชร์พลังคุณ คืนพลังให้อาสา</p>
-					<p className="text-[#6B3E1F] text-[1.8rem]">ร่วมกิจกรรมง่ายๆ</p>
+					<p className="text-[#151F6D] text-[2rem] leading-[110%]">
+						แชร์พลังคุณ คืนพลังให้อาสา
+					</p>
+					<p className="text-[#6B3E1F] text-[1.8rem] leading-[110%]">
+						ร่วมกิจกรรมง่ายๆ
+					</p>
 				</div>
 
 				{/* Inner body box */}
-				<div className="mx-4 my-3 overflow-hidden">
-					<p className="text-center text-[#151F6D] text-[1rem] sm:text-[1.2rem] leading-6 sm:leading-7 whitespace-nowrap">
+				<div className="mx-4 my-3 overflow-hidden ">
+					<p className="text-center text-[#151F6D] text-[1rem] sm:text-[1.2rem] leading-[110%] sm:leading-7 whitespace-nowrap">
 						เมื่อทำ <span className="text-[1.6rem] sm:text-[2rem]">Quiz</span>{" "}
 						ค้นหาพลังที่ซ่อนอยู่ในตัวคุณจบแล้ว
 						<br />

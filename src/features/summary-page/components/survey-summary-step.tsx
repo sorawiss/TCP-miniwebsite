@@ -124,13 +124,13 @@ export function SurveySummaryStep({
 				</div>
 
 				<h1
-					className="text-center text-[#FF8200] font-uid  text-[2.5rem]"
+					className="text-center text-[#FF8200] font-uid leading-[110%] text-[2.5rem] mb-1"
 					data-animate="title"
 				>
 					พลังที่ซ่อนอยู่ในตัวคุณ
 				</h1>
 				<div
-					className="mb-2 text-center text-[#151F6D] font-uid  text-[2.5rem]"
+					className="mb-2 text-center text-[#151F6D] font-uid text-[2.5rem]"
 					data-animate="subtitle"
 				>
 					{runnerName}
@@ -199,7 +199,7 @@ export function SurveySummaryStep({
 
 				{/* Power Description */}
 				<div
-					className="mb-8 px-2 text-center text-[1.5rem] leading-relaxed"
+					className="mb-8 px-2 text-center text-[1.5rem] leading-[110%] text-[#151F6D]"
 					data-animate="power-desc"
 				>
 					{power.description}
@@ -212,7 +212,7 @@ export function SurveySummaryStep({
 				>
 					{/* Download Button */}
 					<button
-						className={`group relative rounded-full mb-4 flex w-full max-w-[300px] py-[1rem] 
+						className={`group relative rounded-full flex w-full max-w-[300px] py-[1rem] 
 							items-center justify-center transition-transform ${
 								isProcessing
 									? "cursor-wait opacity-70"
@@ -235,6 +235,9 @@ export function SurveySummaryStep({
 					<NextButton disabled={isProcessing} onClick={handleShare}>
 						{isProcessing ? "กำลังประมวลผล..." : "แชร์พลังของคุณ"}
 					</NextButton>
+					<p className="text-[1.4rem] mt-2">
+						ร่วมกิจกรรมได้ตั้งแต่วันนี้ - 9 สิงหาคม 2569
+					</p>
 				</div>
 
 				{/* Branding footer: logos + product bottles — excluded from image capture */}
