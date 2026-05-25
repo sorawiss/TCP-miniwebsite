@@ -5,6 +5,11 @@ import { defaultPatterns, WebHaptics } from "web-haptics";
 const UNDERLINE_WAIT = 0.25;
 const UNDERLINE_DURATION = 0.2;
 const NUMBER_DURATION = 0.3;
+const NUMBER_EXIT_DURATION = 0.4;
+const NUMBER_EXIT_SCALE = 0.5;
+const UNDERLINE_EXIT_DURATION = 0.35;
+const PAUSE_DURATION = 0.3;
+const OVERLAP_DURATION = 0.1;
 
 export function playCountdownAnimation(
 	containerRef: RefObject<HTMLElement | null>,
@@ -95,17 +100,17 @@ export function playCountdownAnimation(
 					x: 250,
 					y: -250,
 					rotation: 30,
-					scale: NUMBER_DURATION,
-					duration: 0.4,
+					scale: NUMBER_EXIT_SCALE,
+					duration: NUMBER_EXIT_DURATION,
 					ease: "power2.in",
 				},
-				"+=0.3"
-			) // Pause at center for 0.3s before exiting
+				`+=${PAUSE_DURATION}`
+			) // Pause at center before exiting
 			.to(
 				"#reveal-rect",
 				{
 					attr: { x: 112, width: 0 },
-					duration: 0.35,
+					duration: UNDERLINE_EXIT_DURATION,
 					ease: "power2.in",
 				},
 				`<+=${UNDERLINE_WAIT}`
@@ -129,7 +134,7 @@ export function playCountdownAnimation(
 						haptics.trigger(defaultPatterns.medium);
 					},
 				},
-				"-=0.1"
+				`-=${OVERLAP_DURATION}`
 			) // Overlap entry slightly with "3" exiting
 			.to(
 				"#reveal-rect",
@@ -147,17 +152,17 @@ export function playCountdownAnimation(
 					x: 250,
 					y: -250,
 					rotation: 30,
-					scale: 0.5,
-					duration: 0.4,
+					scale: NUMBER_EXIT_SCALE,
+					duration: NUMBER_EXIT_DURATION,
 					ease: "power2.in",
 				},
-				"+=0.3"
+				`+=${PAUSE_DURATION}`
 			)
 			.to(
 				"#reveal-rect",
 				{
 					attr: { x: 112, width: 0 },
-					duration: UNDERLINE_WAIT,
+					duration: UNDERLINE_EXIT_DURATION,
 					ease: "power2.in",
 				},
 				`<+=${UNDERLINE_WAIT}`
@@ -175,13 +180,13 @@ export function playCountdownAnimation(
 					y: 0,
 					rotation: 0,
 					scale: 1,
-					duration: 0.5,
+					duration: NUMBER_DURATION,
 					ease: "back.out(1.5)",
 					onStart: () => {
 						haptics.trigger(defaultPatterns.medium);
 					},
 				},
-				"-=0.1"
+				`-=${OVERLAP_DURATION}`
 			)
 			.to(
 				"#reveal-rect",
@@ -190,7 +195,7 @@ export function playCountdownAnimation(
 					duration: UNDERLINE_DURATION,
 					ease: "power2.out",
 				},
-				`-=${UNDERLINE_WAIT}`
+				`<+=${UNDERLINE_WAIT}`
 			)
 			.to(
 				'[data-animate="num-1"]',
@@ -199,20 +204,20 @@ export function playCountdownAnimation(
 					x: 250,
 					y: -250,
 					rotation: 30,
-					scale: 0.5,
-					duration: 0.4,
+					scale: NUMBER_EXIT_SCALE,
+					duration: NUMBER_EXIT_DURATION,
 					ease: "power2.in",
 				},
-				"+=0.3"
+				`+=${PAUSE_DURATION}`
 			)
 			.to(
 				"#reveal-rect",
 				{
 					attr: { x: 112, width: 0 },
-					duration: 0.35,
+					duration: UNDERLINE_EXIT_DURATION,
 					ease: "power2.in",
 				},
-				"<"
+				`<+=${UNDERLINE_WAIT}`
 			)
 			.to(
 				'[data-animate="underline-container"]',
