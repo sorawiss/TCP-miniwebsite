@@ -124,20 +124,20 @@ export function SurveySummaryStep({
 				</div>
 
 				<h1
-					className="text-center text-[#FF8200] font-uid leading-[110%] text-[2.5rem] mb-1"
+					className="text-center text-[#FF8200] font-uid leading-[110%] text-[2.5rem] mb-2"
 					data-animate="title"
 				>
 					พลังที่ซ่อนอยู่ในตัวคุณ
 				</h1>
 				<div
-					className="mb-2 text-center text-[#151F6D] font-uid text-[2.5rem]"
+					className="text-center text-[#151F6D] font-uid text-[2.5rem] leading-[110%]"
 					data-animate="subtitle"
 				>
 					{runnerName}
 				</div>
 
 				{isProcessing ? (
-					<div className="relative mb-4 flex h-[220px] w-[220px] items-center justify-center select-none pointer-events-none">
+					<div className="relative mb-2 flex h-[220px] w-[220px] items-center justify-center select-none pointer-events-none">
 						<Image
 							alt="Power image"
 							className="object-contain"
@@ -191,7 +191,7 @@ export function SurveySummaryStep({
 
 				{/* Power Title */}
 				<h2
-					className="text-center font-uid text-[#ee1c25] text-[3rem]"
+					className="mt-2 text-center font-uid text-[#ee1c25] text-[3rem] leading-[110%]"
 					data-animate="power-title"
 				>
 					{power.title}
@@ -292,15 +292,15 @@ export function SurveySummaryStep({
 					/>
 					{/* Card content area */}
 					<div className="relative z-10 flex w-full flex-col items-center">
-						<h1 className="text-center text-[#FF8200] font-uid  text-[2.2rem] leading-tight">
+						<h1 className="text-center text-[#FF8200] font-uid mb-2 text-[2.2rem] leading-tight">
 							พลังที่ซ่อนอยู่ในตัวคุณ
 						</h1>
-						<div className="mb-4 text-center text-[#151F6D] text-[2.2rem] font-uid ">
+						<div className="text-center mb-1 text-[#151F6D] text-[2.2rem] font-uid leading-[110%]">
 							{runnerName}
 						</div>
 
 						{/* Static Power Image (No 3D CoinFlip in screenshot to avoid blank WebGL canvas issues) */}
-						<div className="relative mb-4 flex justify-center  shadow-inner">
+						<div className="relative mb-4 flex justify-center ">
 							<img
 								alt="Power image"
 								className="object-contain"
@@ -333,12 +333,12 @@ export function SurveySummaryStep({
 						</div>
 
 						{/* Power Title */}
-						<h2 className="text-center text-[#ee1c25] font-uid  text-[2.6rem] leading-tight my-1">
+						<h2 className="text-center text-[#ee1c25] font-uid  text-[2.6rem] my-1 leading-[110%]">
 							{power.title}
 						</h2>
 
 						{/* Power Description */}
-						<p className="px-2 text-center text-[1.75rem] leading-[100%] text-[#4A4A4A] mt-2">
+						<p className="px-2 text-center text-[1.75rem] leading-[100%] text-[#4A4A4A] mt-2 text-[#151F6D]">
 							{power.description}
 						</p>
 					</div>
