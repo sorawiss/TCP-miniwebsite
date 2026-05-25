@@ -1,5 +1,7 @@
+import type { gsap } from "gsap";
 import Image from "next/image";
 import { useEffect, useRef } from "react";
+import { defaultPatterns, WebHaptics } from "web-haptics";
 import type { CountdownStep } from "@/lib/config";
 import { playCountdownAnimation } from "./survey-countdown-step.animation";
 
@@ -10,12 +12,32 @@ interface SurveyCountdownStepProps {
 
 export function SurveyCountdownStep({ onNext }: SurveyCountdownStepProps) {
 	const containerRef = useRef<HTMLDivElement>(null);
+	const timelineRef = useRef<gsap.core.Timeline | null>(null);
 
-	useEffect(() => playCountdownAnimation(containerRef, onNext), []);
+	useEffect(() => {
+		const anim = playCountdownAnimation(containerRef, onNext);
+		timelineRef.current = anim.timeline;
+		return () => {
+			anim.revert();
+		};
+	}, [onNext]);
+
+	const handleClick = () => {
+		if (timelineRef.current) {
+			const haptics = new WebHaptics();
+			haptics.trigger(defaultPatterns.light);
+			const currentScale = timelineRef.current.timeScale();
+			timelineRef.current.timeScale(currentScale + 0.5);
+		}
+	};
 
 	return (
+		// biome-ignore lint/a11y/useKeyWithClickEvents: countdown overlay click mechanic is a screen-wide clicker interaction
+		// biome-ignore lint/a11y/noStaticElementInteractions: countdown overlay click mechanic is a screen-wide clicker interaction
+		// biome-ignore lint/a11y/noNoninteractiveElementInteractions: countdown overlay click mechanic is a screen-wide clicker interaction
 		<div
-			className="relative inset-0 z-0 flex h-screen items-center justify-center overflow-hidden"
+			className="relative inset-0 z-0 flex h-screen cursor-pointer select-none items-center justify-center overflow-hidden"
+			onClick={handleClick}
 			ref={containerRef}
 		>
 			{/* Countdown container absolute center */}

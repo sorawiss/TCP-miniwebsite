@@ -11,9 +11,10 @@ export function playCountdownAnimation(
 	onComplete: () => void
 ) {
 	const haptics = new WebHaptics();
+	let tl: gsap.core.Timeline | null = null;
 
 	const ctx = gsap.context(() => {
-		const tl = gsap.timeline({
+		tl = gsap.timeline({
 			onComplete,
 		});
 
@@ -262,5 +263,8 @@ export function playCountdownAnimation(
 			.to({}, { duration: 1.0 }); // Wait at the end so they can see "start" and the full decorative lines
 	}, containerRef);
 
-	return () => ctx.revert();
+	return {
+		timeline: tl,
+		revert: () => ctx.revert(),
+	};
 }
