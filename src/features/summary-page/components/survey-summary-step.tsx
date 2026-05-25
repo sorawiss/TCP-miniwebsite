@@ -13,6 +13,7 @@ import {
 } from "@/lib/image";
 import type { SurveyState } from "@/lib/survey";
 import { SummaryFooterBranding } from "./summary-footer-branding";
+import { SurveyShareCard } from "./survey-share-card";
 import { playSummaryEntranceAnimation } from "./survey-summary-step.animation";
 
 interface SurveySummaryStepProps {
@@ -270,87 +271,13 @@ export function SurveySummaryStep({
 					height: "700px",
 				}}
 			>
-				<div
-					className="relative flex flex-col items-center gap-4 px-3 py-3 overflow-hidden select-none bg-[#FFEFC7]"
+				<SurveyShareCard
+					daysLived={daysLived}
+					power={power}
 					ref={shareCardRef}
-					style={{
-						width: "400px",
-						height: "700px",
-						backgroundImage: "url('/svg/background.svg')",
-					}}
-				>
-					<div
-						className="absolute top-4 right-4 rounded-full border border-[#FF8200] px-1 text-[0.5rem] text-[#FF8200]"
-						style={{ backgroundColor: "rgba(255, 229, 215, 0.5)" }}
-					>
-						UUID: {randomUuid}
-					</div>
-					<img
-						alt="Logo"
-						className="w-14 mx-auto relative z-10"
-						src="/logo.png"
-					/>
-					{/* Card content area */}
-					<div className="relative z-10 flex w-full flex-col items-center">
-						<h1 className="text-center text-[#FF8200] font-uid mb-2 text-[2.2rem] leading-tight">
-							พลังที่ซ่อนอยู่ในตัวคุณ
-						</h1>
-						<div className="text-center mb-1 text-[#151F6D] text-[2.2rem] font-uid leading-[110%]">
-							{runnerName}
-						</div>
-
-						{/* Static Power Image (No 3D CoinFlip in screenshot to avoid blank WebGL canvas issues) */}
-						<div className="relative mb-4 flex justify-center ">
-							<img
-								alt="Power image"
-								className="object-contain"
-								height={160}
-								src={`/results/${power.id}.png`}
-								style={{ display: "block" }}
-								width={160}
-							/>
-						</div>
-
-						{/* Info Box */}
-						{daysLived !== null && (
-							<div className="relative border border-[#FFB500] mb-5 flex bg-[#FFEFC7]/80 w-fit rounded-full px-8 py-1 flex-col items-center justify-center shadow-sm">
-								<div className="text-[#4A4A4A] text-[0.95rem] font-medium">
-									คุณผ่าน“ทะเลทราย” ของตัวเองมาแล้ว
-								</div>
-								<div className="text-[#FF8200] leading-none text-[1.8rem] font-bold">
-									{formattedDays} วัน
-								</div>
-							</div>
-						)}
-
-						{/* Separator line with text */}
-						<div className="flex w-full max-w-[280px] items-center my-2">
-							<div className="flex-grow border-[#E60000] border-t-[2px]" />
-							<span className="mx-3 text-[1.1rem] text-[#E60000] font-medium whitespace-nowrap">
-								พลังที่ปลุกให้คุณไปต่อได้ คือ
-							</span>
-							<div className="flex-grow border-[#E60000] border-t-[2px]" />
-						</div>
-
-						{/* Power Title */}
-						<h2 className="text-center text-[#ee1c25] font-uid  text-[2.6rem] my-1 leading-[110%]">
-							{power.title}
-						</h2>
-
-						{/* Power Description */}
-						<p className="px-2 text-center text-[1.75rem] leading-[100%] text-[#4A4A4A] mt-2 text-[#151F6D]">
-							{power.description}
-						</p>
-					</div>
-
-					{/* Story background bottom */}
-					<img
-						alt=""
-						className="pointer-events-none absolute bottom-0 left-0 z-0 w-full h-auto object-cover"
-						src="/share-bg.png"
-						style={{ width: "100%" }}
-					/>
-				</div>
+					runnerName={runnerName}
+					uuid={randomUuid}
+				/>
 			</div>
 
 			{/* Fallback image share/saving overlay for mobile devices */}
