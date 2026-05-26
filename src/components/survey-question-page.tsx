@@ -30,7 +30,7 @@ export function SurveyChoiceQuestionPage({
 
 	return (
 		<>
-			<section className="relative z-10 flex min-h-[60vh] flex-col justify-between space-y-3 px-4 pt-3">
+			<section className="relative z-10 flex min-h-[56vh] flex-col justify-between space-y-3 px-4 pt-3">
 				{/* Custom Progress Bar */}
 				<Progress
 					className="mx-auto mt-2 w-[85%] max-w-2xl pt-0 pb-0"
