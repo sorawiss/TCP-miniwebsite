@@ -1,6 +1,7 @@
 {
   "dependencies": {
     "@neondatabase/serverless": "^1.1.0",
+    "@next/third-parties": "^16.2.6",
     "@uidotdev/usehooks": "^2.4.1",
     "bad-words-thai": "^3.0.18",
     "class-variance-authority": "^0.7.1",
