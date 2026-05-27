@@ -146,6 +146,6 @@ body {
 	color: black !important;
 }
 
-.cn-decline {
+.cm-btn.cm-btn-danger.cn-decline {
 	display: none !important;
 }
