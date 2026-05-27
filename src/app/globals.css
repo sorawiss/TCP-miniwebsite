@@ -39,3 +39,113 @@ body {
 [data-animate] {
 	opacity: 0;
 }
+
+/* Reddot Cookie Notice custom overrides */
+.cookie-notice {
+	position: static !important;
+	width: 100% !important;
+	max-width: 100% !important;
+	padding: 0 !important;
+	margin: 0 !important;
+	color: #1f1f1f !important;
+	background: transparent !important;
+	border: none !important;
+	box-shadow: none !important;
+}
+
+.cookie-notice .cn-body {
+	display: flex !important;
+	flex-direction: column !important;
+	gap: 16px !important;
+	padding: 0 !important;
+}
+
+.cookie-notice .cn-body > p {
+	margin: 0 !important;
+}
+
+.cookie-notice .cn-body p,
+.cookie-notice .cn-body span {
+	font-size: 18px !important;
+	line-height: 1.45 !important;
+	color: #777777 !important;
+}
+
+.cookie-notice .cn-ok {
+	display: flex !important;
+	flex-direction: column !important;
+	gap: 16px !important;
+	margin-top: 16px !important;
+}
+
+.cookie-notice .cn-learn-more {
+	align-self: flex-start !important;
+	font-size: 16px !important;
+	color: #777777 !important;
+	text-decoration: underline !important;
+}
+
+.cookie-notice .cn-buttons {
+	display: flex !important;
+	gap: 12px !important;
+	width: 100% !important;
+}
+
+.cookie-notice .cn-buttons button,
+.cookie-notice .cm-btn {
+	display: inline-flex !important;
+	flex: 1 !important;
+	align-items: center !important;
+	justify-content: center !important;
+	height: 38px !important;
+	font-size: 18px !important;
+	font-weight: bold !important;
+	cursor: pointer !important;
+	outline: none !important;
+	border: 1px solid transparent !important;
+	border-radius: 5px !important;
+	transition: all 0.2s ease !important;
+}
+
+.cookie-notice .cm-btn-danger {
+	color: #222222 !important;
+	background: white !important;
+	border-color: #d3d3d3 !important;
+}
+
+.cookie-notice .cm-btn-danger:active {
+	background: #f4f4f4 !important;
+}
+
+.cookie-notice .cm-btn-success {
+	color: white !important;
+	background: #e4002b !important;
+}
+
+.cookie-notice .cm-btn-success:active {
+	background: #c90026 !important;
+}
+
+.reddot .cookie-modal .cm-bg {
+	background: white !important;
+}
+
+.reddot .cookie-modal .cm-modal.cm-reddot {
+	background: white !important;
+}
+
+.reddot .cookie-modal .cm-list-input:checked + .cm-list-label .slider {
+	background: #e4002b !important;
+}
+
+.cookie-modal h2 {
+	color: black !important;
+}
+
+.cm-list-title {
+	color: black !important;
+}
+
+.cn-decline {
+	display: none !important;
+}
