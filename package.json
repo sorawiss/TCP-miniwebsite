@@ -24,6 +24,7 @@
   },
   "devDependencies": {
     "@biomejs/biome": "2.4.12",
+    "@playwright/test": "^1.60.0",
     "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
     "@types/react": "^19",
@@ -42,7 +43,9 @@
     "lint": "bun x ultracite check",
     "check": "bun x ultracite check",
     "fix": "bun x ultracite fix",
-    "prepare": "husky"
+    "prepare": "husky",
+    "test:e2e": "playwright test",
+    "test:e2e:ui": "playwright test --ui"
   },
   "lint-staged": {
     "*": "bun x ultracite fix"
