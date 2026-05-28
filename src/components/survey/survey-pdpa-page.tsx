@@ -20,7 +20,7 @@ export function SurveyPdpaPage({ onNext }: PdpaPageProps) {
 		if (!script) {
 			const newScript = document.createElement("script");
 			newScript.src =
-				"https://privacy-uat.tcp.com/v1/privacy-managers/49052097048/reddot.js";
+				"https://privacy.tcp.com/v1/privacy-managers/49048097048/reddot.js";
 			newScript.type = "text/javascript";
 			newScript.async = true;
 			document.body.appendChild(newScript);
