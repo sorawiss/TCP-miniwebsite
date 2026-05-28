@@ -1,5 +1,6 @@
 "use client";
 import Image from "next/image";
+import posthog from "posthog-js";
 import { Suspense, useEffect, useRef, useState } from "react";
 import { FormLogo } from "@/components/form-logo";
 import { SurveyBirthDateStep } from "@/components/survey/survey-birth-date-step";
@@ -81,6 +82,11 @@ function HomeContent() {
 
 		hasSubmittedRef.current = true;
 
+		posthog.capture("survey_completed", {
+			power: winningPower?.title,
+			power_id: winningPower?.id,
+		});
+
 		fetch("/api/submissions", {
 			method: "POST",
 			headers: {
@@ -137,7 +143,15 @@ function HomeContent() {
 					</Suspense>
 
 					{activeStep.type === "intro" ? (
-						<SurveyIntroPage onNext={nextStep} step={activeStep} />
+						<SurveyIntroPage
+							onNext={() => {
+								if (activeStep.id === "intro") {
+									posthog.capture("survey_started");
+								}
+								nextStep();
+							}}
+							step={activeStep}
+						/>
 					) : null}
 
 					{activeStep.type === "pdpa" ? (

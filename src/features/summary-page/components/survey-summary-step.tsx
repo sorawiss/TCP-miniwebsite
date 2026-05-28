@@ -1,6 +1,7 @@
 // biome-ignore-all lint: generated file
 
 import Image from "next/image";
+import posthog from "posthog-js";
 import { useEffect, useRef, useState } from "react";
 import ButtonDonwload from "@/components/ui/button-donwload";
 import { NextButton } from "@/components/ui/next-button";
@@ -85,6 +86,11 @@ export function SurveySummaryStep({
 	const handleShare = async () => {
 		if (isProcessing) return;
 		setIsProcessing(true);
+
+		posthog.capture("survey_shared", {
+			power: power.title,
+			power_id: power.id,
+		});
 
 		const dataUrl = await getCardImageUrl();
 
