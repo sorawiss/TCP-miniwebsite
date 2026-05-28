@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { GoogleTagManager } from "@next/third-parties/google";
-
+import { Analytics } from "@vercel/analytics/next";
 import localFont from "next/font/local";
 import { NuqsAdapter } from "nuqs/adapters/next/app";
 import { BackgroundMusic } from "@/components/background-music";
@@ -73,6 +73,7 @@ export default function RootLayout({
 			className={`h-full antialiased ${HeaventRounded.variable} ${UidDeepSea.variable}`}
 			lang="th"
 		>
+			<Analytics />
 			<GoogleTagManager gtmId="GTM-PZ6FNHTZ" />
 			<body className="flex min-h-full flex-col font-sans">
 				<NuqsAdapter>{children}</NuqsAdapter>

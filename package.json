@@ -3,6 +3,7 @@
     "@neondatabase/serverless": "^1.1.0",
     "@next/third-parties": "^16.2.6",
     "@uidotdev/usehooks": "^2.4.1",
+    "@vercel/analytics": "^2.0.1",
     "bad-words-thai": "^3.0.18",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
