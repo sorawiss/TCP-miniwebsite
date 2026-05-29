@@ -7,7 +7,6 @@ import Script from "next/script";
 import { NuqsAdapter } from "nuqs/adapters/next/app";
 import { BackgroundMusic } from "@/components/background-music";
 import { OrientationLock } from "@/components/orientation-lock";
-import { PostHogProvider } from "@/components/posthog-provider";
 
 export const metadata: Metadata = {
 	metadataBase: new URL("https://70years.tcp.com"),
@@ -84,11 +83,11 @@ window.dataLayer = window.dataLayer || [];
 function gtag() {
   dataLayer.push(arguments);
 }
-gtag('consent', 'default', {
-  ad_storage: 'denied',
-  analytics_storage: 'denied',
-  ad_user_data: 'denied',
-  ad_personalization: 'denied'
+gtag('consent', 'update', {
+  ad_storage: 'granted',
+  analytics_storage: 'granted',
+  ad_user_data: 'granted',
+  ad_personalization: 'granted'
 });
 `}
 				</Script>
