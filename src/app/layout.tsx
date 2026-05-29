@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import localFont from "next/font/local";
+import Script from "next/script";
 import { NuqsAdapter } from "nuqs/adapters/next/app";
 import { BackgroundMusic } from "@/components/background-music";
 import { OrientationLock } from "@/components/orientation-lock";
@@ -45,6 +46,20 @@ export default function RootLayout({
 			lang="th"
 		>
 			<body className="flex min-h-full flex-col font-sans">
+				<Script id="google-consent-mode" strategy="beforeInteractive">
+					{`
+window.dataLayer = window.dataLayer || [];
+function gtag() {
+  dataLayer.push(arguments);
+}
+gtag('consent', 'default', {
+  ad_storage: 'denied',
+  analytics_storage: 'denied',
+  ad_user_data: 'denied',
+  ad_personalization: 'denied'
+});
+`}
+				</Script>
 				<NuqsAdapter>{children}</NuqsAdapter>
 				<BackgroundMusic />
 				<OrientationLock />
