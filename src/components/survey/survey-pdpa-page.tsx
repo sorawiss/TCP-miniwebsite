@@ -50,61 +50,46 @@ export function SurveyPdpaPage({ onNext }: PdpaPageProps) {
 			moveCookieNotice();
 		});
 
-		observer.observe(document.body, {
-			childList: true,
-			subtree: true,
-		});
+declare global {
+	interface Window {
+		// biome-ignore lint/suspicious/noExplicitAny: window.gtag accepts dynamic parameter lists from GTM
+		gtag?: (...args: any[]) => void;
+	}
+}
 
-		// Fallback check interval
-		const interval = setInterval(moveCookieNotice, 100);
+export function SurveyPdpaPage({ onNext }: PdpaPageProps) {
+	const [performance, setPerformance] = useState(false);
+	const [functional, setFunctional] = useState(false);
+	const [targeting, setTargeting] = useState(false);
 
-		// Clean up on unmount (only remove UI notice, leave script singleton)
-		return () => {
-			clearInterval(interval);
-			observer.disconnect();
-			const notices = document.querySelectorAll(".cookie-notice");
-			for (const notice of notices) {
-				notice.remove();
-			}
-		};
-	}, []);
+	const acceptAll = () => {
+		setPerformance(true);
+		setFunctional(true);
+		setTargeting(true);
 
-	// Fallback mechanism if the notice doesn't load/appear (e.g. adblocker, already accepted consent)
-	useEffect(() => {
-		const timer = setTimeout(() => {
-			const notice = document.querySelector(".cookie-notice");
-			if (!notice) {
-				setShowFallback(true);
-			}
-		}, 1500);
+		if (typeof window !== "undefined" && window.gtag) {
+			window.gtag("consent", "update", {
+				ad_storage: "granted",
+				analytics_storage: "granted",
+				ad_user_data: "granted",
+				ad_personalization: "granted",
+			});
+		}
 
-		return () => clearTimeout(timer);
-	}, [noticeFound]);
+		setTimeout(onNext, 150);
+	};
 
-	// Handle button interactions inside the notice or modal
-	useEffect(() => {
-		const handleGlobalClick = (e: MouseEvent) => {
-			const target = e.target as HTMLElement;
-			const clickedButton = target.closest("button");
-			if (
-				clickedButton &&
-				(clickedButton.classList.contains("cm-btn-success") ||
-					clickedButton.classList.contains("cn-decline") ||
-					clickedButton.classList.contains("cm-btn-accept") ||
-					clickedButton.classList.contains("cm-btn-accept-all") ||
-					clickedButton.classList.contains("cm-btn-decline"))
-			) {
-				setTimeout(() => {
-					onNext();
-				}, 400); // 400ms delay to ensure reddot.js cookies/consent is stored
-			}
-		};
-
-		document.addEventListener("click", handleGlobalClick);
-		return () => {
-			document.removeEventListener("click", handleGlobalClick);
-		};
-	}, [onNext]);
+	const confirmChoices = () => {
+		if (typeof window !== "undefined" && window.gtag) {
+			window.gtag("consent", "update", {
+				ad_storage: targeting ? "granted" : "denied",
+				analytics_storage: performance ? "granted" : "denied",
+				ad_user_data: targeting ? "granted" : "denied",
+				ad_personalization: targeting ? "granted" : "denied",
+			});
+		}
+		onNext();
+	};
 
 	return (
 		<div className="relative flex h-screen items-center justify-center px-4">
@@ -128,8 +113,8 @@ export function SurveyPdpaPage({ onNext }: PdpaPageProps) {
 							ยินยอมนโยบายความเป็นส่วนตัวและคุกกี้เรียบร้อยแล้ว
 						</p>
 						<button
-							className="h-[38px] w-full cursor-pointer rounded-[5px] bg-[#E4002B] px-6 font-bold text-[18px] text-white shadow-sm transition-colors active:bg-[#C90026]"
-							onClick={onNext}
+							className="h-[34px] cursor-pointer rounded-[5px] border border-[#D3D3D3] bg-white px-3 text-[#222222] text-[18px] transition-colors active:bg-[#F4F4F4]"
+							onClick={confirmChoices}
 							type="button"
 						>
 							ดำเนินการต่อ

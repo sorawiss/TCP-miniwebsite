@@ -3,6 +3,7 @@ import "./globals.css";
 import { GoogleTagManager } from "@next/third-parties/google";
 import { Analytics } from "@vercel/analytics/next";
 import localFont from "next/font/local";
+import Script from "next/script";
 import { NuqsAdapter } from "nuqs/adapters/next/app";
 import { BackgroundMusic } from "@/components/background-music";
 import { OrientationLock } from "@/components/orientation-lock";
@@ -77,9 +78,21 @@ export default function RootLayout({
 			<Analytics />
 			<GoogleTagManager gtmId="GTM-PZ6FNHTZ" />
 			<body className="flex min-h-full flex-col font-sans">
-				<PostHogProvider>
-					<NuqsAdapter>{children}</NuqsAdapter>
-				</PostHogProvider>
+				<Script id="google-consent-mode" strategy="beforeInteractive">
+					{`
+window.dataLayer = window.dataLayer || [];
+function gtag() {
+  dataLayer.push(arguments);
+}
+gtag('consent', 'default', {
+  ad_storage: 'denied',
+  analytics_storage: 'denied',
+  ad_user_data: 'denied',
+  ad_personalization: 'denied'
+});
+`}
+				</Script>
+				<NuqsAdapter>{children}</NuqsAdapter>
 				<BackgroundMusic />
 				<OrientationLock />
 			</body>
