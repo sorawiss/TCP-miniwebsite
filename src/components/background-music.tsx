@@ -26,6 +26,6 @@ export function BackgroundMusic() {
 
 	return (
 		// biome-ignore lint/a11y/useMediaCaption: Background music does not require captions
-		<audio loop ref={audioRef} src="/sound/rhythm-revolution.mp3" />
+		<audio loop ref={audioRef} src="/sound/rhythm-revolution.wav" />
 	);
 }

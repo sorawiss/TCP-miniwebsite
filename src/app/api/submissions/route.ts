@@ -1,5 +1,15 @@
+import { cookies } from "next/headers";
 import { sql } from "@/lib/db";
 import { getSubmissionResult, parseSurveySubmission } from "@/lib/submission";
+
+const DEVICE_ID_COOKIE = "survey_device_id";
+const DEVICE_ID_MAX_AGE_SECONDS = 60 * 60 * 24 * 90;
+const UUID_PATTERN =
+	/^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
+
+function getCookieDeviceId(value: string | undefined) {
+	return value && UUID_PATTERN.test(value) ? value : null;
+}
 
 export async function POST(request: Request) {
 	let body: unknown;
@@ -23,6 +33,11 @@ export async function POST(request: Request) {
 	const birthDate = submission.profile.skipsBirthDate
 		? null
 		: submission.profile.birthDate;
+	const cookieStore = await cookies();
+	const cookieDeviceId = getCookieDeviceId(
+		cookieStore.get(DEVICE_ID_COOKIE)?.value
+	);
+	const deviceId = cookieDeviceId ?? crypto.randomUUID();
 
 	try {
 		const rows = await sql`
@@ -32,7 +47,8 @@ export async function POST(request: Request) {
 				skipped_birth_date,
 				choice_answers,
 				text_answers,
-				winning_power_id
+				winning_power_id,
+				device_id
 			)
 			values (
 				${submission.profile.name},
@@ -40,12 +56,23 @@ export async function POST(request: Request) {
 				${submission.profile.skipsBirthDate},
 				${JSON.stringify(submission.choiceAnswers)}::jsonb,
 				${JSON.stringify(submission.textAnswers)}::jsonb,
-				${winningPowerId}
+				${winningPowerId},
+				${deviceId}
 			)
 			returning id
 		`;
 
 		console.log("Submitted successfully", rows[0]?.id);
+
+		if (!cookieDeviceId) {
+			cookieStore.set(DEVICE_ID_COOKIE, deviceId, {
+				httpOnly: true,
+				maxAge: DEVICE_ID_MAX_AGE_SECONDS,
+				path: "/",
+				sameSite: "lax",
+				secure: true,
+			});
+		}
 
 		return Response.json({ id: rows[0]?.id }, { status: 201 });
 	} catch (error) {

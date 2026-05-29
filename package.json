@@ -1,7 +1,9 @@
 {
   "dependencies": {
     "@neondatabase/serverless": "^1.1.0",
+    "@next/third-parties": "^16.2.6",
     "@uidotdev/usehooks": "^2.4.1",
+    "@vercel/analytics": "^2.0.1",
     "bad-words-thai": "^3.0.18",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
@@ -12,6 +14,7 @@
     "lucide-react": "^1.16.0",
     "next": "16.2.4",
     "nuqs": "^2.8.9",
+    "posthog-js": "^1.376.3",
     "radix-ui": "^1.4.3",
     "react": "19.2.4",
     "react-dom": "19.2.4",
@@ -23,6 +26,7 @@
   },
   "devDependencies": {
     "@biomejs/biome": "2.4.12",
+    "@playwright/test": "^1.60.0",
     "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
     "@types/react": "^19",
@@ -41,7 +45,9 @@
     "lint": "bun x ultracite check",
     "check": "bun x ultracite check",
     "fix": "bun x ultracite fix",
-    "prepare": "husky"
+    "prepare": "husky",
+    "test:e2e": "playwright test",
+    "test:e2e:ui": "playwright test --ui"
   },
   "lint-staged": {
     "*": "bun x ultracite fix"

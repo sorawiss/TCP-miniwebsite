@@ -1,7 +1,7 @@
 "use client";
 
 import { parseAsInteger, useQueryState } from "nuqs";
-import { useEffect, useMemo } from "react";
+import { useMemo } from "react";
 import { create } from "zustand";
 import { resultPowers, type SurveyStep, surveySteps } from "@/lib/config";
 import { getWinningPower } from "@/lib/scoring";
@@ -97,22 +97,6 @@ export function useSurvey() {
 		parseAsInteger.withDefault(0).withOptions({ history: "push" })
 	);
 	const store = useSurveyStore();
-
-	// TODO: Remove this useEffect and UUID persistence in the future
-	useEffect(() => {
-		if (typeof window !== "undefined") {
-			let stored = localStorage.getItem("survey_uuid");
-			if (!stored) {
-				stored = Math.floor(Math.random() * 1000)
-					.toString()
-					.padStart(4, "0");
-				localStorage.setItem("survey_uuid", stored);
-			}
-			if (store.uuid !== stored) {
-				store.setUuid(stored);
-			}
-		}
-	}, [store.uuid, store.setUuid]);
 
 	const state = useMemo<SurveyState>(
 		() => ({
