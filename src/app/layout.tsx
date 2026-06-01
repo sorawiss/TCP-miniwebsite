@@ -96,7 +96,7 @@ gtag('consent', 'update', {
 `}
 				</Script>
 				<PostHogProvider>
-					<NuqsAdapter>po{children}</NuqsAdapter>
+					<NuqsAdapter>{children}</NuqsAdapter>
 				</PostHogProvider>
 				<BackgroundMusic />
 				<OrientationLock />
