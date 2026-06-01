@@ -3,6 +3,13 @@ import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import type { PdpaStep } from "@/lib/config";
 
+declare global {
+	interface Window {
+		// biome-ignore lint/suspicious/noExplicitAny: window.gtag accepts dynamic parameter lists from GTM
+		gtag?: (...args: any[]) => void;
+	}
+}
+
 interface PdpaPageProps {
 	onNext: () => void;
 	step: PdpaStep;

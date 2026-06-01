@@ -3,11 +3,11 @@ import "./globals.css";
 import { GoogleTagManager } from "@next/third-parties/google";
 import { Analytics } from "@vercel/analytics/next";
 import localFont from "next/font/local";
+import Script from "next/script";
 import { NuqsAdapter } from "nuqs/adapters/next/app";
 import { BackgroundMusic } from "@/components/background-music";
 import { InAppBrowserGuard } from "@/components/in-app-browser-guard";
 import { OrientationLock } from "@/components/orientation-lock";
-import { PostHogProvider } from "@/components/posthog-provider";
 
 export const metadata: Metadata = {
 	metadataBase: new URL("https://70years.tcp.com"),
@@ -80,12 +80,24 @@ export default function RootLayout({
 			<Analytics />
 			<GoogleTagManager gtmId="GTM-PZ6FNHTZ" />
 			<body className="flex min-h-full flex-col font-sans">
-				<PostHogProvider>
-					<NuqsAdapter>{children}</NuqsAdapter>
-				</PostHogProvider>
-				<InAppBrowserGuard />
+				<Script id="google-consent-mode" strategy="beforeInteractive">
+					{`
+window.dataLayer = window.dataLayer || [];
+function gtag() {
+  dataLayer.push(arguments);
+}
+gtag('consent', 'update', {
+  ad_storage: 'granted',
+  analytics_storage: 'granted',
+  ad_user_data: 'granted',
+  ad_personalization: 'granted'
+});
+`}
+				</Script>
+				<NuqsAdapter>{children}</NuqsAdapter>
 				<BackgroundMusic />
 				<OrientationLock />
+				<InAppBrowserGuard />
 			</body>
 		</html>
 	);
