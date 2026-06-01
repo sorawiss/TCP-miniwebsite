@@ -11,6 +11,7 @@ import {
 	downloadImage,
 	generateImageFromElement,
 	shareImage,
+	uploadImageToServer,
 } from "@/lib/image";
 import type { SurveyState } from "@/lib/survey";
 import { SummaryFooterBranding } from "./summary-footer-branding";
@@ -73,7 +74,8 @@ export function SurveySummaryStep({
 
 		if (dataUrl) {
 			if (isMobileDevice()) {
-				setGeneratedImageUrl(dataUrl);
+				const serverUrl = await uploadImageToServer(dataUrl);
+				setGeneratedImageUrl(serverUrl || dataUrl);
 				setShowShareModal(true);
 			} else {
 				downloadImage(dataUrl, "tcp-power.png");
@@ -107,7 +109,8 @@ export function SurveySummaryStep({
 
 		if (!shared) {
 			if (isMobileDevice()) {
-				setGeneratedImageUrl(dataUrl);
+				const serverUrl = await uploadImageToServer(dataUrl);
+				setGeneratedImageUrl(serverUrl || dataUrl);
 				setShowShareModal(true);
 			} else {
 				downloadImage(dataUrl, "tcp-power.png");

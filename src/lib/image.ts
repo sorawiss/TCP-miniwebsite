@@ -103,3 +103,33 @@ export async function shareImage(
 	}
 	return false;
 }
+
+/**
+ * Uploads a base64 image data URL to the server API and returns the public URL.
+ * Returns null if the upload fails.
+ *
+ * @param dataUrl The data URL of the image.
+ */
+export async function uploadImageToServer(
+	dataUrl: string
+): Promise<string | null> {
+	try {
+		const response = await fetch("/api/images", {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json",
+			},
+			body: JSON.stringify({ image: dataUrl }),
+		});
+
+		if (!response.ok) {
+			throw new Error(`Upload failed with status ${response.status}`);
+		}
+
+		const data = await response.json();
+		return data.url;
+	} catch (error) {
+		console.error("Failed to upload image to server", error);
+		return null;
+	}
+}
