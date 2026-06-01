@@ -5,6 +5,7 @@ import { Analytics } from "@vercel/analytics/next";
 import localFont from "next/font/local";
 import { NuqsAdapter } from "nuqs/adapters/next/app";
 import { BackgroundMusic } from "@/components/background-music";
+import { InAppBrowserGuard } from "@/components/in-app-browser-guard";
 import { OrientationLock } from "@/components/orientation-lock";
 import { PostHogProvider } from "@/components/posthog-provider";
 
@@ -50,6 +51,7 @@ const HeaventRounded = localFont({
 	],
 	variable: "--font-heavent-rounded",
 	display: "swap",
+	adjustFontFallback: false,
 });
 
 const UidDeepSea = localFont({
@@ -62,6 +64,7 @@ const UidDeepSea = localFont({
 	],
 	variable: "--font-uid-deepsea",
 	display: "swap",
+	adjustFontFallback: false,
 });
 
 export default function RootLayout({
@@ -80,6 +83,7 @@ export default function RootLayout({
 				<PostHogProvider>
 					<NuqsAdapter>{children}</NuqsAdapter>
 				</PostHogProvider>
+				<InAppBrowserGuard />
 				<BackgroundMusic />
 				<OrientationLock />
 			</body>
