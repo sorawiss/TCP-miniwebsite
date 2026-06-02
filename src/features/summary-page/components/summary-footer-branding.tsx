@@ -79,7 +79,7 @@ export function SummaryFooterBranding() {
 					*TCP บริจาคเครื่องดื่มสูงสุดจำนวน 6,000 ขวด
 				</p>
 			</div>
-			{/* <SummaryFooterContentCarousel /> */}
+			<SummaryFooterContentCarousel />
 		</div>
 	);
 }
