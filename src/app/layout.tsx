@@ -8,6 +8,7 @@ import { NuqsAdapter } from "nuqs/adapters/next/app";
 import { BackgroundMusic } from "@/components/background-music";
 import { InAppBrowserGuard } from "@/components/in-app-browser-guard";
 import { OrientationLock } from "@/components/orientation-lock";
+import { PostHogProvider } from "@/components/posthog-provider";
 
 export const metadata: Metadata = {
 	metadataBase: new URL("https://70years.tcp.com"),
@@ -94,7 +95,9 @@ gtag('consent', 'update', {
 });
 `}
 				</Script>
-				<NuqsAdapter>{children}</NuqsAdapter>
+				<PostHogProvider>
+					<NuqsAdapter>{children}</NuqsAdapter>
+				</PostHogProvider>
 				<BackgroundMusic />
 				<OrientationLock />
 				<InAppBrowserGuard />
