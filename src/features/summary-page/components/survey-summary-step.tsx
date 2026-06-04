@@ -252,7 +252,7 @@ export function SurveySummaryStep({
 				</div>
 
 				{/* Branding footer: logos + product bottles — excluded from image capture */}
-				<div id="branding-footer">
+				<div className="w-[110%]" id="branding-footer">
 					<SummaryFooterBranding />
 				</div>
 			</div>

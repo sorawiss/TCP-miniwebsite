@@ -80,7 +80,7 @@ export default function RootLayout({
 		>
 			<Analytics />
 			<GoogleTagManager gtmId="GTM-PZ6FNHTZ" />
-			<body className="flex min-h-full flex-col font-sans">
+			<body className="flex min-h-full flex-col overflow-x-hidden font-sans">
 				<Script id="google-consent-mode" strategy="beforeInteractive">
 					{`
 window.dataLayer = window.dataLayer || [];

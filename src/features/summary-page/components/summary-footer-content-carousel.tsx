@@ -60,7 +60,7 @@ function SectionHeader({ title, href }: { title: string; href: string }) {
 function FilmCard({ image, title }: { image: string; title: string }) {
 	return (
 		<Link
-			className="block rounded-md bg-white"
+			className="block overflow-hidden rounded-md bg-white"
 			href={
 				"https://www.youtube.com/playlist?app=desktop&list=PLLtp3XH2TdU9Pn661EQlee1P4aEHXw1zF&ra=m"
 			}
@@ -107,7 +107,9 @@ function ArticleCard({
 				/>
 			</div>
 			<div className="flex min-h-9 items-center gap-1.5 px-2 py-1.5">
-				<p className="line-clamp-5 flex-1 text-[18px] leading-3">{title}</p>
+				<p className="line-clamp-5 min-w-0 flex-1 text-balance text-[18px] leading-tight">
+					{title}
+				</p>
 				<span className="flex size-5 shrink-0 items-center justify-center rounded-full bg-[#F28A00] text-white">
 					<ChevronRightIcon className="size-3.5" />
 				</span>
