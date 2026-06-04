@@ -104,6 +104,15 @@ function HomeContent() {
 				if (data && typeof data.id === "string") {
 					localStorage.setItem("survey_uuid", data.id);
 					setUuid(data.id);
+
+					if (typeof window !== "undefined") {
+						const w = window as any;
+						w.dataLayer = w.dataLayer || [];
+						w.dataLayer.push({
+							event: "generate_lead",
+							submission_id: data.id,
+						});
+					}
 				}
 			})
 			.catch((error) => {
