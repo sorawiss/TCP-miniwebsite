@@ -36,7 +36,7 @@ const articles = [
 	},
 ];
 
-function SectionHeader({ title }: { title: string }) {
+function SectionHeader({ title, href }: { title: string; href: string }) {
 	return (
 		<div className="mb-2 flex items-center justify-between pr-1">
 			<h3 className="border-[#F28A00] border-l-4 pl-1.5 text-[#151F6D] text-[20px] leading-none">
@@ -44,7 +44,7 @@ function SectionHeader({ title }: { title: string }) {
 			</h3>
 			<Link
 				className="flex items-center gap-1 text-[#F28A00] text-[16px]"
-				href="https://www.tcp.com/th/updates/tcp-updates?category=tcp-70-years&year="
+				href={href}
 				target="_blank"
 				type="button"
 			>
@@ -57,18 +57,28 @@ function SectionHeader({ title }: { title: string }) {
 	);
 }
 
-// TODO : Insert film video
-// Biome-ignore lint/correctness/noUnusedVariables: not using
-function _FilmCard({ image, title }: { image: string; title: string }) {
+function FilmCard({ image, title }: { image: string; title: string }) {
 	return (
-		<article className="overflow-hidden rounded-md bg-white shadow-[0_2px_8px_rgba(0,0,0,0.18)]">
-			<div className="relative aspect-[1.62] w-full overflow-hidden">
-				<Image alt="" className="object-cover" fill sizes="116px" src={image} />
+		<Link
+			className="block rounded-md bg-white"
+			href={
+				"https://www.youtube.com/playlist?app=desktop&list=PLLtp3XH2TdU9Pn661EQlee1P4aEHXw1zF&ra=m"
+			}
+			target="_blank"
+		>
+			<div className="relative aspect-[1.62] w-full">
+				<Image
+					alt="70years TCP video playlist"
+					className="w-full object-cover"
+					height={718}
+					src={image}
+					width={1272}
+				/>
 			</div>
 			<p className="line-clamp-2 min-h-8 px-2 py-1.5 text-[18px] leading-3">
 				{title}
 			</p>
-		</article>
+		</Link>
 	);
 }
 
@@ -110,16 +120,19 @@ export function SummaryFooterContentCarousel() {
 	return (
 		<section className="mt-5 w-full overflow-hidden rounded-sm bg-center bg-cover px-2.5 py-4">
 			<div className="px-1 py-1">
-				{/* <SectionHeader title="TCP 70 Years Short Films" />
+				<SectionHeader
+					href="https://www.youtube.com/playlist?app=desktop&list=PLLtp3XH2TdU9Pn661EQlee1P4aEHXw1zF&ra=m"
+					title="TCP 70 Years Short Films"
+				/>
 				<div className="w-full">
-					<FilmCard
-						image="/bottom/desert.png"
-						title="อิ่มใจและทราย คืนพลังอย่างไร?"
-					/>
-				</div> */}
+					<FilmCard image="/vdo.jpg" title="70 ปี TCP ปลุกพลัง...ให้ไปต่อ" />
+				</div>
 
 				<div className="mt-4">
-					<SectionHeader title="Articles" />
+					<SectionHeader
+						href="https://www.tcp.com/th/updates/tcp-updates?category=tcp-70-years&year="
+						title="Articles"
+					/>
 					<Carousel opts={{ align: "start", dragFree: true }}>
 						<CarouselContent className="-ml-2">
 							{articles.map((article) => (
